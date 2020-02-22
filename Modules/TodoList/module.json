@@ -1,0 +1,13 @@
+{
+    "name": "TodoList",
+    "alias": "todolist",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\TodoList\\Providers\\TodoListServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

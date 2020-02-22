@@ -1,0 +1,13 @@
+{
+    "name": "WorkTime",
+    "alias": "worktime",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\WorkTime\\Providers\\WorkTimeServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
