@@ -5,6 +5,9 @@ namespace Modules\TimeLine\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\TimeLine\Entities\TimeLine;
+use Storage;
+
 
 class TimeLineController extends Controller
 {
@@ -14,7 +17,8 @@ class TimeLineController extends Controller
      */
     public function index()
     {
-        return view('timeline::index');
+        $time_lines = TimeLine::latest()->paginate(12);
+        return view('timeline::timeline-index',compact('time_lines'));
     }
 
     /**
@@ -31,9 +35,24 @@ class TimeLineController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+       
+        $data = $req->validate([
+            'title' =>  'required | unique:time_lines',
+            'desc'  =>  'required',
+            'image' =>  'required'
+        ]);
+        
+        $data['user_id']    =   7;
+        $data['image'] = Storage::disk('public')->put('TimeLine/',$req->File('image'));
+
+        $time_line = TimeLine::create($data);
+            
+        $time_line->syncTagsWithType($req->tags,$time_line->title);
+
+        return redirect()->route('timeline.index')->with('message');
+
     }
 
     /**
@@ -74,6 +93,7 @@ class TimeLineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TimeLine::destroy($id);
+        return redirect()->route('timeline.index');
     }
 }

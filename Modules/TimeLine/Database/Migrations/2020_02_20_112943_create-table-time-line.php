@@ -16,15 +16,17 @@ class CreateTableTimeLine extends Migration
         Schema::create('time_lines', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('image_id')->unsigned()->nullable();
             $table->string('title');
             $table->string('slug');
             $table->text('desc');
-            $table->text('tags');
-            $table->string('images');
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+            $table->foreign('image_id')->references('id')->on('media')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }

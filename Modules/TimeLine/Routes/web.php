@@ -11,6 +11,12 @@
 |
 */
 
-Route::prefix('timeline')->group(function() {
-    Route::get('/', 'TimeLineController@index');
+Route::group(['prefix'=>'timeline','as'=>'timeline.'],function() {
+
+    Route::get('/', 'TimeLineController@index')->name('index');
+    Route::post('/store', 'TimeLineController@store')->name('store');
+    Route::get('/destroy/{id}', 'TimeLineController@destroy')->name('destroy');
+
+
+
 });
