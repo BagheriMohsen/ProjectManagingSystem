@@ -23,32 +23,32 @@
 <script src="{{asset('panel/js/chart.chartjs.js')}}"></script>
 <script src="{{asset('panel/js/fontawsome-all.js')}}"></script>
 
+@if(isset($text_editor))
+	@if($text_editor['desc'])
+		<script src="{{asset('panel/lib/tinymce/js/tinymce/tinymce.min.js')}}"></script>
+		<script>
+			tinymce.init({
+			//selector: 'textarea',  // change this value according to your HTML
+			//mode : "textareas",
+			mode : "specific_textareas",
+			editor_selector : "textarea",
+			menubar: false,
+			statusbar: false
+			});
+		</script>
+	@endif
 
-@if($text_editor['desc'])
-	<script src="{{asset('panel/lib/tinymce/js/tinymce/tinymce.min.js')}}"></script>
-	<script>
-		tinymce.init({
-		//selector: 'textarea',  // change this value according to your HTML
-		//mode : "textareas",
-        mode : "specific_textareas",
-        editor_selector : "textarea",
-		menubar: false,
-		statusbar: false
-		});
-	</script>
+	@if($text_editor['tags'])
+
+	<script src="{{asset('panel/lib/select2/js/select2.full.min.js')}}"></script>
+		<script>
+			$(".tags").select2({
+				tags: true,
+				tokenSeparators: [',',]
+			})
+		</script>
+	@endif
 @endif
-
-@if($text_editor['tags'])
-
-<script src="{{asset('panel/lib/select2/js/select2.full.min.js')}}"></script>
-    <script>
-        $(".tags").select2({
-            tags: true,
-            tokenSeparators: [',',]
-        })
-	</script>
-@endif
-
 
 
 		

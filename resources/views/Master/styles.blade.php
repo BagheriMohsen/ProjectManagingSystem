@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="{{asset('panel/css/jquery-ui.min.css')}}">
 
 
-
-@if($text_editor['tags'])
-    <link rel="stylesheet" href="{{asset('panel/css/select2.min.css')}}">   
+@if(isset($text_editor))
+    @if($text_editor['tags'])
+        <link rel="stylesheet" href="{{asset('panel/css/select2.min.css')}}">   
+    @endif
 @endif
-
 <link rel="stylesheet" href="{{asset('panel/css/main.css')}}">

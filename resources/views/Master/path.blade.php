@@ -8,12 +8,17 @@
     @if(isset($path['btn_content']))
         <a 
         @if(!$path['is_modal'])
-            href="{{$path['btn_href']}}"
+            href="{{route($path['btn_href'])}}"
         @endif
         
         class="btn btn-success btn-sm btn-with-icon btn-submit-new-timeline"
         @if($path['is_modal'])
-            data-toggle="modal" data-target="#modalCompose"
+            data-toggle="modal" 
+            @if(isset($path['modal_name'])) 
+                data-target="#{{ $path["modal_name"] }}" 
+            @else 
+                data-target="#modalCompose" 
+            @endif
         @endif
         >
             <div class="ht-30 justify-content-between text-light">

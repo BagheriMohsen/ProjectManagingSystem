@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\WorkTime\Http\Controllers;
+namespace Modules\TimeLine\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
-class WorkTimeController extends Controller
+use Modules\TimeLine\Entities\TimeLine;
+use Storage;
+class TimeLineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class WorkTimeController extends Controller
      */
     public function index()
     {
-        return view('worktime::index');
+        $time_lines = TimeLine::latest()->paginate(12);
+        return response()->json($time_lines);
     }
 
     /**
@@ -23,7 +25,7 @@ class WorkTimeController extends Controller
      */
     public function create()
     {
-        return view('worktime::create');
+        return view('timeline::create');
     }
 
     /**
@@ -31,9 +33,23 @@ class WorkTimeController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        
+        $data = $req->validate([
+            'title' =>  'required | unique:time_lines',
+            'desc'  =>  'required',
+            'image' =>  'required'
+        ]);
+        
+        $data['user_id']    =   7;
+        $data['image'] = Storage::disk('public')->put('TimeLine/',$req->File('image'));
+
+        $time_line = TimeLine::create($data);
+            
+        $time_line->syncTagsWithType($req->tags,$time_line->title);
+
+        return response()->json('با موفقیت ثبت شد');
     }
 
     /**
@@ -43,7 +59,7 @@ class WorkTimeController extends Controller
      */
     public function show($id)
     {
-        return view('worktime::show');
+        return view('timeline::show');
     }
 
     /**
@@ -53,7 +69,7 @@ class WorkTimeController extends Controller
      */
     public function edit($id)
     {
-        return view('worktime::edit');
+        return view('timeline::edit');
     }
 
     /**

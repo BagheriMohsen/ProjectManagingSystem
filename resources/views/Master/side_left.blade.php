@@ -8,13 +8,13 @@
       <label class="sidebar-label pd-x-10 mg-t-20 op-3"></label>
       <ul class="br-sideleft-menu">
         <li class="br-menu-item">
-          <a href="index" class="br-menu-link">
+            <a href="{{url('/')}}" class="br-menu-link">
             <i class="menu-item-icon icon ion-ios-keypad tx-24"></i>
             <span class="menu-item-label">Dashboard</span>
           </a>
         </li>
         <li class="br-menu-item">
-          <a href="timeline" class="br-menu-link">
+            <a href="{{route('timeline.index')}}" class="br-menu-link">
             <i class="menu-item-icon icon ion-coffee tx-24"></i>
             <span class="menu-item-label">Timeline</span>
           </a>
@@ -43,8 +43,16 @@
             <span class="menu-item-label">Projects</span>
           </a>
           <ul class="br-menu-sub">
-            <li class="sub-item"><a href="projects-list" class="sub-link">Projects List</a></li>
-            <li class="sub-item"><a href="addproject" class="sub-link">New Project</a></li>
+            <li class="sub-item">
+              <a href="{{route('project.index')}}" class="sub-link">
+                Projects List
+              </a>
+            </li>
+            <li class="sub-item">
+              <a href="{{route('project.create')}}" class="sub-link">
+                New Project
+              </a>
+            </li>
           </ul>
         </li>
         <li class="br-menu-item">
@@ -72,7 +80,7 @@
           </a>
         </li>
         <li class="br-menu-item">
-          <a href="users" class="br-menu-link">
+          <a href="{{ route("users.index") }}" class="br-menu-link">
             <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
             <span class="menu-item-label">Users</span>
           </a>

@@ -5,6 +5,38 @@
 @endsection
 
 
+<!-- 
+    path 
+-->
+@section('path')
+    @php 
+        $path = [
+            'is_modal'      =>  False,
+            'btn_href'      =>  ''
+        ]
+    @endphp
+    @include('Master.path')
+@endsection
+
+<!-- 
+    Modal for store data
+-->
+@section('create_modal')
+    @php 
+        $text_editor = [
+            'route_name'    =>  'timeline.store',
+            'image'         =>  False,
+            'file'          =>  False,
+            'desc'          =>  False,
+            'tags'          =>  False,
+            'tags_item'     =>  array(),
+            'title'         =>  False
+        ]
+    @endphp
+    @include('Master.Modal.create-modal')
+@endsection
+
+
 @section('content')
 
 <div class="row row-sm">

@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('user')->group(function() {
-    Route::get('/', 'UserController@index');
+Route::group(["prefix"=>"users","as"=>"users."],function(){
+    Route::get("","UserController@index")->name("index");
 });

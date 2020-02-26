@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/timeline', function (Request $request) {
-    return $request->user();
+Route::group(['middleware'=>'auth:api','prefix'=>'/timeline/'],function(){
+    Route::get('','Api\TimeLineController@index');
+    Route::post('store','Api\TimeLineController@store');
 });
+

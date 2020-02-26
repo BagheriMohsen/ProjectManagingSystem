@@ -14,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project::index');
+        return view('project::project-index');
     }
 
     /**
@@ -23,7 +23,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project::create');
+        return view('project::project-create');
     }
 
     /**
@@ -31,9 +31,9 @@ class ProjectController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        dd($req);
     }
 
     /**
