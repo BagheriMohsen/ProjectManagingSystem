@@ -13,6 +13,7 @@
 
 Route::group(["prefix"=>"users/","as"=>"users."],function(){
     Route::get("","UserController@index")->name("index");
+    Route::get("/edit","UserController@edit")->name("edit");
 
     /*
     |--------------------------------------------------------------------------

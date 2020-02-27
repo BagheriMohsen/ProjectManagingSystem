@@ -10,11 +10,11 @@
 @section('path')
     @php 
         $path = [
-            'name'          =>  'Users',
-            'btn_content'   =>  'New User',
+            'name'          =>  'Groups',
+            'btn_content'   =>  'New Group',
             'is_modal'      =>  True,
             'btn_href'      =>  '',
-            'modal_name'    =>  'newuser'
+            'modal_name'    =>  'newgroup'
         ]
     @endphp
     @include('Master.path')
@@ -30,12 +30,12 @@
             'image'         =>  False,
             'file'          =>  False,
             'desc'          =>  False,
-            'tags'          =>  False,
+            'tags'          =>  true,
             'tags_item'     =>  array(),
             'title'         =>  False
         ]
     @endphp
-    @include('Master.Modal.create-users')
+    @include('Master.Modal.create-groups')
 @endsection
 
 
@@ -56,23 +56,19 @@
                     <div class="col-xs-12 col-xl-12">
                     <div class="card bd-0 mg-b-20">
                         <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
-                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">Users List</h6>
+                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">Groups List</h6>
                         </div>
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
                             <table class="table table-hover table-striped table-bordered  tx-center">
                                 <thead>
                                     <th>Row</th>
-                                    <th>Name</th>
-                                    <th>Unit</th>
-                                    <th>Username</th>
-                                    <th>Status</th>
+                                    <th>Group Name</th>
+                                    <th>Users</th>
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Ali Fatemi</td>
-                                        <td>Management</td>
                                         <td>alifatemi</td>
                                         <td>Active</td>
                                         <td>
@@ -104,6 +100,15 @@
 
 
 @section("scripts")
+<script>
+
+    $(document).ready(function() {
+      $("#grouptags").select2({
+        dropdownParent: $("#newgroup")
+      });
+    });
+    
+</script>
 <script>
     $(function(){
 

@@ -14,3 +14,4 @@
     @endif
 @endif
 <link rel="stylesheet" href="{{asset('panel/css/main.css')}}">
+<link rel="stylesheet" href="{{asset('panel/css/custom.css')}}">
