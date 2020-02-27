@@ -3,3 +3,8 @@
     color: white;
     opacity:1;
 }
+.br-header-right .dropdown .dropdown-menu-left{
+    left: -1px !important;
+    right: auto !important;
+    top:45px !important;
+}

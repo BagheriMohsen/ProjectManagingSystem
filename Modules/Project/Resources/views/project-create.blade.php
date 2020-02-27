@@ -36,7 +36,7 @@
             </div>
             <br>
             
-            <form action="{{route("project.store")}}" method="POST">
+            <form id="project_create" action="{{route("project.store")}}" method="POST">
                 @csrf
                 
             <div class="addproject-wr">
@@ -168,7 +168,7 @@
                                         <div class="row row-sm">
                                                 <div class="col-sm-12 col-xl-4">
                                                     <label>Percent of the project</label>
-                                                    <input class="form-control" placeholder="Percent">
+                                                    <input type="number" class="form-control project_percent" placeholder="Percent">
                                                 </div>
                                                 <div class="col-sm-12 col-xl-4">
                                                     <label>Deadline</label>
