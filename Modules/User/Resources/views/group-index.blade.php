@@ -54,36 +54,98 @@
             <div class="timesheet-wr">
                 <div class="row">
                     <div class="col-xs-12 col-xl-12">
-                    <div class="card bd-0 mg-b-20">
-                        <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
-                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">Groups List</h6>
+                        <div class="card bd-0 mg-b-20">
+                            <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
+                            <h6 class="mg-b-0 tx-14 tx-white tx-normal">Groups List</h6>
+                            </div>
+                            <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
+                                <table class="table table-hover table-striped table-bordered  tx-center">
+                                    <thead>
+                                        <th>Row</th>
+                                        <th>Group Name</th>
+                                        <th>Users</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>alifatemi</td>
+                                            <td>Active</td>
+                                            <td>
+                                                <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message"><i class="icon ion-chatbubble-working"></i></a>
+                                                <a class="mg-l-10 tx-18 tx-info" href="" title="Edit"><i class="icon ion-gear-a"></i></a>
+                                                <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer bd bd-t-0 d-flex justify-content-between">
+                                <a class="btn btn-light active btn-sm" disabled>TechnoFast</a>
+                            </div>
                         </div>
-                        <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
-                            <table class="table table-hover table-striped table-bordered  tx-center">
-                                <thead>
-                                    <th>Row</th>
-                                    <th>Group Name</th>
-                                    <th>Users</th>
-                                    <th>Action</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>alifatemi</td>
-                                        <td>Active</td>
-                                        <td>
-                                            <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message"><i class="icon ion-chatbubble-working"></i></a>
-                                            <a class="mg-l-10 tx-18 tx-info" href="" title="Edit"><i class="icon ion-gear-a"></i></a>
-                                            <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-footer bd bd-t-0 d-flex justify-content-between">
-                            <a class="btn btn-light active btn-sm" disabled>TechnoFast</a>
+
+                        
+                    </div>
+                    <div class="col-12 col-sm-6 mx-auto">
+                        <div class="card bd-0 mg-b-20">
+                            <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
+                                <h6 class="mg-b-0 tx-14 tx-white tx-normal">Edit profile</h6>
+                            </div>
+                            <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
+                                <form class="form" action="{{route($text_editor['route_name'])}}" method="POST" 
+                                enctype="multipart/form-data">
+                                @csrf
+                                    <div class="row mp0">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Firstname<span class="tx-danger">*</span></label>
+                                                <input class="form-control" name="" value="" id="" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Lastname<span class="tx-danger">*</span></label>
+                                                <input class="form-control" name="" value="" id="" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-12 col-sm-6 mx-auto">
+                        <div class="card bd-0 mg-b-20">
+                            <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
+                                <h6 class="mg-b-0 tx-14 tx-white tx-normal">Edit profile</h6>
+                            </div>
+                            <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
+                                <form class="form" action="{{route($text_editor['route_name'])}}" method="POST" 
+                                enctype="multipart/form-data">
+                                @csrf
+                                    <div class="row mp0">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Old password<span class="tx-danger">*</span></label>
+                                                <input type="password" class="form-control" name="" value="" id="" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">New password<span class="tx-danger">*</span></label>
+                                                <input type="password" class="form-control" name="" value="" id="" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Confirm new password<span class="tx-danger">*</span></label>
+                                                <input type="password" class="form-control" name="" value="" id="" placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

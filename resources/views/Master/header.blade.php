@@ -1,10 +1,26 @@
 
     <!-- ########## START: HEAD PANEL ########## -->
     <div class="br-header">
-      <div class="br-header-left">
+      <div class="br-header-right">
         <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
         <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
-		<!--
+        <div class="nav">
+          <div class="dropdown">
+            <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
+              <span class="logged-name hidden-md-down">test</span>
+              <span class="square-10 bg-success"></span>
+            </a>
+            <div class="dropdown-menu-left dropdown-menu  dropdown-menu-header wd-250 ">
+              <ul class="list-unstyled user-profile-nav">
+                <li><a href=""><i class="icon ion-ios-person"></i> test</a></li>
+                <li><a href=""><i class="icon ion-locked"></i> test</a></li>
+                <li><a href=""><i class="icon ion-help-buoy"></i> test</a></li>
+                <li><a href=""><i class="icon ion-power"></i> test</a></li>
+              </ul>
+            </div><!-- dropdown-menu -->
+          </div><!-- dropdown --> 
+        </div>
+        <!--
         <div class="input-group hidden-xs-down wd-170 transition">
           <input id="searchbox" type="text" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
