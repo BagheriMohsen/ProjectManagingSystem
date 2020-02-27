@@ -79,12 +79,33 @@
             <span class="menu-item-label">Todo List (Private)</span>
           </a>
         </li>
+        
+
         <li class="br-menu-item">
-          <a href="{{ route("users.index") }}" class="br-menu-link">
+          <a href="#" class="br-menu-link with-sub">
             <i class="menu-item-icon icon ion-person-stalker tx-20"></i>
             <span class="menu-item-label">Users</span>
           </a>
+          <ul class="br-menu-sub">
+            <li class="sub-item">
+              <a href="{{route('users.unit.index')}}" class="sub-link">
+                Unit
+              </a>
+            </li>
+            <li class="sub-item">
+              <a href="{{route('users.group.index')}}" class="sub-link">
+                Group
+              </a>
+            </li>
+            <li class="sub-item">
+              <a href="{{ route("users.index") }}" class="sub-link">
+                Users
+              </a>
+            </li>
+          </ul>
         </li>
+
+
       </ul>
       <br>
     </div>
