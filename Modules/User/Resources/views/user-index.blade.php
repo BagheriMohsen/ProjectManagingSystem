@@ -77,7 +77,7 @@
                                         <td>Active</td>
                                         <td>
                                             <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message"><i class="icon ion-chatbubble-working"></i></a>
-                                            <a class="mg-l-10 tx-18 tx-info" href="" title="Edit"><i class="icon ion-gear-a"></i></a>
+                                            <a class="mg-l-10 tx-18 tx-info" href="{{ route("users.edit") }}" title="Edit"><i class="icon ion-gear-a"></i></a>
                                             <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
                                         </td>
                                     </tr>
@@ -85,7 +85,7 @@
                             </table>
                         </div>
                         <div class="card-footer bd bd-t-0 d-flex justify-content-between">
-                            <a class="btn btn-light active btn-sm" disabled>TechnoFast</a>
+                            <a class="btn btn-light active btn-sm" disabled>test</a>
                         </div>
                     </div>
                     </div>
