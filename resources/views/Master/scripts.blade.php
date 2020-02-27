@@ -22,6 +22,7 @@
 <script src="{{asset('panel/js/dashboard.js')}}"></script>
 <script src="{{asset('panel/js/chart.chartjs.js')}}"></script>
 <script src="{{asset('panel/js/fontawsome-all.js')}}"></script>
+<script src="{{asset('panel/js/custom.js')}}"></script>
 
 
 @if(isset($text_editor))
