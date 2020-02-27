@@ -11,6 +11,32 @@
 |
 */
 
-Route::group(["prefix"=>"users","as"=>"users."],function(){
+Route::group(["prefix"=>"users/","as"=>"users."],function(){
     Route::get("","UserController@index")->name("index");
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Unit Route
+    |--------------------------------------------------------------------------
+    */
+    Route::group(["prefix"=>"unit/","as"=>"unit."],function(){
+        Route::get("","UnitController@index")->name("index");
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Group Route
+    |--------------------------------------------------------------------------
+    */
+    Route::group(["prefix"=>"group/","as"=>"group."],function(){
+        Route::get("","GroupController@index")->name("index");
+    });
+    
+
+
+
 });
+
+
+
