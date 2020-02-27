@@ -13,11 +13,36 @@ class CreateTableGroup extends Migration
      */
     public function up()
     {
-        Schema::create('group', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger("user_id")->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
+
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('set null')->onUpdate('CASCADE');
         });
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Group User Table
+        |--------------------------------------------------------------------------
+        */
+        Schema::create('group_user', function (Blueprint $table) {
+            $table->bigInteger("user_id")->unsigned();
+            $table->bigInteger("group_id")->unsigned();
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+            $table->foreign('group_id')->references('id')->on('groups')
+            ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+
+        });
+
     }
 
     /**
@@ -28,5 +53,7 @@ class CreateTableGroup extends Migration
     public function down()
     {
         Schema::dropIfExists('group');
+        Schema::dropIfExists('group_user');
+
     }
 }

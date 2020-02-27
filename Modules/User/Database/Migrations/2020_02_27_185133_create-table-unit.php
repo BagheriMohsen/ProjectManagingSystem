@@ -15,8 +15,12 @@ class CreateTableUnit extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger("user_id")->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('set null')->onUpdate('CASCADE');
         });
     }
 

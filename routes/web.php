@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::group(["middleware"=>"auth"], function ()  {
+    Route::get("/","HomeController@dashboard")->name("dashboard");
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+Route::get("/login","Auth\Custom\AuthController@login")->name("login");
+Route::post("/login-check","Auth\Custom\AuthController@login_check")->name("login_check");
+Route::get("/logout","Auth\Custom\AuthController@logout")->name("logout");
+
+
+

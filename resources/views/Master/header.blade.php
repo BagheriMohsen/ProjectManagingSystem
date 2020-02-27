@@ -82,13 +82,17 @@
           </div><!-- dropdown -->
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name hidden-md-down">Ali Fatemi</span>
+              <span class="logged-name hidden-md-down">
+                {{ auth()->user()->first_name." ".auth()->user()->last_name }}
+              </span>
               <img src="img/user-blank.png" class="wd-32 rounded-circle" alt="">
               <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-250">
               <div class="tx-center">
-                <h6 class="logged-fullname">Ali Fatemi</h6>
+                <h6 class="logged-fullname">
+                  {{ auth()->user()->first_name." ".auth()->user()->last_name }}
+                </h6>
                 <p>Management Unit</p>
               </div>
               <hr>
@@ -96,7 +100,12 @@
                 <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
                 <li><a href=""><i class="icon ion-locked"></i> Change Password</a></li>
                 <li><a href=""><i class="icon ion-help-buoy"></i> Support Request</a></li>
-                <li><a href="logout"><i class="icon ion-power"></i> Logout</a></li>
+                <li>
+                  <a href="{{ route("logout") }}">
+                    <i class="icon ion-power"></i>
+                    Logout
+                  </a>
+                </li>
               </ul>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->

@@ -2,7 +2,9 @@
     <div class="br-sideleft sideleft-scrollbar">
 		<div class="tx-center side-logged-name-wr">
     <a href="#"><img src="{{asset('panel/img/user-blank.png')}}" class="rounded-circle mg-t-20" style="width:70%; height:auto;"></a>
-			<h4 class="logged-fullname color-eee">Ali Fatemi</h4>
+			<h4 class="logged-fullname color-eee">
+        {{ auth()->user()->first_name." ".auth()->user()->last_name }}
+      </h4>
 			<p class="color-eee">Manager</p>
 		</div>
       <label class="sidebar-label pd-x-10 mg-t-20 op-3"></label>

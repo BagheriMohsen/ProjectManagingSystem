@@ -11,9 +11,9 @@
 |
 */
 
-Route::group(["prefix"=>"users/","as"=>"users."],function(){
+Route::group(["middleware"=>"auth","prefix"=>"users/","as"=>"users."],function(){
     Route::get("","UserController@index")->name("index");
-    Route::get("/edit","UserController@edit")->name("edit");
+    Route::get("edit/","UserController@edit")->name("edit");
 
     /*
     |--------------------------------------------------------------------------

@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\User\Entities\Unit;
 
 class UnitController extends Controller
 {
@@ -31,9 +32,14 @@ class UnitController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        Unit::create([
+            "user_id"   =>  auth()->user->id,
+            "name"      =>  $req->name
+        ]);
+
+        return back()->with("message","unit is created!");
     }
 
     /**
