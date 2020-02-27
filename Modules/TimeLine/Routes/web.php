@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix'=>'timeline','as'=>'timeline.'],function() {
+Route::group(["middleware"=>"auth",'prefix'=>'timeline','as'=>'timeline.'],function() {
 
     Route::get('/', 'TimeLineController@index')->name('index');
     Route::post('/store', 'TimeLineController@store')->name('store');

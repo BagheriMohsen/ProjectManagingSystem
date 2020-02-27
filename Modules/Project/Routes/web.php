@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix'=>'project','as'=>'project.'],function(){
+Route::group(["middleware"=>"auth",'prefix'=>'project','as'=>'project.'],function(){
     Route::get('/', 'ProjectController@index')->name('index');
     Route::get('/create', 'ProjectController@create')->name('create');
     Route::post('/store', 'ProjectController@store')->name('store');
