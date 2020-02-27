@@ -1,7 +1,7 @@
 @extends('Master.layout')
 
 @section('title')
-    {{"Time Line"}}
+    {{"users"}}
 @endsection
 
 <!-- 
