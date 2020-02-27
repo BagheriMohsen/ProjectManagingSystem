@@ -23,6 +23,7 @@
 <script src="{{asset('panel/js/chart.chartjs.js')}}"></script>
 <script src="{{asset('panel/js/fontawsome-all.js')}}"></script>
 
+
 @if(isset($text_editor))
 	@if($text_editor['desc'])
 		<script src="{{asset('panel/lib/tinymce/js/tinymce/tinymce.min.js')}}"></script>

@@ -1,0 +1,5 @@
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+    left:0;
+    color: white;
+    opacity:1;
+}

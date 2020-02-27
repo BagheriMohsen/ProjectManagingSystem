@@ -10,11 +10,11 @@
 @section('path')
     @php 
         $path = [
-            'name'          =>  'Users',
-            'btn_content'   =>  'New User',
+            'name'          =>  'Units',
+            'btn_content'   =>  'New unit',
             'is_modal'      =>  True,
             'btn_href'      =>  '',
-            'modal_name'    =>  'newuser'
+            'modal_name'    =>  'newunit'
         ]
     @endphp
     @include('Master.path')
@@ -35,7 +35,7 @@
             'title'         =>  False
         ]
     @endphp
-    @include('Master.Modal.create-users')
+    @include('Master.Modal.create-units')
 @endsection
 
 
@@ -62,22 +62,13 @@
                             <table class="table table-hover table-striped table-bordered  tx-center">
                                 <thead>
                                     <th>Row</th>
-                                    <th>Name</th>
                                     <th>Unit</th>
-                                    <th>Username</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Ali Fatemi</td>
                                         <td>Management</td>
-                                        <td>alifatemi</td>
-                                        <td>Active</td>
                                         <td>
-                                            <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message"><i class="icon ion-chatbubble-working"></i></a>
-                                            <a class="mg-l-10 tx-18 tx-info" href="" title="Edit"><i class="icon ion-gear-a"></i></a>
                                             <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
                                         </td>
                                     </tr>
