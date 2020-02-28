@@ -26,7 +26,7 @@
 @section('create_modal')
     @php 
         $text_editor = [
-            'route_name'    =>  'timeline.store',
+            'route_name'    =>  'users.units.store',
             'image'         =>  False,
             'file'          =>  False,
             'desc'          =>  False,
@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-xl-12">
                     <div class="card bd-0 mg-b-20">
-                        <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
+                        <div class="card-header bg-side-panel bd-0 d-flex align-items-center justify-content-between">
                         <h6 class="mg-b-0 tx-14 tx-white tx-normal">Users List</h6>
                         </div>
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
@@ -65,18 +65,25 @@
                                     <th>Unit</th>
                                 </thead>
                                 <tbody>
+                                    @foreach($units as $unit)
                                     <tr>
                                         <td>1</td>
-                                        <td>Management</td>
+                                        <td>{{ $unit->name }}</td>
                                         <td>
-                                            <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
+                                            <a class="mg-l-10 tx-18 tx-danger" 
+                                            href="{{ route("users.units.destroy",$unit->id) }}" title="Delete">
+                                                <i class="icon ion-close"></i>
+                                            </a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-footer bd bd-t-0 d-flex justify-content-between">
-                            <a class="btn btn-light active btn-sm" disabled>TechnoFast</a>
+                            <ul>
+                                {!! $units->render() !!}
+                            </ul>
                         </div>
                     </div>
                     </div>

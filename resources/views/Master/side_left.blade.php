@@ -1,11 +1,23 @@
-    
+    @php 
+      $user = auth()->user();
+    @endphp
     <div class="br-sideleft sideleft-scrollbar">
 		<div class="tx-center side-logged-name-wr">
-    <a href="#"><img src="{{asset('panel/img/user-blank.png')}}" class="rounded-circle mg-t-20" style="width:70%; height:auto;"></a>
+    <div>
+      @if(is_null($user->avatar))
+        <img src="{{asset('panel/icon/user.svg')}}"
+        class="rounded-circle mg-t-20 bg-light" style="width:70%; height:auto;">
+      @else 
+        <img src="storage/{{ $user->avatar }}"
+        class="rounded-circle mg-t-20" style="width:70%; height:auto;">
+      @endif
+    </div>
 			<h4 class="logged-fullname color-eee">
-        {{ auth()->user()->first_name." ".auth()->user()->last_name }}
+        {{ $user->first_name." ".$user->last_name }}
       </h4>
-			<p class="color-eee">Manager</p>
+			<p class="color-eee">
+        {{ $user->job_title }}
+      </p>
 		</div>
       <label class="sidebar-label pd-x-10 mg-t-20 op-3"></label>
       <ul class="br-sideleft-menu">
@@ -90,12 +102,12 @@
           </a>
           <ul class="br-menu-sub">
             <li class="sub-item">
-              <a href="{{route('users.unit.index')}}" class="sub-link">
+              <a href="{{route('users.units.index')}}" class="sub-link">
                 Unit
               </a>
             </li>
             <li class="sub-item">
-              <a href="{{route('users.group.index')}}" class="sub-link">
+              <a href="{{route('users.groups.index')}}" class="sub-link">
                 Group
               </a>
             </li>

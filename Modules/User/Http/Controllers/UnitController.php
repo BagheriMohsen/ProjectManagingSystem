@@ -15,7 +15,10 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return view('user::unit-index');
+        $units = Unit::latest()->paginate(10);
+        return view('user::unit-index',compact(
+            "units"
+        ));
     }
 
     /**
@@ -34,8 +37,13 @@ class UnitController extends Controller
      */
     public function store(Request $req)
     {
+        
+        $req->validate([
+            "name"  =>  "required | unique:units"
+        ]);
+
         Unit::create([
-            "user_id"   =>  auth()->user->id,
+            "user_id"   =>  auth()->user()->id,
             "name"      =>  $req->name
         ]);
 
@@ -80,6 +88,9 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Unit::destroy($id);
+
+        return redirect()->route("users.units.index")
+        ->with("message","unit deleted");
     }
 }

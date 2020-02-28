@@ -31,7 +31,7 @@
     <form class="form" action="{{ route("login_check") }}" method="post">
       @csrf
       <div class="form-group">
-
+          
         <input type="text" class="form-control login-mobilenumber1"
          name="phone_number" placeholder="Mobile Number" autocomplete="off">
           {{-- error --}}
@@ -47,7 +47,14 @@
           @error('password')
             <div class="text-danger">{{ $message }}</div>
           @enderror
+          
           {{-- end error --}}
+
+          {{-- invalid data error --}}
+          @if(session('error'))
+            <span class="form-control bg-danger text-light">{{ session("error") }}</span>
+          @endif
+          {{-- invalid data error --}}
 
 
       </div>

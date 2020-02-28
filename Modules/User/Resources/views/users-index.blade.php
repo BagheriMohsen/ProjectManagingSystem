@@ -26,7 +26,7 @@
 @section('create_modal')
     @php 
         $text_editor = [
-            'route_name'    =>  'timeline.store',
+            'route_name'    =>  'users.store',
             'image'         =>  False,
             'file'          =>  False,
             'desc'          =>  False,
@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-xl-12">
                     <div class="card bd-0 mg-b-20">
-                        <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
+                        <div class="card-header bg-side-panel bd-0 d-flex align-items-center justify-content-between">
                         <h6 class="mg-b-0 tx-14 tx-white tx-normal">Users List</h6>
                         </div>
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
@@ -69,23 +69,40 @@
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
+                                    @foreach($users as $user)
                                     <tr>
                                         <td>1</td>
-                                        <td>Ali Fatemi</td>
-                                        <td>Management</td>
-                                        <td>alifatemi</td>
+                                        <td> {{ $user->first_name." ".$user->last_name }} </td>
+                                        <td>
+                                            @if(is_null($user->unit_id))
+                                                {{"---"}}
+                                            @else 
+                                                {{ $user->unit->name }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $user->phone_number }}</td>
                                         <td>Active</td>
                                         <td>
-                                            <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message"><i class="icon ion-chatbubble-working"></i></a>
-                                            <a class="mg-l-10 tx-18 tx-info" href="{{ route("users.edit") }}" title="Edit"><i class="icon ion-gear-a"></i></a>
-                                            <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
+                                            <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message">
+                                                <img class="icon" src="{{ asset("panel/icon/send.svg") }}" alt="">
+                                            </a>
+                                            <a class="mg-l-10 tx-18 tx-info" href="{{ route("users.edit",$user->id) }}" title="Edit">
+                                                <img class="icon" src="{{ asset("panel/icon/edit.svg") }}" alt="">
+                                            </a>
+                                            <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete">
+                                                <img class="icon" src="{{ asset("panel/icon/delete.png") }}" alt="">
+                                            </a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
+
                             </table>
                         </div>
                         <div class="card-footer bd bd-t-0 d-flex justify-content-between">
-                            <a class="btn btn-light active btn-sm" disabled>test</a>
+                            <ul>
+                                {!! $users->render() !!}
+                            </ul>
                         </div>
                     </div>
                     </div>

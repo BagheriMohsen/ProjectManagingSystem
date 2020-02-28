@@ -31,6 +31,7 @@ class CreateTableGroup extends Migration
         |--------------------------------------------------------------------------
         */
         Schema::create('group_user', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger("user_id")->unsigned();
             $table->bigInteger("group_id")->unsigned();
 

@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\User\Entities\Group;
 
 class GroupController extends Controller
 {
@@ -14,7 +15,13 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('user::group-index');
+        $users  = "App\User"::latest()->get();
+        $groups = Group::latest()->paginate(10);
+
+        return view('user::group-index',compact(
+            "users",
+            "groups"
+        ));
     }
 
     /**
@@ -31,9 +38,22 @@ class GroupController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+       
+        $req->validate([
+            "name"  =>  "required | unique:groups"
+        ]);
+
+        $group = Group::create([
+            "name"      =>  $req->name,
+            "user_id"   =>  auth()->user()->id
+        ]);
+
+        $group->users()->attach($req->users);
+
+        return redirect()->route("users.groups.index")
+        ->with("message","group created");
     }
 
     /**

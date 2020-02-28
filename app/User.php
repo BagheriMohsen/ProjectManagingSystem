@@ -19,6 +19,8 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
+        'job_title',
+        'avatar',
         'email',
         'password',
         'phone_number'
@@ -41,4 +43,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\User\Entities\Unit Model
+    |--------------------------------------------------------------------------
+    */
+    public function unit() {
+        return $this->belongsTo("Modules\User\Entities\Unit");
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\User\Entities\Group Model - Many To Many RelationsShip
+    |--------------------------------------------------------------------------
+    */
+    public function users() {
+        return $this->belongsToMany("Modules\User\Entities\Group");
+    }
 }

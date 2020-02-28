@@ -11,17 +11,18 @@
             <div class="row row-sm">
                 <div class="col-sm-12">
                     <label>Unit Name</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" name="name" type="text">
                 </div>
             </div>
-        </form>
+       
 
 
         </div><!-- modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-success mg-l-10">Add Unit</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success btn-sm mg-l-10">Add Unit</button>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
+      </form>
       </div>
     </div><!-- modal-dialog -->
   </div><!-- modal -->

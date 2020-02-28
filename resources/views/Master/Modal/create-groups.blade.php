@@ -11,25 +11,30 @@
             <div class="row row-sm">
                 <div class="col-sm-12 col-xl-6">
                     <label>Group Name</label>
-                    <input class="form-control" type="text">
+                    <input name="name" class="form-control" type="text">
                 </div>
                 <div class="col-sm-12 col-xl-6">
                     <label>Select Users</label>
-                    <select id="grouptags" class="form-control tags" multiple="multiple">
-                        <option selected="selected">orange</option>
-                        <option>white</option>
-                        <option selected="selected">purple</option>
+                    <select name="users[]" id="grouptags" class="form-control tags" multiple="multiple">
+                      @foreach($users as $user)
+                        <option value="{{ $user->id }}">
+                          {{ $user->first_name." ".$user->last_name }}
+                        </option>
+                      @endforeach
                     </select>
                 </div>
             </div>
-        </form>
+        
 
 
         </div><!-- modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-success mg-l-10">Add Group</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-success btn-sm mg-l-10">Add Group</button>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
+
+      </form>
+
       </div>
     </div><!-- modal-dialog -->
   </div><!-- modal -->

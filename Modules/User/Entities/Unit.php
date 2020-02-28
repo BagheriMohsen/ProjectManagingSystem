@@ -11,5 +11,13 @@ class Unit extends Model
         "name"
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User Model
+    |--------------------------------------------------------------------------
+    */
+    public function users() {
+        return $this->hasMany("App\User");
+    }
 
 }

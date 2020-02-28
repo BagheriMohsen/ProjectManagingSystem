@@ -40,7 +40,7 @@ class AuthController extends Controller
         ]);
 
         if( !auth()->attempt($data) ){
-            return response()->json('invalid data');
+            return redirect()->route("login")->with("error","username or password is wrong");
         }
 
         return redirect("/");

@@ -5,6 +5,9 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\User;
+use Modules\User\Entities\Unit;
+
 
 class UserController extends Controller
 {
@@ -14,7 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user::user-index');
+        $users = User::latest()->paginate(10);
+        $units = Unit::latest()->get();
+
+        return view('user::users-index',compact(
+            "users",
+            "units"
+        ));
     }
 
     /**
@@ -31,9 +40,34 @@ class UserController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $login_data = $req->validate([
+            "avatar"            =>  "image",
+            "first_name"        =>  "required",
+            "last_name"         =>  "required",
+            "phone_number"      =>  "required | unique:users",
+            "password"          =>  "required",
+            "password_confirm"  =>  "required | same:password",
+            "unit"              =>  "required",
+            "job_title"         =>  "required"
+        ]);
+
+
+        $image       = $req->file('avatar');
+        $filename    = $image->getClientOriginalName();
+    
+        $image_resize = Image::make($image->getRealPath());              
+        $image_resize->resize(147, 147);
+        $image_resize->save(public_path('storage/avatars/' .$filename));
+        $image_path = 'avatars/' .$filename;
+
+        $login_data["avatar"] = $image_path;
+        User::create($login_data);
+
+        return redirect()->route("users.index")
+        ->with("messsage","user created !");
+
     }
 
     /**
@@ -51,9 +85,16 @@ class UserController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit()
-    {
-        return view('user::edit');
+    public function edit($user_id)
+    {   
+
+        $user = User::findOrFail($user_id);
+        $units = Unit::latest()->get();
+
+        return view('user::users-edit',compact(
+            "user",
+            "units"
+        ));
     }
 
     /**

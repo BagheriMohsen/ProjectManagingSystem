@@ -32,32 +32,48 @@
                 <div class="row">
                     <div class="col-xs-12 col-xl-12">
                     <div class="card bd-0 mg-b-20">
-                        <div class="card-header bg-success bd-0 d-flex align-items-center justify-content-between">
-                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">User Edit</h6>
+                        <div class="card-header bg-side-panel bd-0 d-flex align-items-center justify-content-between">
+                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">
+                            {{ $user->first_name." ".$user->last_name }}
+                        </h6>
+                       
                         </div>
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
                             <form action="" method="post">
                                 @csrf
                                 <div class="row row-sm">
+                                    
                                     <div class="col-sm-12 col-xl-6">
+                                    
                                         <label>First Name</label>
-                                        <input class="form-control" type="text">
+                                        <input value="{{ $user->first_name }}" name="first_name" class="form-control" type="text">
+                                    </div>
+
+                                    <div class="col-sm-12 col-xl-6">
+                                        @if(is_null($user->avatar))
+                                            <img style="width:147px;" src="{{asset('panel/icon/user.svg')}}"
+                                            class="rounded-circle mg-t-20 bg-light" style="width:70%; height:auto;">
+                                        @else 
+                                            <img style="width:147px;" src="storage/{{ $user->avatar }}"
+                                            class="rounded-circle mg-t-20" style="width:70%; height:auto;">
+                                        @endif
                                     </div>
                                     <div class="col-sm-12 col-xl-6">
                                         <label>Last Name</label>
-                                        <input class="form-control" type="text">
+                                        <input value="{{ $user->last_name }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <div class="row row-sm">
                                     <div class="col-sm-12 col-xl-6">
                                         <label>Unit</label>
-                                        <select class="form-control">
-                                            <option>Management Unit</option>
-                                            <option>Network Unit</option>
-                                            <option>Programming Unit</option>
-                                            <option>Support Unit</option>
-                                            <option>Research Unit</option>
-                                            <option>Finance Unit</option>
+                                        <select name="unit" class="form-control">
+                                            @foreach($units as $unit)
+                                                <option value="{{ $unit->id }}"
+                                                    @if($unit->id == $user->unit_id)
+                                                        selected
+                                                    @endif
+                                                    >{{ $unit->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-sm-12 col-xl-6">
@@ -70,39 +86,36 @@
                                 </div>
                                 <div class="row row-sm">
                                     <div class="col-sm-12 col-xl-6">
-                                        <label>E-Mail</label>
-                                        <input class="form-control" type="text">
+                                        <label>Phone Number</label>
+                                        <input name="phone_number" value="{{ $user->phone_number }}"  class="form-control" type="text">
                                     </div>
                                     <div class="col-sm-12 col-xl-6">
-                                        <label>Mobile Number</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="row row-sm">
-                                    <div class="col-sm-12 col-xl-6">
-                                        <label>Username</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                    <div class="col-sm-12 col-xl-6">
-                                        <label>Verfication Code</label>
-                                        <input class="form-control" type="text">
+                                        <label>Password</label>
+                                        <input name="password" class="form-control" type="password">
                                     </div>
                                 </div>
                                 <div class="row row-sm">
                                     <div class="col-sm-12 col-xl-6 mg-t-20">
-                                        <input type="file" name="file-1[]" id="file-1" class="inputfile"
-                                        data-multiple-caption="{count} files selected" multiple>
-                                        <label for="file-1" class="tx-white bg-warning">
-                                            <i class="icon ion-ios-upload-outline tx-24"></i>
-                                            <span>Photo</span>
-                                        </label>
+                                        <input type="file" name="avatar" id="file-1" class="inputfile"
+                      data-multiple-caption="{count} files selected" multiple>
+                                                <label for="file-1" class="tx-white bg-warning">
+                                                  <i class="icon ion-ios-upload-outline tx-24"></i>
+                                                  <span>Avatar</span>
+                                                </label>
                                     </div>
+
+
+                                    <div class="col-sm-12 col-xl-6 mg-t-20">
+                                        
+                                        <a class="btn btn-success active">Edit </a>
+                                    </div>
+
+                                    
+
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer bd bd-t-0 d-flex justify-content-center">
-                            <a class="btn btn-success active" disabled>Submit</a>
-                        </div>
+                        
                     </div>
                     </div>
                 </div>
