@@ -1,4 +1,3 @@
-	
 <script src="{{asset('panel/lib/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('panel/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('panel/lib/jquery-ui/ui/widgets/datepicker.js')}}"></script>
@@ -22,7 +21,11 @@
 <script src="{{asset('panel/js/dashboard.js')}}"></script>
 <script src="{{asset('panel/js/chart.chartjs.js')}}"></script>
 <script src="{{asset('panel/js/fontawsome-all.js')}}"></script>
+<script src="{{asset('panel/js/parsley-2.9.2.min.js')}}"></script>
+<script src="{{asset('panel/lib/i18n/ar.js')}}"></script>
+<script src="{{asset('panel/lib/i18n/fa.js')}}"></script>
 <script src="{{asset('panel/js/custom.js')}}"></script>
+
 
 
 @if(isset($text_editor))
