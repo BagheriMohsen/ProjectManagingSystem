@@ -16,7 +16,7 @@ Route::group(["middleware"=>"auth",'prefix'=>'timeline','as'=>'timeline.'],funct
     Route::get('/', 'TimeLineController@index')->name('index');
     Route::post('/store', 'TimeLineController@store')->name('store');
     Route::get('/destroy/{id}', 'TimeLineController@destroy')->name('destroy');
-
-
-
+    Route::get('/single', function(){
+        return view('timeline::timeline-single');
+    });
 });

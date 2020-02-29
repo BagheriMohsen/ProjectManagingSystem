@@ -233,7 +233,7 @@
     // Select2 with tagging support
     $('.select2-tag').select2({
       tags: true,
-      tokenSeparators: [',', ' ']
+      tokenSeparators: [',', ' '],
     });
   }
 

@@ -208,16 +208,7 @@
 
 
 @section("scripts")
-<script>
 
-    $(document).ready(function() {
-      $("#grouptags").select2({
-        dropdownParent: $("#newgroup"),
-        dropdownAutoWidth : true
-      });
-    });
-    
-</script>
 <script>
     $(function(){
 
