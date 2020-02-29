@@ -3,7 +3,7 @@
 <script src="{{asset('panel/lib/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <script src="{{asset('panel/js/persiandatepicker.js')}}"></script>
 <script src="{{asset('panel/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-{{-- <script src="{{asset('panel/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script> --}}
+<script src="{{asset('panel/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('panel/lib/moment/min/moment.min.js')}}"></script>
 {{-- <script src="{{asset('panel/lib/peity/jquery.peity.min.js')}}"></script> --}}
 {{-- <script src="{{asset('panel/lib/rickshaw/vendor/d3.min.js')}}"></script> --}}
