@@ -23,9 +23,10 @@ class CreateTableUsers extends Migration
             $table->bigIncrements('id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('phone_number')->nullable()->unique();
+            $table->string('phone_number')->nullable();
             $table->string('job_title')->nullable();
             $table->string('avatar')->nullable();
+            $table->boolean('is_active')->default(False);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

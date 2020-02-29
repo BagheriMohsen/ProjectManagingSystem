@@ -39,10 +39,19 @@ class AuthController extends Controller
             "password"      =>  "required"
         ]);
 
+        // user data is wrong
         if( !auth()->attempt($data) ){
-            return redirect()->route("login")->with("error","username or password is wrong");
+            return redirect()->route("login")
+            ->with("error","username or password is wrong");
         }
 
+        // user suspended
+        if(!auth()->user()->is_active){
+            Auth::logout();
+            return redirect()->route("login")
+            ->with("error","Your Account is suspended"); 
+        }
+        
         return redirect("/");
         
     }

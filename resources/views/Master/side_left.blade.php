@@ -9,7 +9,7 @@
         class="rounded-circle mg-t-20 bg-light" style="width:70%; height:auto;">
       @else 
         <img src="storage/{{ $user->avatar }}"
-        class="rounded-circle mg-t-20" style="width:70%; height:auto;">
+        class="rounded-circle mg-t-20"  >
       @endif
     </div>
 			<h4 class="logged-fullname color-eee">
@@ -69,12 +69,7 @@
             </li>
           </ul>
         </li>
-        <li class="br-menu-item">
-          <a href="time-sheet" class="br-menu-link">
-            <i class="menu-item-icon icon ion-android-alarm-clock tx-20"></i>
-            <span class="menu-item-label">Works Times</span>
-          </a>
-        </li>
+       
         <li class="br-menu-item">
           <a href="reports" class="br-menu-link">
             <i class="menu-item-icon icon ion-stats-bars tx-20"></i>

@@ -34,10 +34,7 @@
                     </div>
                     <div class="col-sm-12 col-xl-6">
                         <label>Job title</label>
-                        <select name="job_title" class="form-control">
-                            <option>Manager</option>
-                            <option selected>Staff</option>
-                        </select>
+                        <input value="{{ old("job_title") }}" class="form-control" type="text" name="job_title">
                     </div>
                 </div>
                   
@@ -54,7 +51,14 @@
                       <label>Password Confirm</label>
                       <input class="form-control" type="password" name="password_confirm">
                     </div>
+                    <div class="col-sm-12 col-xl-6">
+                      <label>User is Active?</label>
+                      <input class="form-control" @if( old("is_active") == "on" ) checked @endif type="checkbox" name="is_active">
+                    </div>
+                    
                 </div>
+
+                
                   <div class="row row-sm">
                     <div class="col-sm-12 col-xl-6 mg-t-20">
                       <input type="file" name="avatar" id="file-1" class="inputfile"
@@ -71,7 +75,7 @@
 
         </div><!-- modal-body -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success btn-sm mg-l-10">Add User</button>
+          <button type="submit" class="btn bg-green btn-sm mg-l-10">Add User</button>
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
 

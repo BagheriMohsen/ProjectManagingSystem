@@ -56,7 +56,7 @@
                     <div class="col-xs-12 col-xl-12">
                     <div class="card bd-0 mg-b-20">
                         <div class="card-header bg-side-panel bd-0 d-flex align-items-center justify-content-between">
-                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">Users List</h6>
+                        <h6 class="mg-b-0 tx-14 tx-white tx-normal">Unit List</h6>
                         </div>
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
                             <table class="table table-hover table-striped table-bordered  tx-center">

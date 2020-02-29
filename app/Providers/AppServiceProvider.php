@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\User\Entities\Unit;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /*
+        |--------------------------------------------------------------------------
+        | Set Units variable for admin header
+        |--------------------------------------------------------------------------
+        |*/
+        view()->composer('Master.header',function($view){
+            if(auth()->check()){
+                // find user detail
+                $units       = Unit::latest()->get();
+               
+                $view ->with(compact('units'));
+            }
+        });
+
+
+
     }
 }

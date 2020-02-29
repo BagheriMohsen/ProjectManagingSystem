@@ -19,7 +19,8 @@ class StartingSeeder extends Seeder
             "first_name"    =>  "Mohsen",
             "last_name"     =>  "Bagheri",
             "phone_number"  =>  "09106769465",
-            "password"      =>  Hash::make("admin")
+            "password"      =>  Hash::make("admin"),
+            'is_active'     =>  True
         ]);
 
 

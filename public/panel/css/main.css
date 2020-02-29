@@ -40260,3 +40260,25 @@ a.hover-white-8:hover, a.hover-white-8:focus {
 .bg-side-panel {
 background-color:#18222f;
 }
+
+
+.bg-green {
+  background-color:#1CAF9A;
+  color:white;
+}
+
+.text-green {
+  color:#1CAF9A !important;
+}
+
+
+.btn-green{
+  background-color:#1CAF9A !important;
+  color:white !important;
+}
+
+.btn-green:hover {
+  border:1px solid #1CAF9A;
+  background-color:white !important;
+  color:black !important;
+}

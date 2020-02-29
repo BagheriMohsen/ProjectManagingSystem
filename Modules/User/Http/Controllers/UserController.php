@@ -5,6 +5,9 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\User;
 use Modules\User\Entities\Unit;
 
@@ -17,6 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        
+
         $users = User::latest()->paginate(10);
         $units = Unit::latest()->get();
 
@@ -42,7 +47,8 @@ class UserController extends Controller
      */
     public function store(Request $req)
     {
-        $login_data = $req->validate([
+        
+        $data = $req->validate([
             "avatar"            =>  "image",
             "first_name"        =>  "required",
             "last_name"         =>  "required",
@@ -54,19 +60,31 @@ class UserController extends Controller
         ]);
 
 
-        $image       = $req->file('avatar');
-        $filename    = $image->getClientOriginalName();
-    
-        $image_resize = Image::make($image->getRealPath());              
-        $image_resize->resize(147, 147);
-        $image_resize->save(public_path('storage/avatars/' .$filename));
-        $image_path = 'avatars/' .$filename;
+        if($req->hasFile("avatar")){
+            $image       = $req->file('avatar');
+            $filename    = $image->getClientOriginalName();
+        
+            $image_resize = Image::make($image->getRealPath());              
+            $image_resize->resize(147, 147);
+            $image_resize->save(public_path('storage/avatars/' .$filename));
+            $image_path = 'avatars/' .$filename;
+        }else{
+            $image_path = null;
+        }
 
-        $login_data["avatar"] = $image_path;
-        User::create($login_data);
+        if(is_null($req->is_active)){
+            $active =   False;
+        }else{
+            $active =   True;
+        }
+        
+        $data["is_active"]  = $active;
+        $data["password"]   =   Hash::make($req->password);
+        $data["avatar"]     = $image_path;
+        User::create($data);
 
         return redirect()->route("users.index")
-        ->with("messsage","user created !");
+        ->with("message","user created !");
 
     }
 
@@ -88,8 +106,8 @@ class UserController extends Controller
     public function edit($user_id)
     {   
 
-        $user = User::findOrFail($user_id);
-        $units = Unit::latest()->get();
+        $user   = User::findOrFail($user_id);
+        $units  = Unit::latest()->get();
 
         return view('user::users-edit',compact(
             "user",
@@ -103,9 +121,50 @@ class UserController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $data = $req->validate([
+            "first_name"        =>  "required",
+            "last_name"         =>  "required",
+            "phone_number"      =>  "required",
+            "password"          =>  "required",
+            "unit"              =>  "required",
+            "job_title"         =>  "required"
+        ]);
+        
+
+
+        $user = User::findOrFail($id);
+
+        if($req->hasFile("avatar")){
+
+            Storage::disk("public")->delete($user->avatar);
+
+            $image       = $req->file('avatar');
+            $filename    = $image->getClientOriginalName();
+        
+            $image_resize = Image::make($image->getRealPath());              
+            $image_resize->resize(147, 147);
+            $image_resize->save(public_path('storage/avatars/' .$filename));
+            $image_path = 'avatars/' .$filename;
+        }else{
+            $image_path = $user->avatar;
+        }
+
+
+        if(is_null($req->is_active)){
+            $active =   False;
+        }else{
+            $active =   True;
+        }
+        $data["is_active"]  = $active;
+        $data["password"]   =   Hash::make($req->password);
+        $data["avatar"] = $image_path;
+        
+        $user->update($data);
+
+        return redirect()->route("users.index")
+        ->with("message","user details is updated !");
     }
 
     /**
@@ -117,4 +176,23 @@ class UserController extends Controller
     {
         //
     }
+
+    /**
+     * Change UnitID
+     * @param int $unit_id
+     * @return Response
+     */
+    public function change_unitID($unit_id) {
+        
+        $user_id = auth()->user()->id;
+
+        $user = "App\User"::findOrFail($user_id);
+        $user->update([
+            "unit_id"   =>  $unit_id
+        ]);
+
+        return redirect()->back();
+
+    }
+
 }

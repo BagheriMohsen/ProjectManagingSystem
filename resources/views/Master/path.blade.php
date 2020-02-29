@@ -1,6 +1,6 @@
 <div class="br-pageheader">
     <nav class="breadcrumb pd-0 mg-0 tx-12 mg-r-20">
-    <a class="breadcrumb-item" href="index">Dashboard</a>
+    <a class="breadcrumb-item" href="{{ route("dashboard") }}">Dashboard</a>
     @if(isset($path['name']))
         <span class="breadcrumb-item active">{{$path['name']}}</span>
     @endif
@@ -11,7 +11,7 @@
             href="{{route($path['btn_href'])}}"
         @endif
         
-        class="btn btn-primary btn-sm btn-with-icon btn-submit-new-timeline"
+        class="btn bg-green btn-sm btn-with-icon btn-submit-new-timeline"
         @if($path['is_modal'])
             data-toggle="modal" 
             @if(isset($path['modal_name'])) 

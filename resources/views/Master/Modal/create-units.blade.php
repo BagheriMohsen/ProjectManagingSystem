@@ -19,7 +19,7 @@
 
         </div><!-- modal-body -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success btn-sm mg-l-10">Add Unit</button>
+          <button type="submit" class="btn bg-green btn-sm mg-l-10">Add Unit</button>
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
         </div>
       </form>

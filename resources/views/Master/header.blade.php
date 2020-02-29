@@ -7,15 +7,49 @@
         <div class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name hidden-md-down">test</span>
-              <span class="square-10 bg-success"></span>
+              <span class="logged-name hidden-md-down mx-3">
+                @php
+                  $user = auth()->user();
+                @endphp
+                @if(is_null($user->unit_id))
+                  {{"Select the part you want looking at"}}
+                @else 
+                  {{ "You are looking at: " }}
+
+                  <span class="border border-success px-2 mb-3">{{ $user->unit->name }}</span>
+                @endif
+
+              </span>
+              
             </a>
             <div class="dropdown-menu-left dropdown-menu  dropdown-menu-header wd-250 ">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person"></i> test</a></li>
-                <li><a href=""><i class="icon ion-locked"></i> test</a></li>
-                <li><a href=""><i class="icon ion-help-buoy"></i> test</a></li>
-                <li><a href=""><i class="icon ion-power"></i> test</a></li>
+                @foreach($units as $unit)
+                  <li>
+                    <a 
+                    @if($user->unit_id == $unit->id)
+                      class="text-green"
+                    @endif
+                    href="{{ route("users.change_unitID",$unit->id) }}">
+                      <i class="icon ion-ios-person"></i>
+                      {{ $unit->name }}
+                    </a>
+                  </li>
+                @endforeach
+                 
+                  @if(count($units) == 0)
+                    <li class="mt-3 ">
+                      {{"There is nothing to see"}}
+                    </li>
+                    <li class="mt-3">
+                      {{"Please create Unit first"}}
+                      <a class="btn btn-green text-light mt-2" 
+                        href="{{ route("users.units.index") }}">
+                        {{"Click here"}}
+                      </a>
+                    </li>
+                  @endif
+
               </ul>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown --> 

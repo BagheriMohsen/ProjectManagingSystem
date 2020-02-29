@@ -3,33 +3,35 @@
 <script src="{{asset('panel/lib/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <script src="{{asset('panel/js/persiandatepicker.js')}}"></script>
 <script src="{{asset('panel/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('panel/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+{{-- <script src="{{asset('panel/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script> --}}
 <script src="{{asset('panel/lib/moment/min/moment.min.js')}}"></script>
-<script src="{{asset('panel/lib/peity/jquery.peity.min.js')}}"></script>
-<script src="{{asset('panel/lib/rickshaw/vendor/d3.min.js')}}"></script>
-<script src="{{asset('panel/lib/rickshaw/vendor/d3.layout.min.js')}}"></script>
-<script src="{{asset('panel/lib/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
-<script src="{{asset('panel/lib/rickshaw/rickshaw.min.js')}}"></script>
-<script src="{{asset('panel/lib/jquery.flot/jquery.flot.js')}}"></script>
-<script src="{{asset('panel/lib/jquery.flot/jquery.flot.resize.js')}}"></script>
-<script src="{{asset('panel/lib/flot-spline/js/jquery.flot.spline.min.js')}}"></script>
-<script src="{{asset('panel/lib/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('panel/js/jquery.multifield.js')}}"></script>
+{{-- <script src="{{asset('panel/lib/peity/jquery.peity.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/rickshaw/vendor/d3.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/rickshaw/vendor/d3.layout.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/jquery-sparkline/jquery.sparkline.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/rickshaw/rickshaw.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/jquery.flot/jquery.flot.js')}}"></script>
+<script src="{{asset('panel/lib/jquery.flot/jquery.flot.resize.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/flot-spline/js/jquery.flot.spline.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/lib/chart.js/Chart.min.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/js/jquery.multifield.js')}}"></script> --}}
 <script src="{{asset('panel/js/main.js')}}"></script>
-<script src="{{asset('panel/js/map.shiftworker.js')}}"></script>
-<script src="{{asset('panel/js/ResizeSensor.js')}}"></script>
-<script src="{{asset('panel/js/dashboard.js')}}"></script>
-<script src="{{asset('panel/js/chart.chartjs.js')}}"></script>
+{{-- <script src="{{asset('panel/js/map.shiftworker.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/js/ResizeSensor.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/js/dashboard.js')}}"></script> --}}
+{{-- <script src="{{asset('panel/js/chart.chartjs.js')}}"></script> --}}
 <script src="{{asset('panel/js/fontawsome-all.js')}}"></script>
-<script src="{{asset('panel/js/parsley-2.9.2.min.js')}}"></script>
+{{-- <script src="{{asset('panel/js/parsley-2.9.2.min.js')}}"></script> --}}
 <script src="{{asset('panel/lib/i18n/ar.js')}}"></script>
 <script src="{{asset('panel/lib/i18n/fa.js')}}"></script>
 <script src="{{asset('panel/js/custom.js')}}"></script>
 
 
 
-@if(isset($text_editor))
-	@if($text_editor['desc'])
+
+
+
+
 		<script src="{{asset('panel/lib/tinymce/js/tinymce/tinymce.min.js')}}"></script>
 		<script>
 			tinymce.init({
@@ -41,9 +43,9 @@
 			statusbar: false
 			});
 		</script>
-	@endif
 
-	@if($text_editor['tags'])
+
+
 
 	<script src="{{asset('panel/lib/select2/js/select2.full.min.js')}}"></script>
 		<script>
@@ -52,8 +54,7 @@
 				tokenSeparators: [',',]
 			})
 		</script>
-	@endif
-@endif
+
 
 
 		

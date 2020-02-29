@@ -39,14 +39,14 @@
                        
                         </div>
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
-                            <form action="" method="post">
+                            <form action="{{ route("users.update",$user->id) }}" method="post" enctype="multipart/form-data"  >
                                 @csrf
                                 <div class="row row-sm">
                                     
                                     <div class="col-sm-12 col-xl-6">
                                     
                                         <label>First Name</label>
-                                        <input value="{{ $user->first_name }}" name="first_name" class="form-control" type="text">
+                                        <input name="first_name" value="{{ $user->first_name }}" name="first_name" class="form-control" type="text">
                                     </div>
 
                                     <div class="col-sm-12 col-xl-6">
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="col-sm-12 col-xl-6">
                                         <label>Last Name</label>
-                                        <input value="{{ $user->last_name }}" class="form-control" type="text">
+                                        <input name="last_name" value="{{ $user->last_name }}" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <div class="row row-sm">
@@ -78,10 +78,7 @@
                                     </div>
                                     <div class="col-sm-12 col-xl-6">
                                         <label>Job title</label>
-                                        <select class="form-control">
-                                            <option>Manager</option>
-                                            <option selected>Staff</option>
-                                        </select>
+                                        <input value="{{ $user->job_title }}" class="form-control" type="text" name="job_title">
                                     </div>
                                 </div>
                                 <div class="row row-sm">
@@ -92,6 +89,10 @@
                                     <div class="col-sm-12 col-xl-6">
                                         <label>Password</label>
                                         <input name="password" class="form-control" type="password">
+                                    </div>
+                                    <div class="col-sm-12 col-xl-6">
+                                        <label>User is Active?</label>
+                                        <input class="form-control" @if($user->is_active) checked @endif type="checkbox" name="is_active">
                                     </div>
                                 </div>
                                 <div class="row row-sm">
@@ -106,8 +107,9 @@
 
 
                                     <div class="col-sm-12 col-xl-6 mg-t-20">
-                                        
-                                        <a class="btn btn-success active">Edit </a>
+                                        <button type="submit" class="btn btn-sm bg-green">
+                                            Update
+                                        </button>
                                     </div>
 
                                     

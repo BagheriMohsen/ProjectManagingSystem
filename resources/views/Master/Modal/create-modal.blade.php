@@ -62,7 +62,7 @@
                         @endif
                 </div><!-- modal-body -->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-l-20 mg-r-20">Publish</button>
+                    <button type="submit" class="btn bg-green tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-l-20 mg-r-20">Publish</button>
                     <button type="button" class="btn btn-secondary tx-12 tx-uppercase pd-y-12 pd-x-25 tx-mont tx-medium mg-r-20 mg-l-20" data-dismiss="modal">Cancel</button>
                 </div>
                 </form>
