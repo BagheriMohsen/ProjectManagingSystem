@@ -193,9 +193,6 @@
                             </div>
                         </div>
                     </div>
-
-               
-            
             </form>
             
         </div>
@@ -215,7 +212,8 @@
 
     $(document).ready(function() {
       $("#grouptags").select2({
-        dropdownParent: $("#newgroup")
+        dropdownParent: $("#newgroup"),
+        dropdownAutoWidth : true
       });
     });
     

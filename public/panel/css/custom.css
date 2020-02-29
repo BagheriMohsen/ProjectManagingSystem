@@ -1,5 +1,6 @@
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
-    left:0;
+    left:-1px;
+    top: -5px;
     color: white;
     opacity:1;
 }
@@ -7,6 +8,19 @@
     left: -1px !important;
     right: auto !important;
     top:45px !important;
+}
+.modal-dialog.modal-notify.modal-dark .modal-header {
+  background-color: #1d2939;
+}
+main input[type=email]:focus, main input[type=password]:focus, main input[type=text]:focus, main input[type=url]:focus, main textarea:focus {
+  border: 0;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 /* Parsly Css */
@@ -44,4 +58,5 @@ textarea.parsley-error {
 .parsley-errors-list.filled {
   opacity: 1;
 }
+
 /* End Parsly */

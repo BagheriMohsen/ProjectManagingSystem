@@ -84,21 +84,24 @@
                                         <td>{{ $user->phone_number }}</td>
                                         <td>
                                             @if($user->is_active)
-                                                <i class="fas fa-check text-green"></i>
+                                                <i class="fas fa-check text-green hvr-grow"></i>
                                             @else 
-                                                <i class="fas fa-times text-danger"></i>
+                                                <i class="fas fa-times text-danger hvr-grow"></i>
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message">
-                                                <img class="icon" src="{{ asset("panel/icon/send.svg") }}" alt="">
+                                            <a class="mg-l-10 tx-18 px-1 tx-success hvr-grow" href="" title="Send Message">
+                                                {{-- <img class="icon" src="{{ asset("panel/icon/send.svg") }}" alt=""> --}}
+                                                <i class="fas fa-paper-plane"></i>
                                             </a>
-                                            <a class="mg-l-10 tx-18 tx-info" href="{{ route("users.edit",$user->id) }}" title="Edit">
-                                                <img class="icon" src="{{ asset("panel/icon/edit.svg") }}" alt="">
+                                            <a class="mg-l-10 tx-18 px-1 tx-info hvr-grow" href="{{ route("users.edit",$user->id) }}" title="Edit">
+                                                {{-- <img class="icon" src="{{ asset("panel/icon/edit.svg") }}" alt=""> --}}
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                             @if(!$role_name == "admin")
-                                                <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete">
-                                                    <img class="icon" src="{{ asset("panel/icon/delete.png") }}" alt="">
+                                                <a class="mg-l-10 tx-18 px-1 tx-danger hvr-grow" href="" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                    {{-- <img class="icon" src="{{ asset("panel/icon/delete.png") }}" alt=""> --}}
                                                 </a>
                                             @endif
                                         </td>
