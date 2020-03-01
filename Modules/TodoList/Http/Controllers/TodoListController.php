@@ -5,6 +5,7 @@ namespace Modules\TodoList\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\TodoList\Entities\TodoList;
 
 class TodoListController extends Controller
 {
@@ -14,7 +15,15 @@ class TodoListController extends Controller
      */
     public function index()
     {
-        return view('todolist::index');
+
+        $todo_lists         =   TodoList::where("is_done",False)->get();
+        $todo_list_archive  =   TodoList::where("is_done",True)->paginate(15);
+
+        return view('todolist::todo-index',compact(
+            "todo_lists",
+            "todo_list_archive"
+        ));
+
     }
 
     /**
@@ -31,9 +40,15 @@ class TodoListController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        TodoList::create([
+            "user_id"   =>  auth()->user()->id,
+            "desc"      =>  $req->desc
+        ]);
+
+        return response()->json("item is created !");
+
     }
 
     /**
@@ -62,9 +77,16 @@ class TodoListController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $todo_list  =   TodoList::findOrFail($id);
+
+        $todo_list->update([
+            "is_done"   =>  True
+        ]);
+        
+        return response()->json("its done!");
+
     }
 
     /**
@@ -74,6 +96,8 @@ class TodoListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        TodoList::destroy($id);
+
+        return response()->json("item is deleted !");
     }
 }

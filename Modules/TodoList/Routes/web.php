@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::prefix('todolist')->group(function() {
-    Route::get('/', 'TodoListController@index');
+Route::group(["middleware"=>"auth","prefix"=>"todolist/","as"=>"todolist."], function() {
+    Route::get("","TodoListController@index")->name("index");
+    Route::post("store/","TodoListController@store")->name("store");
+    Route::post("update/{todo_id}","TodoListController@update")->name("update");
+    Route::get("delete/","TodoListController@delete")->name("delete");
 });

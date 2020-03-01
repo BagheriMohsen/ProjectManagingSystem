@@ -83,7 +83,7 @@
           </a>
         </li>
         <li class="br-menu-item">
-          <a href="todo-list" class="br-menu-link">
+          <a href="{{ route("todolist.index") }}" class="br-menu-link">
             <i class="menu-item-icon icon ion-android-checkbox-outline tx-20"></i>
             <span class="menu-item-label">Todo List (Private)</span>
           </a>

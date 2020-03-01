@@ -44,11 +44,17 @@ class TimeLineController extends Controller
             'image' =>  'required'
         ]);
         
-        $data['user_id']    =   7;
+        $data['user_id']    =   auth()->user()->id;
         $data['image'] = Storage::disk('public')->put('TimeLine/',$req->File('image'));
 
+        // save timeline
         $time_line = TimeLine::create($data);
-            
+
+        // save image
+        $media = $time_line->addMedia($request->File('image'))->toMediaCollection("timeline");
+        $time_line->update(['image_id'=>$media->id]);
+
+        // save tags
         $time_line->syncTagsWithType($req->tags,$time_line->title);
 
         return redirect()->route('timeline.index')->with('message');

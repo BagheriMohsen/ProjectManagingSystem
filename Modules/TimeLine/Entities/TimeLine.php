@@ -49,14 +49,11 @@ class TimeLine extends Model
     public function registerMediaCollections()
     {
         
-        //Thumb image for Product
-        $this->addMediaConversion('thumb')
-              ->width(75)
-              ->height(75);
+        
         //Card image for Product
         $this->addMediaConversion('card')
-            ->width(400)
-            ->height(400);
+            ->width(310)
+            ->height(194);
     }
     /*
     |--------------------------------------------------------------------------
@@ -74,14 +71,7 @@ class TimeLine extends Model
     public function getCardUrlAttribute(){
         return $this->timeLineImage->getUrl('card');
     }
-    /*
-    |--------------------------------------------------------------------------
-    | Call Thumb url in view page
-    |--------------------------------------------------------------------------
-    */
-    public function getThumbUrlAttribute(){
-        return $this->timeLineImage->getUrl('thumb');
-    }
+   
 
 
 }

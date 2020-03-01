@@ -17,6 +17,7 @@ class CreateTableTimeLine extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('image_id')->unsigned()->nullable();
+            $table->bigInteger('unit_id')->unsigned();
             $table->string('title');
             $table->string('slug');
             $table->text('desc');
@@ -27,6 +28,9 @@ class CreateTableTimeLine extends Migration
             ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->foreign('image_id')->references('id')->on('media')
+            ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+            $table->foreign('unit_id')->references('id')->on('units')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
