@@ -15,4 +15,8 @@ Route::group(["middleware"=>"auth","prefix"=>"todolist/","as"=>"todolist."], fun
     Route::post("store/","TodoListController@store")->name("store");
     Route::post("update/{todo_id}","TodoListController@update")->name("update");
     Route::get("delete/","TodoListController@delete")->name("delete");
+    
+    Route::get("Work-left-over/","TodoListController@Work_left_over")->name("Work_left_over");
+    Route::get("Work-is-done/","TodoListController@Work_is_done")->name("Work_is_done");
+
 });

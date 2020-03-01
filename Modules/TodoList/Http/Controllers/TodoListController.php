@@ -15,14 +15,8 @@ class TodoListController extends Controller
      */
     public function index()
     {
-
-        $todo_lists         =   TodoList::where("is_done",False)->get();
-        $todo_list_archive  =   TodoList::where("is_done",True)->paginate(15);
-
-        return view('todolist::todo-index',compact(
-            "todo_lists",
-            "todo_list_archive"
-        ));
+        
+        return view('todolist::todo-index');
 
     }
 
@@ -100,4 +94,36 @@ class TodoListController extends Controller
 
         return response()->json("item is deleted !");
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Work left over
+    |--------------------------------------------------------------------------
+    */
+    public function Work_left_over() {
+
+        $todo_lists = TodoList::where([
+            ["user_id","=",auth()->user()->id],
+            ["is_done","=",False]
+        ])->get();
+
+        return response()->json($todo_lists);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Work is done
+    |--------------------------------------------------------------------------
+    */
+    public function Work_is_done() {
+
+        $todo_lists = TodoList::where([
+            ["user_id","=",auth()->user()->id],
+            ["is_done","=",True]
+        ])->get();
+
+        return response()->json($todo_lists);
+    }
+
+    
 }

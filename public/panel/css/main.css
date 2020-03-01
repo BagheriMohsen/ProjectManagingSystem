@@ -40282,3 +40282,7 @@ background-color:#18222f;
   background-color:white !important;
   color:black !important;
 }
+
+.modal-body {
+    background-color: #dee2e6 !important; 
+}
