@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('message')->group(function() {
-    Route::get('/', 'MessageController@index');
+Route::group(["middleware"=>"auth","prefix"=>"messages/","as"=>"messages."], function() {
+    Route::get("","MessageController@index")->name("index");
 });

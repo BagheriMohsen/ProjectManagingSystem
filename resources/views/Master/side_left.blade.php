@@ -40,7 +40,7 @@
           </a>
         </li>
         <li class="br-menu-item">
-          <a href="message" class="br-menu-link">
+          <a href="{{ route("messages.index") }}" class="br-menu-link">
             <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
             <span class="menu-item-label">Messages</span>
           </a>
@@ -77,7 +77,7 @@
           </a>
         </li>
         <li class="br-menu-item">
-          <a href="notes" class="br-menu-link">
+          <a href="{{ route("notes.index") }}" class="br-menu-link">
             <i class="menu-item-icon icon ion-ios-paper-outline tx-20"></i>
             <span class="menu-item-label">Notes (Private)</span>
           </a>

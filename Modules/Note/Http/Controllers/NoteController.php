@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Modules\Note\Entities\Note;
+
 class NoteController extends Controller
 {
     /**
@@ -14,7 +16,11 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return view('note::index');
+        $user_id = auth()->user()->id;
+
+        $notes = Note::where("user_id",$user_id)->latest()->paginate(12);
+
+        return view('note::notes-index',compact("notes"));
     }
 
     /**
@@ -31,9 +37,20 @@ class NoteController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+
+        $data = $req->validate([
+            "title" =>  "required | unique:notes",
+            "desc"  =>  "required"
+        ]);
+
+        $data["user_id"]    =   auth()->user()->id;
+        Note::create($data);
+        
+        return redirect()->back()
+        ->with("message","note created!");
+
     }
 
     /**
@@ -74,6 +91,9 @@ class NoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Note::destroy($id);
+
+        return redirect()->back()
+        ->with("message","note is deleted!");
     }
 }

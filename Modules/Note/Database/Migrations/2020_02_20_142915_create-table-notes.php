@@ -18,8 +18,7 @@ class CreateTableNotes extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('title');
             $table->string('slug');
-            $table->string('body');
-            $table->text('tags');
+            $table->string('desc');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

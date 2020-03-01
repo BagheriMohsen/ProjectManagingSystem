@@ -24,6 +24,8 @@
 
   <div class="br-mainpanel">
     
+    @yield("page_title")
+
     @yield('path')
 
     <div class="br-pagebody">

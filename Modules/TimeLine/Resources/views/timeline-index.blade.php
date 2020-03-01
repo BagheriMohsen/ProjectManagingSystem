@@ -4,27 +4,10 @@
     {{"Time Line"}}
 @endsection
 
-<!-- 
-    path 
--->
-@section('path')
-    @php 
-        $path = [
-            'name'          =>  'TimeLine',
-            'btn_content'   =>  'New Discuss',
-            'is_modal'      =>  True,
-            'btn_href'      =>  ''
-        ]
-    @endphp
-    @include('Master.path')
-@endsection
+@php
 
-<!-- 
-    Modal for store data
--->
-@section('create_modal')
-    @php 
-        $text_editor = [
+    // text_editor option
+    $text_editor = [
             'route_name'    =>  'timeline.store',
             'image'         =>  True,
             'file'          =>  False,
@@ -32,8 +15,42 @@
             'tags'          =>  True,
             'tags_item'     =>  array(),
             'title'         =>  True
-        ]
-    @endphp
+    ];
+
+    // path option
+    $path = [
+            'name'          =>  'TimeLine',
+            'btn_content'   =>  'New Discuss',
+            'is_modal'      =>  True,
+            'btn_href'      =>  ''
+    ];
+
+    // page_title option
+    $page_title = [
+        "title"     =>  "Time Line",
+        "sub_title" =>  "Techno Fast",
+        "icon"      =>  '<i class="menu-item-icon icon ion-coffee"></i>'
+    ]
+@endphp
+
+<!-- 
+    Page Title 
+-->
+@section("page_title")
+    @include("Master.page_title")
+@endsection
+
+<!-- 
+    path 
+-->
+@section('path')
+    @include('Master.path')
+@endsection
+
+<!-- 
+    Modal for store data
+-->
+@section('create_modal')
     @include('Master.Modal.create-modal')
 @endsection
 

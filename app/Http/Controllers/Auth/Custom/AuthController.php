@@ -17,7 +17,7 @@ class AuthController extends Controller
     public function login() {
         
         if(auth()->check()){
-            return back();
+            return abort(404);
         }
 
         return view("Auth.login_page");
@@ -31,7 +31,7 @@ class AuthController extends Controller
     public function login_check(Request $req) {
 
         if(auth()->check()){
-            return back();
+            return abort(404);
         }
 
         $data = $req->validate([

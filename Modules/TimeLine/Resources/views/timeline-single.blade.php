@@ -100,6 +100,7 @@
         </div>
     </div>
 </div>
+
 <div class="row row-sm">
     <div class="col-md-12">
         <div class="blog-comment mt-4">
@@ -166,6 +167,9 @@
         </div>
     </div>
 </div>
+
+
+
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-md modal-notify modal-dark" role="document">

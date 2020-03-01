@@ -5,20 +5,42 @@
 @endsection
 
 
+@php
 
-<!-- 
-    path 
--->
-@section('path')
-    @php 
-        $path = [
+    // text_editor option
+    $text_editor = [
+            'route_name'    =>  'users.store',
+    ];
+
+    // path option
+    $path = [
             'name'          =>  'Users',
             'btn_content'   =>  'New User',
             'is_modal'      =>  True,
             'btn_href'      =>  '',
             'modal_name'    =>  'newuser'
-        ]
-    @endphp
+    ];
+
+    // page_title option
+    $page_title = [
+        "title"     =>  "Users",
+        "sub_title" =>  "Techno Fast",
+        "icon"      =>  '<i class="icon ion-person-stalker"></i>'
+    ]
+@endphp
+
+<!-- 
+    Page Title 
+-->
+@section("page_title")
+    @include("Master.page_title")
+@endsection
+
+
+<!-- 
+    path 
+-->
+@section('path')
     @include('Master.path')
 @endsection
 
@@ -26,11 +48,6 @@
     Modal for store data
 -->
 @section('create_modal')
-    @php 
-        $text_editor = [
-            'route_name'    =>  'users.store',
-        ]
-    @endphp
     @include('Master.Modal.create-users')
 @endsection
 

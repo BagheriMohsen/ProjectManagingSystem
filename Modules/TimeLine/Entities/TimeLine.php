@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 class TimeLine extends Model
 {
     use Sluggable , \Spatie\Tags\HasTags;
+    
     protected $fillable = [
         'user_id',
         'unit_id',

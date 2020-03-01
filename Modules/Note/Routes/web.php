@@ -11,6 +11,8 @@
 |
 */
 
-Route::prefix('note')->group(function() {
-    Route::get('/', 'NoteController@index');
+Route::group(["middleware"=>"auth","prefix"=>"notes/","as"=>"notes."], function() {
+    Route::get("","NoteController@index")->name("index");
+    Route::post("store/","NoteController@store")->name("store");
+    Route::get("destroy/{note_id}","NoteController@destroy")->name("destroy");
 });

@@ -3,12 +3,32 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-notify modal-dark" role="document">
             <div class="modal-content tx-size-sm">
                 <div class="modal-header pd-x-20">
-                    <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">New Discuss</h6>
+                    {{-- <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">New Item</h6> --}}
                 </div>
                 <div class="modal-body pd-20">
                     <form class="form" action="{{route($text_editor['route_name'])}}" method="POST" 
                     enctype="multipart/form-data">
                         @csrf
+
+                        @if($text_editor['contact'])
+                            <div class="row mp0">
+                                <div class="col-xl-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Contact</label>
+                                        <br/>
+                                        <select id="timelineTags" class="form-control text-dark"  name="contact[]" multiple="multiple" style="width: 100%">
+                                        
+                                            <option selected="selected">
+                                                {{"users"}}
+                                            </option>
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
                         @if($text_editor['title'])
                             <div class="row mp0">
                                 <div class="col-xl-12">
