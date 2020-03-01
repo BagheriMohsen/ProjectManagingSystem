@@ -63,12 +63,14 @@
                                 </div>
                             </div>
                         @endif
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-green btn-sm mg-l-10">Add Unit</button>
                 </div>
+
+            </form>
             </div>
         </div><!-- modal-dialog -->
     </div>

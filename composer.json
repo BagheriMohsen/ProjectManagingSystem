@@ -16,6 +16,7 @@
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
+        "laravolt/avatar": "^3.1",
         "nwidart/laravel-modules": "^6.2",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-permission": "^3.8",

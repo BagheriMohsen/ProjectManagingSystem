@@ -55,6 +55,7 @@ class User extends Authenticatable
     public function unit() {
         return $this->belongsTo("Modules\User\Entities\Unit");
     }
+    
     /*
     |--------------------------------------------------------------------------
     | relate with Modules\User\Entities\Group Model - Many To Many RelationsShip
@@ -63,4 +64,24 @@ class User extends Authenticatable
     public function users() {
         return $this->belongsToMany("Modules\User\Entities\Group");
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relate with Modules\TimeLine\Entities\TimeLine
+    |--------------------------------------------------------------------------
+    */
+    public function user() {
+        return $this->hasMany("Modules\TimeLine\Entities\TimeLine");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relate with Modules\TimeLine\Entities\TimeLineComment
+    |--------------------------------------------------------------------------
+    */
+    public function timeline_comments() {
+        return $this->hasMany("Modules\TimeLine\Entities\TimeLineComment");
+    }
+
+
 }

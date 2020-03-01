@@ -57,7 +57,7 @@
                                             <img style="width:147px;" src="{{asset('panel/icon/user.svg')}}"
                                             class="rounded-circle mg-t-20 bg-light" style="width:70%; height:auto;">
                                         @else 
-                                            <img style="width:147px;" src="storage/{{ $user->avatar }}"
+                                            <img style="width:147px;" src="/storage/{{ $user->avatar }}"
                                             class="rounded-circle mg-t-20" style="width:70%; height:auto;">
                                         @endif
                                     </div>

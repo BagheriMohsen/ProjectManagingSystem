@@ -11,12 +11,18 @@
 |
 */
 
-Route::group(["middleware"=>"auth",'prefix'=>'timeline','as'=>'timeline.'],function() {
+Route::group(["middleware"=>"auth",'prefix'=>'timeline/','as'=>'timeline.'],function() {
 
-    Route::get('/', 'TimeLineController@index')->name('index');
-    Route::post('/store', 'TimeLineController@store')->name('store');
-    Route::get('/destroy/{id}', 'TimeLineController@destroy')->name('destroy');
-    Route::get('/single', function(){
-        return view('timeline::timeline-single');
-    });
+    Route::get('', 'TimeLineController@index')->name('index');
+    Route::post('store', 'TimeLineController@store')->name('store');
+    Route::get('destroy/{id}', 'TimeLineController@destroy')->name('destroy');
+    Route::get('{slug}/',"TimeLineController@show")->name("show");
+
+    // Comments
+    Route::post("send-comment/{timeline_id}","TimeLineController@send_comment")->name("send_comment");
+});
+
+Route::group(["middleware"=>"auth",'prefix'=>'timeline-comment/','as'=>'timeline_comment.'],function() {
+   
+    Route::post("send-comment/{timeline_id}","TimeLineCommentController@send_comment")->name("send_comment");
 });

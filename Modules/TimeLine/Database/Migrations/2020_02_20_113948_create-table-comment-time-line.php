@@ -19,6 +19,8 @@ class CreateTableCommentTimeLine extends Migration
             $table->bigInteger('time_line_id')->unsigned();
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->text('message');
+            $table->boolean('is_confirm')->default(False);
+            $table->date("confirm_date")->nullable();
             $table->timestamps();
 
 

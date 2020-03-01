@@ -16,18 +16,18 @@ class CreateTableTimeLine extends Migration
         Schema::create('time_lines', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('image_id')->unsigned()->nullable();
             $table->bigInteger('unit_id')->unsigned();
             $table->string('title');
             $table->string('slug');
             $table->text('desc');
+            $table->string('image')->nullable();
+            $table->string('thumb')->nullable();
+            $table->boolean("is_confirm")->default(False);
+            $table->date("confirm_date")->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')->references('id')->on('users')
-            ->onDelete('CASCADE')->onUpdate('CASCADE');
-
-            $table->foreign('image_id')->references('id')->on('media')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->foreign('unit_id')->references('id')->on('units')

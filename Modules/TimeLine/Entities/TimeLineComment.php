@@ -10,6 +10,19 @@ class TimeLineComment extends Model
         'user_id',
         'time_line_id',
         'parent_id',
-        'message'
+        'message',
+        'is_confirm',
+        'confirm_date'
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function user() {
+        return $this->belongsTo("App\User");
+    }
+
+    
 }

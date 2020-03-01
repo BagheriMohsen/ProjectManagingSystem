@@ -52,20 +52,28 @@
         @foreach($time_lines as $time_line)
             <div class="card">
                 
-                <img class="card-img-top img-fluid" src="{{asset('panel/img/img17.jpg')}}" alt="Image">
+                <img class="card-img-top img-fluid" 
+                src="/storage/{{ $time_line->thumb }}" alt="Image">
                 <div class="card-body">
                     <p class="card-text">
                         <li class="media d-block d-sm-flex">
-                            <img class="d-flex mg-r-20 wd-60 rounded-circle" src="{{asset('panel/img/user-3ajjad.png')}}" alt="Image">
+                            @if(is_null($time_line->user->avatar))
+                                <img class="d-flex mg-r-20 wd-60 rounded-circle"
+                                src="{{ Avatar::create($time_line->user->first_name." ".$time_line->user->last_name)->toBase64() }}" alt="Image">
+                            @else    
+                                <img class="d-flex mg-r-20 wd-60 rounded-circle"
+                                src="/storage/{{ auth()->user()->avatar }}" alt="Image">
+                            @endif  
+                            
                             <div class="media-body align-self-center mg-t-20 mg-sm-t-0 tx-11">
-                            <a href="">
+                            <a href="{{ route("timeline.show",$time_line->slug) }}">
                                 <h6 class="tx-inverse mg-b-10">
                                     {{$time_line->title}}
                                 </h6>
                             </a>
                                 {!! Str::limit($time_line->desc, 20) !!}
 
-                                <a href="">
+                                <a href="{{ route("timeline.show",$time_line->slug) }}">
                                     More...
                                 </a>
                             </div>

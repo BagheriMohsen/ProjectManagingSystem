@@ -10,7 +10,7 @@
 @section('path')
     @php 
         $path = [
-            'name'          =>  'TimeLine Single',
+            'name'          =>  'TimeLine',
         ]
     @endphp
     @include('Master.path')
@@ -27,43 +27,56 @@
 
 <div class="row row-sm">
     <div class="card col-12">
-        <img class="card-img-top img-fluid" src="{{asset('panel/img/img17.jpg')}}" alt="Image">
+        <img class="card-img-top img-fluid" src="/storage/{{ $time_line->image }}" alt="Image">
         <div class="card-header">
             <p class="card-text">
                 <li class="media d-block d-sm-flex">
-                    <img class="d-flex mg-r-20 wd-60 rounded-circle" src="{{asset('panel/img/user-3ajjad.png')}}" alt="Image">
+              
+                    @php 
+                        $first_name = $time_line->user->first_name;
+                        $last_name  = $time_line->user->last_name;
+                    @endphp
+                    @if(is_null($time_line->user->avatar))
+                        <img class="d-flex mg-r-20 wd-60 rounded-circle" 
+                        src="{{ Avatar::create($first_name." ".$last_name)->toBase64() }}"
+                        alt="Image" />
+                    @else 
+                        <img class="d-flex mg-r-20 wd-60 rounded-circle" 
+                        src="/storage/{{ $time_line->user->avatar }}"
+                        alt="Image" />
+                    @endif
+                    
+                    
+                    
                     <div class="media-body align-self-center mg-t-20 mg-sm-t-0 tx-11">
                     <a href="">
                         <h6 class="tx-inverse mg-b-10">
-                            Title of post
+                            {{ $time_line->title }}
                         </h6>
                     </a>
-                        Written by Admin in 20 june 2020
+                        Written by 
+                        {{ $first_name." ".$last_name }}
+                        in 
+                        {{ $time_line->created_at }}
                     </div>
                 </li>
             </p>
         </div>
         <div class="card-body">
-            <h5 class="card-title">Title of Post</h3>
-            <p class="card-text">
-                Lorem ipsum dolor sit amet, nec noster inermis ut, apeirian gubergren interpretaris et has. Ad lucilius atomorum intellegat usu, ne cum enim exerci diceret. Audiam verear utroque ea mea. Eruditi elaboraret nec ei, et labore quidam cum.
-
-                Ad perfecto volutpat expetendis has. Malorum prodesset sit ut, adipisci complectitur per an. Animal nonumes dissentiet vel te, est et laudem putent, at sed mucius vivendo reformidans. An sint suscipit has, omnes affert sea cu, diam liber meliore per ad. Pri assum evertitur forensibus ea.
-                
-                At labore fabellas facilisi mei, audire tamquam rationibus eam ne. Discere detracto lobortis no per, eam congue maiestatis ei. Ei sit brute affert deleniti, doming praesent accusamus ei qui, partem adipisci tacimates no sit. Vis etiam simul ne, eam altera latine dissentiunt ea. His nostrum expetenda reprehendunt ad. Qui in facer augue, dicat epicuri platonem vel at, paulo torquatos honestatis ut mea.
-                
-                Nisl omittam urbanitas nam te, latine accusamus consetetur an eos, id blandit maluisset sententiae vix. Menandri corrumpit necessitatibus ei sit. Ei justo placerat sea, vim ex erat prima tibique. Sea mollis quaeque suscipiantur ne, atomorum tractatos ea mei.
-                
-                Salutatus laboramus scribentur id nam. Hinc purto dicunt in vix, mel quem dicant te. Qui solet oratio semper an, odio eleifend ius id, wisi posse mei no. In quot consul vituperata vis. At duo tractatos constituto. Ut essent mediocritatem quo.  
-            </p>
+            <h5 class="card-title">
+                {{ $time_line->title }}
+            </h3>
+            <div class="card-text">
+                {!! $time_line->desc !!}
+            </div>
         </div>
         <div class="card-footer">
-            <a href="#">
-                #test
-            </a>
-            <a href="#">
-                #test2
-            </a>
+            @foreach($time_line->tags as $tag)
+                <a href="#">
+                    #{{$tag->name}}
+                </a>
+            @endforeach
+
         </div>
     </div>
 </div>
@@ -74,9 +87,13 @@
                 <h5 class="text-secondary mb-0"><i class="fas fa-pen pr-2 fa-2x" style="width: .8em;"></i> Write your comment:</h5>
             </div>
             <div class="pt-0">
-                <form action="#">
+                <form action="{{ route("timeline_comment.send_comment",$time_line->id) }}" method="POST">
+                    @csrf
                     <div class="form-group">
-                        <textarea class="form-control" style="height:150px"></textarea>
+                        <textarea name="message" class="form-control" style="height:150px" required></textarea>
+                        <button class="btn btn-green btn-sm" type="submit">
+                            send
+                        </button>
                     </div>
                 </form>
             </div>
@@ -89,25 +106,36 @@
             <h3 class="text-secondary mb-3">Comments</h3>
             <hr/>
             <ul class="comments">
+                
+                @foreach( $comments as $comment  )
                 <li class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                    @if(is_null($comment->user->avatar))
+                        <img 
+                        src="{{ Avatar::create($comment->user->first_name." ".$comment->user->last_name)->toBase64() }}"
+                         class="avatar" alt="">
+                    @else 
+                        <img 
+                        src="/storage/{{ $comment->user->avatar }}"
+                        class="avatar" alt="">
+                    @endif
+                    
                     <div class="post-comments">
-                        <p class="meta">Dec 18, 2014 <a href="#">JohnDoe</a> says : <a class="float-right" href="#" data-toggle="modal" data-target="#basicExampleModal"><i class="fas fa-reply fa-2x pr-2"></i><small>Reply</small></a></i></p>
+                        <p class="meta">
+                            {{ $comment->created_at }}
+                            <a href="#">
+                                {{ $comment->user->first_name." ".$comment->user->last_name }}     
+                            </a> says : 
+                            <a class="float-right" href="#" 
+                                data-toggle="modal" data-target="#basicExampleModal">
+                                <i class="fas fa-reply fa-2x pr-2"></i>
+                                <small>Reply</small>
+                            </a>
+                        </p>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Etiam a sapien odio, sit amet
+                            {{ $comment->message }}
                         </p>
                     </div>
-                </li>
-                <li class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_2.jpg" class="avatar" alt="">
-                    <div class="post-comments">
-                        <p class="meta">Dec 19, 2014 <a href="#">JohnDoe</a> says : <a href="#"><a class="float-right"><i class="fas fa-reply fa-2x pr-2"></i><small>Reply</small></a></i></p>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Etiam a sapien odio, sit amet
-                        </p>
-                    </div>
+                    
                     <ul class="comments">
                         <li class="clearfix">
                             <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
@@ -130,7 +158,10 @@
                             </div>
                         </li>
                     </ul>
+
                 </li>
+                @endforeach
+                
             </ul>
         </div>
     </div>
