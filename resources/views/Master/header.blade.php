@@ -133,22 +133,44 @@
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
               <span class="logged-name hidden-md-down">
-                {{ auth()->user()->first_name." ".auth()->user()->last_name }}
+                {{ $user->first_name." ".$user->last_name }}
               </span>
-              <img src="img/user-blank.png" class="wd-32 rounded-circle" alt="">
+              @if(is_null($user->avatar))
+                <img src="{{ Avatar::create($user->first_name." ".$user->last_name)->toBase64() }}" class="wd-32 rounded-circle" alt="">
+              @else 
+                <img src="/storage/{{ $user->avatar }}" class="wd-32 rounded-circle" alt="">
+              @endif
+              
+
+
               <span class="square-10 bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-250">
               <div class="tx-center">
                 <h6 class="logged-fullname">
-                  {{ auth()->user()->first_name." ".auth()->user()->last_name }}
+                  {{ $user->first_name." ".$user->last_name }}
                 </h6>
-                <p>Management Unit</p>
+                <p>
+                  {{ $user->job_title }}
+                </p>
               </div>
               <hr>
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person"></i> Edit Profile</a></li>
-                <li><a href=""><i class="icon ion-locked"></i> Change Password</a></li>
+
+                <li>
+                  <a href="{{ route("users.edit_profile",auth()->user()->id) }}">
+                    <i class="icon ion-ios-person"></i>
+                     Edit Profile
+                    </a>
+                  </li>
+
+                <li>
+                  <a href="{{ route("users.change_pass_page") }}">
+                    <i class="icon ion-locked"></i>
+                     Change Password
+                    </a>
+                  </li>
+
                 <li><a href=""><i class="icon ion-help-buoy"></i> Support Request</a></li>
                 <li>
                   <a href="{{ route("logout") }}">

@@ -25,7 +25,7 @@ class UserController extends Controller
         $users = User::latest()->paginate(10);
         $units = Unit::latest()->get();
 
-        return view('user::users-index',compact(
+        return view('user::User.users-index',compact(
             "users",
             "units"
         ));
@@ -109,7 +109,7 @@ class UserController extends Controller
         $user   = User::findOrFail($user_id);
         $units  = Unit::latest()->get();
 
-        return view('user::users-edit',compact(
+        return view('user::User.users-edit',compact(
             "user",
             "units"
         ));
@@ -194,5 +194,88 @@ class UserController extends Controller
         return redirect()->back();
 
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Edit Profile
+    |--------------------------------------------------------------------------
+    */
+    public function edit_profile($user_id) {
+
+        $user = User::findOrFail($user_id);
+
+        return view("user::User.edit-profile",compact("user"));
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Update Profile
+    |--------------------------------------------------------------------------
+    */
+    public function update_profile(Request $req,$user_id) {
+
+        $req->validate([
+            "first_name"    =>  "required",
+            "last_name"     =>  "required"
+        ]);
+
+        $user = User::findOrFail($user_id);
+
+        $user->update([
+            "first_name"    =>  $req->first_name,
+            "last_name"     =>  $req->last_name
+        ]);
+
+        return redirect()->route("users.edit_profile",[$user_id])
+        ->with("message","your profile data is updated successfully");
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Change Password Page
+    |--------------------------------------------------------------------------
+    */
+    public function change_pass_page() {
+
+        return view("user::User.change-pass");
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Change Password 
+    |--------------------------------------------------------------------------
+    */
+    public function change_pass(Request $req) {
+
+        $req->validate([
+            "old_pass"      =>  "required",
+            "new_pass"      =>  "required",
+            "pass_confirm"  =>  "required | same:new_pass"
+        ]);
+
+        $user = User::findOrFail(auth()->user()->id);
+
+        if (Hash::check($req->old_pass, $user->password)) {
+            $user->update([
+                "password"  =>  Hash::make($req->new_pass),
+            ]);
+
+            return redirect()->back()
+            ->with("message","your password is changed!");
+
+        }else{
+
+            return redirect()->back()
+            ->with("error","password is wrong");
+
+        }
+
+        
+
+    }
+
 
 }

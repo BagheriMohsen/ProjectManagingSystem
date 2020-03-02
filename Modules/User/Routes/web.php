@@ -16,7 +16,13 @@ Route::group(["middleware"=>"auth","prefix"=>"users/","as"=>"users."],function()
     Route::post("store/","UserController@store")->name("store");
     Route::post("update/{user_id}","UserController@update")->name("update");
     Route::get("change-unit/{unit_id}","UserController@change_unitID")->name("change_unitID");
+    
+    /** user edit own profile */
+    Route::get("edit-profile/{user_id}","UserController@edit_profile")->name("edit_profile");
+    Route::post("update-profile/{user_id}","UserController@update_profile")->name("update_profile");
 
+    Route::get("change-password-page/","UserController@change_pass_page")->name("change_pass_page");
+    Route::post("change-password/","UserController@change_pass")->name("change_pass");
 
     /*
     |--------------------------------------------------------------------------

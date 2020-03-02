@@ -14,7 +14,8 @@
             'desc'          =>  True,
             'tags'          =>  True,
             'tags_item'     =>  array(),
-            'title'         =>  True
+            'title'         =>  True,
+            'contact'       =>  False
     ];
 
     // path option
