@@ -1973,26 +1973,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      inputTodo: ''
+      todoInput: '',
+      todosDone: '',
+      todosActive: ''
     };
   },
   methods: {
+    getActiveTodos: function getActiveTodos() {
+      var _this = this;
+
+      this.$http.get('todolist/Work-left-over').then(function (res) {
+        _this.todosActive = res.data;
+        console.log(_this.todosActive);
+        console.log('activeget');
+      });
+    },
+    getDoneTodos: function getDoneTodos() {
+      var _this2 = this;
+
+      this.$http.get('todolist/Work-is-done').then(function (res) {
+        _this2.todosDone = res.data;
+        console.log(_this2.todosDone);
+      });
+    },
     addTodo: function addTodo() {
+      var _this3 = this;
+
       this.$http.post('todolist/store', {
         'user_id': 1,
-        'desc': this.inputTodo
+        'desc': this.todoInput
       }).then(function (res) {
-        return console.lgo(res);
+        _this3.todoInput = '';
+
+        _this3.getActiveTodos();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    deleteDoneTodo: function deleteDoneTodo(id) {
+      var _this4 = this;
+
+      if (confirm('Are you sure?')) {
+        this.$http.get('todolist/delete/' + id).then(function (res) {
+          console.log(res);
+
+          _this4.getDoneTodos();
+        });
+      }
+    },
+    deleteActiveTodo: function deleteActiveTodo(id) {
+      var _this5 = this;
+
+      if (confirm('Are you sure?')) {
+        this.$http.get('todolist/delete/' + id).then(function (res) {
+          console.log(res);
+
+          _this5.getActiveTodos();
+        });
+      }
+    },
+    updateTodo: function updateTodo(id) {
+      var _this6 = this;
+
+      this.$http.post('todolist/update/' + id).then(function (res) {
+        _this6.getDoneTodos();
+
+        _this6.getActiveTodos();
       })["catch"](function (err) {
         return console.log(err);
       });
     }
   },
+  computed: {
+    activeTodos: function activeTodos() {
+      return 'test';
+    },
+    doneTodos: function doneTodos() {
+      return 'test';
+    }
+  },
   mounted: function mounted() {
-    console.log('Componefdsafdsnt mounted.');
+    this.getActiveTodos();
+    this.getDoneTodos();
   }
 });
 
@@ -37431,104 +37500,139 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _vm._m(1)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "active_todo" }, [
+    _c("div", { staticClass: "active_todo" }, [
       _c("h6", { staticClass: "mb-1" }, [_vm._v("Todo List:")]),
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("ul", { staticClass: "list-group list-group-flush" }, [
-        _c(
-          "li",
-          {
-            staticClass:
-              "list-group-item d-flex justify-content-between align-items-center"
-          },
-          [
-            _c("div", { staticClass: "d-flex align-items-center" }, [
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "materialUnchecked" }
-                }),
-                _vm._v(" "),
-                _c("label", {
-                  staticClass: "form-check-label",
-                  attrs: { for: "materialUnchecked" }
-                })
-              ]),
-              _vm._v(
-                "\n                     Cras justo odio\n                 "
-              )
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fas fa-trash fa-lg text-danger" })
-            ])
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "done_todo" }, [
-      _c("h6", { staticClass: "mb-1 mt-3" }, [_vm._v("Done List:")]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("ul", { staticClass: "list-group list-group-flush" }, [
-        _c(
-          "li",
-          {
-            staticClass:
-              "list-group-item d-flex justify-content-between align-items-center"
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "d-flex align-items-center",
-                staticStyle: { "text-decoration-line": "line-through" }
-              },
-              [
+      _c(
+        "ul",
+        { staticClass: "list-group list-group-flush" },
+        _vm._l(_vm.todosActive, function(todoActive) {
+          return _c(
+            "li",
+            {
+              key: todoActive.id,
+              staticClass:
+                "list-group-item d-flex justify-content-between align-items-center"
+            },
+            [
+              _c("div", { staticClass: "d-flex align-items-center" }, [
                 _c("div", { staticClass: "form-check" }, [
                   _c("input", {
                     staticClass: "form-check-input",
-                    attrs: { type: "checkbox", id: "materialUnchecked1" }
+                    attrs: {
+                      type: "checkbox",
+                      id: "todoCheckbox" + todoActive.id
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.updateTodo(todoActive.id)
+                      }
+                    }
                   }),
                   _vm._v(" "),
                   _c("label", {
                     staticClass: "form-check-label",
-                    attrs: { for: "materialUnchecked1" }
+                    attrs: { for: "todoCheckbox" + todoActive.id }
                   })
                 ]),
                 _vm._v(
-                  "\n                     Cras justo odio\n                 "
+                  "\n                     " +
+                    _vm._s(todoActive.desc) +
+                    "\n                 "
                 )
-              ]
-            ),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fas fa-trash fa-lg tx-danger" })
-            ])
-          ]
-        )
-      ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteActiveTodo(todoActive.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-trash fa-lg text-danger" })]
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "done_todo" }, [
+      _c("h6", { staticClass: "mb-1 mt-3" }, [_vm._v("Done List:")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "list-group list-group-flush" },
+        _vm._l(_vm.todosDone, function(todoDone) {
+          return _c(
+            "li",
+            {
+              key: todoDone.id,
+              staticClass:
+                "list-group-item d-flex justify-content-between align-items-center"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "d-flex align-items-center",
+                  staticStyle: { "text-decoration-line": "line-through" }
+                },
+                [
+                  _c("div", { staticClass: "form-check" }, [
+                    _c("input", {
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "checkbox",
+                        id: "todoCheckbox" + todoDone.id,
+                        checked: ""
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", {
+                      staticClass: "form-check-label disabled",
+                      attrs: { for: "todoCheckbox" + todoDone.id }
+                    })
+                  ]),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(todoDone.desc) +
+                      "\n                 "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteDoneTodo(todoDone.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-trash fa-lg tx-danger" })]
+              )
+            ]
+          )
+        }),
+        0
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

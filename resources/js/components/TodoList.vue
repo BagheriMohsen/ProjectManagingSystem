@@ -25,15 +25,17 @@
             <h6 class="mb-1">Todo List:</h6>
             <hr>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                v-for="todoActive in todosActive" v-bind:key="todoActive.id"
+                >
                     <div class="d-flex align-items-center">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="materialUnchecked">
-                            <label class="form-check-label" for="materialUnchecked"></label>
+                            <input type="checkbox" class="form-check-input" :id="'todoCheckbox' + todoActive.id" @click="updateTodo(todoActive.id)">
+                            <label class="form-check-label" :for="'todoCheckbox' + todoActive.id"></label>
                         </div>
-                        Cras justo odio
+                        {{todoActive.desc}}
                     </div>
-                    <a href="#">
+                    <a href="#" @click.prevent="deleteActiveTodo(todoActive.id)">
                         <i class="fas fa-trash fa-lg text-danger"></i>
                     </a>
                 </li>
@@ -44,15 +46,17 @@
            <h6 class="mb-1 mt-3">Done List:</h6>
             <hr>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                v-for="todoDone in todosDone" v-bind:key="todoDone.id"
+                >
                     <div class="d-flex align-items-center" style="text-decoration-line: line-through;">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="materialUnchecked1">
-                            <label class="form-check-label" for="materialUnchecked1"></label>
+                            <input type="checkbox" class="form-check-input" :id="'todoCheckbox' + todoDone.id" checked>
+                            <label class="form-check-label disabled" :for="'todoCheckbox' + todoDone.id"></label>
                         </div>
-                        Cras justo odio
+                       {{todoDone.desc}}
                     </div>
-                    <a href="#">
+                    <a href="#" @click.prevent="deleteDoneTodo(todoDone.id)">
                         <i class="fas fa-trash fa-lg tx-danger"></i>
                     </a>
                 </li>
@@ -67,21 +71,76 @@
     export default {
         data(){
             return{
-                inputTodo:''
+                todoInput:'',
+                todosDone:'',
+                todosActive:''
             }
         },
         methods:{
+            getActiveTodos(){
+                this.$http.get('todolist/Work-left-over')
+                .then(res => {
+                    this.todosActive = res.data;
+                    console.log(this.todosActive);
+                    console.log('activeget')
+                })
+            },
+            getDoneTodos(){
+                this.$http.get('todolist/Work-is-done')
+                .then(res => {
+                    this.todosDone = res.data;
+                    console.log(this.todosDone);
+                })
+            },
             addTodo(){
                 this.$http.post('todolist/store',{
                     'user_id' : 1,
-                    'desc':this.inputTodo
+                    'desc':this.todoInput
                 })
-                .then(res=>console.lgo(res))
+                .then(res=>{
+                    this.todoInput = '';
+                    this.getActiveTodos();
+                })
+                .catch(err=>console.log(err));
+            },
+            deleteDoneTodo(id){
+                if(confirm('Are you sure?')){
+                    this.$http.get('todolist/delete/' + id)
+                    .then(res => {
+                        console.log(res);
+                        this.getDoneTodos();
+                    })
+                }
+            },
+            deleteActiveTodo(id){
+                if(confirm('Are you sure?')){
+                    this.$http.get('todolist/delete/' + id)
+                    .then(res => {
+                        console.log(res);
+                        this.getActiveTodos();
+                    })
+                }
+            },
+            updateTodo(id){
+                this.$http.post('todolist/update/' + id)
+                .then(res=>{
+                    this.getDoneTodos();
+                    this.getActiveTodos();
+                })
                 .catch(err=>console.log(err));
             }
         },
+        computed:{
+            activeTodos(){
+                return 'test'
+            },
+            doneTodos(){
+                return 'test'
+            }
+        },
         mounted() {
-            console.log('Componefdsafdsnt mounted.')
+           this.getActiveTodos();
+           this.getDoneTodos();
         }
     }
 </script>
