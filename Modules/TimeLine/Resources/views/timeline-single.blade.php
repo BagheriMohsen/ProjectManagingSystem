@@ -110,24 +110,22 @@
                 
                 @foreach( $comments as $comment  )
                 <li class="clearfix">
-                    @if(is_null($comment->user->avatar))
-                        <img 
-                        src="{{ Avatar::create($comment->user->first_name." ".$comment->user->last_name)->toBase64() }}"
-                         class="avatar" alt="">
-                    @else 
-                        <img 
-                        src="/storage/{{ $comment->user->avatar }}"
-                        class="avatar" alt="">
-                    @endif
-                    
                     <div class="post-comments">
+                        @if(is_null($comment->user->avatar))
+                        <img 
+                            src="{{ Avatar::create($comment->user->first_name." ".$comment->user->last_name)->toBase64() }}"
+                            class="avatar" alt="">
+                        @else 
+                            <img 
+                            src="/storage/{{ $comment->user->avatar }}"
+                            class="avatar" alt="">
+                        @endif
                         <p class="meta">
                             {{ $comment->created_at }}
                             <a href="#">
                                 {{ $comment->user->first_name." ".$comment->user->last_name }}     
                             </a> says : 
-                            <a class="float-right" href="#" 
-                                data-toggle="modal" data-target="#basicExampleModal">
+                            <a class="float-right toggle-reply" href="#">
                                 <i class="fas fa-reply fa-2x pr-2"></i>
                                 <small>Reply</small>
                             </a>
@@ -135,12 +133,21 @@
                         <p>
                             {{ $comment->message }}
                         </p>
+                        <form action="#" method="" style="display:none">
+                            <div class="form-group">
+                                <textarea class="form-control" style="height:80px"></textarea>
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-outline-danger btn-sm cancel_reply">Cancel</button>
+                                <button class="btn btn-outline-info btn-sm">Send reply</button>
+                            </div>
+                        </form>
                     </div>
                     
                     <ul class="comments">
                         <li class="clearfix">
-                            <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                             <div class="post-comments">
+                                <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                                 <p class="meta">Dec 20, 2014 <a href="#">JohnDoe</a> says : <a href="#"><a class="float-right"><i class="fas fa-reply fa-2x pr-2"></i><small>Reply</small></a></i></p>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -149,8 +156,8 @@
                             </div>
                         </li>
                         <li class="clearfix">
-                            <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                             <div class="post-comments">
+                                <img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
                                 <p class="meta">Dec 20, 2014 <a href="#">JohnDoe</a> says : <a href="#"><a class="float-right"><i class="fas fa-reply fa-2x pr-2"></i><small>Reply</small></a></i></p>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -170,26 +177,7 @@
 
 
 
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-md modal-notify modal-dark" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">Your reply:</h6>
-      </div>
-      <div class="modal-body">
-          <form action="#" method="">
-            <div class="form-group">
-                <textarea class="form-control" style="height:100px"></textarea>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-sm btn-light-green">send</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 

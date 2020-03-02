@@ -1959,9 +1959,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      inputTodo: ''
+    };
+  },
+  methods: {
+    addTodo: function addTodo() {
+      this.$http.post('todolist/store', {
+        'user_id': 1,
+        'desc': this.inputTodo
+      }).then(function (res) {
+        return console.lgo(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log('Componefdsafdsnt mounted.');
   }
 });
 
@@ -37322,19 +37353,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-axios/dist/vue-axios.min.js":
-/*!******************************************************!*\
-  !*** ./node_modules/vue-axios/dist/vue-axios.min.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o};!function(){function o(e,t){if(!o.installed){if(o.installed=!0,!t)return void console.error("You have to install axios");e.axios=t,Object.defineProperties(e.prototype,{axios:{get:function(){return t}},$http:{get:function(){return t}}})}}"object"==( false?undefined:_typeof(exports))?module.exports=o: true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function(){return o}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):undefined}();
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TodoList.vue?vue&type=template&id=30436d6f&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TodoList.vue?vue&type=template&id=30436d6f& ***!
@@ -37350,43 +37368,72 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row row-sm" }, [
-      _c("div", { staticClass: "col-sm-12 col-xl-12" }, [
-        _c("div", { staticClass: "timesheet-wr" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "row row-sm bg-white" }, [
-            _c("div", { staticClass: "col-md-7" }, [
-              _c("div", { staticClass: "card card-body bd-0 pd-25 tx-12 " }, [
+  return _c("div", { attrs: { id: "todolist" } }, [
+    _c("div", { staticClass: "create_todo" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12 col-sm-6" }, [
+          _c("form", { attrs: { action: "#" } }, [
+            _c("div", { staticClass: "md-form input-group mt-0 mb-3" }, [
+              _c("div", { staticClass: "input-group-prepend" }, [
                 _c(
-                  "table",
-                  { staticClass: "table table-hover table-bordered" },
-                  _vm._l(_vm.todo_lists, function(todo_list) {
-                    return _c("tr", [
-                      _c("td", [
-                        _c("label", { staticClass: "ckbox mp0" }, [
-                          _c("input", { attrs: { type: "checkbox" } }),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              "\n                                                " +
-                                _vm._s(todo_list.desc) +
-                                "\n                                            "
-                            )
-                          ])
-                        ])
-                      ])
-                    ])
-                  }),
-                  0
+                  "span",
+                  {
+                    staticClass: "input-group-text md-addon",
+                    attrs: { id: "material-addon1" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.addTodo($event)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-plus fa-2x" })]
+                    )
+                  ]
                 )
-              ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.todoInput,
+                    expression: "todoInput"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  placeholder: "Write todo...",
+                  "aria-label": "Todo",
+                  "aria-describedby": "material-addon1"
+                },
+                domProps: { value: _vm.todoInput },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.todoInput = $event.target.value
+                  }
+                }
+              })
             ])
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1)
   ])
 }
 var staticRenderFns = [
@@ -37394,30 +37441,90 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row row-sm bg-gray mg-b-10" }, [
-      _c("div", { staticClass: "col-md-3" }, [
-        _c("form", { attrs: { id: "todo-create", action: "#" } }, [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "input-group" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { name: "desc", type: "text", placeholder: "+ New" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-warning", attrs: { type: "submit" } },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-chevron-right pd-r-3 pd-l-3"
-                    })
-                  ]
-                )
-              ])
+    return _c("div", { staticClass: "active_todo" }, [
+      _c("h6", { staticClass: "mb-1" }, [_vm._v("Todo List:")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("ul", { staticClass: "list-group list-group-flush" }, [
+        _c(
+          "li",
+          {
+            staticClass:
+              "list-group-item d-flex justify-content-between align-items-center"
+          },
+          [
+            _c("div", { staticClass: "d-flex align-items-center" }, [
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "materialUnchecked" }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "form-check-label",
+                  attrs: { for: "materialUnchecked" }
+                })
+              ]),
+              _vm._v(
+                "\n                     Cras justo odio\n                 "
+              )
+            ]),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fas fa-trash fa-lg text-danger" })
             ])
-          ])
-        ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "done_todo" }, [
+      _c("h6", { staticClass: "mb-1 mt-3" }, [_vm._v("Done List:")]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("ul", { staticClass: "list-group list-group-flush" }, [
+        _c(
+          "li",
+          {
+            staticClass:
+              "list-group-item d-flex justify-content-between align-items-center"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "d-flex align-items-center",
+                staticStyle: { "text-decoration-line": "line-through" }
+              },
+              [
+                _c("div", { staticClass: "form-check" }, [
+                  _c("input", {
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", id: "materialUnchecked1" }
+                  }),
+                  _vm._v(" "),
+                  _c("label", {
+                    staticClass: "form-check-label",
+                    attrs: { for: "materialUnchecked1" }
+                  })
+                ]),
+                _vm._v(
+                  "\n                     Cras justo odio\n                 "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("a", { attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fas fa-trash fa-lg tx-danger" })
+            ])
+          ]
+        )
       ])
     ])
   }
@@ -49596,8 +49703,6 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.min.js");
-/* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_axios__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49607,8 +49712,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
-
-Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTED_MODULE_0___default.a);
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = 'http://localhost:8000/';
+Vue.prototype.$http = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -49764,8 +49869,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /media/mohsen/Storage/project/Php-Project/tecfas/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /media/mohsen/Storage/project/Php-Project/tecfas/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\ProjectManagingSystem\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\ProjectManagingSystem\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

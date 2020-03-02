@@ -6,20 +6,7 @@
 
 
 @section("scripts")
-    <script src="{{ asset("panel/javascript/todo.js") }}"></script>
     <script src="{{ asset("/js/app.js") }}"></script>
-
-    <script>
-        new Vue({
-            el:"#app",
-            data(){
-                return {
-                    message:"hello world!",
-                }
-            }
-        });
-    </script>
-
 @endsection
 <!-- 
     path 
@@ -43,19 +30,10 @@
  
     @include('Messages.errors')
     @include('Messages.message')
-
+   
     <div id="app">
         <todo-list></todo-list>
-    </div
-       
-   
-
-
-
-
-
-
-
+    </div>
 @endsection
 
 

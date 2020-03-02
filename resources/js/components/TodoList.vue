@@ -1,58 +1,87 @@
 <template>
-    <div>
 
-         <div class="row row-sm">
-        <div class="col-sm-12 col-xl-12">
-            <div class="timesheet-wr">
-                <div class="row row-sm bg-gray mg-b-10">
-                    <div class="col-md-3">
-                    <form id="todo-create" action="#" >
-                        
-                            <div class="form-row">
-                                <div class="input-group">
-                                    <input name="desc" type="text" class="form-control" placeholder="+ New">
-                                    <div class="input-group-append">
-                                      <button class="btn btn-warning" type="submit"><i class="fa fa-chevron-right pd-r-3 pd-l-3"></i></button>
-                                    </div>
+   <div id="todolist">
 
-                                </div>
+       <div class="create_todo">
+           <div class="row">
+               <div class="col-12 col-sm-6">
+                   <form action="#">
+                        <div class="md-form input-group mt-0 mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text md-addon" id="material-addon1">
+                                  <a href="#" @click.prevent="addTodo">
+                                      <i class="fas fa-plus fa-2x"></i>
+                                  </a>
+                                </span>
                             </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row row-sm bg-white">
-                        <div class="col-md-7">
-                        <div class="card card-body bd-0 pd-25 tx-12 ">
-                            <table class="table table-hover table-bordered">
-                            
-                                    <tr v-for="todo_list in todo_lists">
-                                        <td>
-                                            <label class="ckbox mp0">
-                                                <input type="checkbox">
-                                                <span>
-                                                    {{ todo_list.desc }}
-                                                </span>
-                                            </label>
-                                        </td>
-                                    </tr> 
-                               
-                            </table>
+                            <input v-model="todoInput" type="text" class="form-control" placeholder="Write todo..." aria-label="Todo" aria-describedby="material-addon1">
                         </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </form>
+               </div>
+           </div>
+       </div>
 
+       <div class="active_todo">
+            <h6 class="mb-1">Todo List:</h6>
+            <hr>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="materialUnchecked">
+                            <label class="form-check-label" for="materialUnchecked"></label>
+                        </div>
+                        Cras justo odio
+                    </div>
+                    <a href="#">
+                        <i class="fas fa-trash fa-lg text-danger"></i>
+                    </a>
+                </li>
+            </ul>
+       </div>
 
-    </div>
+       <div class="done_todo">
+           <h6 class="mb-1 mt-3">Done List:</h6>
+            <hr>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center" style="text-decoration-line: line-through;">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="materialUnchecked1">
+                            <label class="form-check-label" for="materialUnchecked1"></label>
+                        </div>
+                        Cras justo odio
+                    </div>
+                    <a href="#">
+                        <i class="fas fa-trash fa-lg tx-danger"></i>
+                    </a>
+                </li>
+            </ul>
+       </div>
+
+   </div>
+
 </template>
 
 <script>
     export default {
+        data(){
+            return{
+                inputTodo:''
+            }
+        },
+        methods:{
+            addTodo(){
+                this.$http.post('todolist/store',{
+                    'user_id' : 1,
+                    'desc':this.inputTodo
+                })
+                .then(res=>console.lgo(res))
+                .catch(err=>console.log(err));
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Componefdsafdsnt mounted.')
         }
     }
 </script>
