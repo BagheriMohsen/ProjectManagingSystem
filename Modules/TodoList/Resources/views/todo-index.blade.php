@@ -21,6 +21,7 @@
     @include('Master.path')
 @endsection
 
+<h2>{{ Auth::user()->id }}</h2>
 
 
 <!-- 

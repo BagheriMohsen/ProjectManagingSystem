@@ -2007,7 +2007,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$http.post('todolist/store', {
-        'user_id': 1,
         'desc': this.todoInput
       }).then(function (res) {
         _this3.todoInput = '';

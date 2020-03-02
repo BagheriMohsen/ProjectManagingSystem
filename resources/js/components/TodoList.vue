@@ -94,7 +94,6 @@
             },
             addTodo(){
                 this.$http.post('todolist/store',{
-                    'user_id' : 1,
                     'desc':this.todoInput
                 })
                 .then(res=>{
