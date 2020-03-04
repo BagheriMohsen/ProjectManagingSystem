@@ -4,13 +4,13 @@
     <div class="br-sideleft sideleft-scrollbar">
 		<div class="tx-center side-logged-name-wr">
     <div>
-      @if(is_null($user->avatar))
+      {{-- @if(is_null($user->avatar))
         <img src="{{ Avatar::create($user->first_name." ".$user->last_name)->toBase64() }}"
         class="rounded-circle mg-t-20 bg-light" style="width:70%; height:auto;">
       @else 
         <img src="/storage/{{ $user->avatar }}"
         class="rounded-circle mg-t-20"  >
-      @endif
+      @endif --}}
     </div>
 			<h4 class="logged-fullname color-eee">
         {{ $user->first_name." ".$user->last_name }}

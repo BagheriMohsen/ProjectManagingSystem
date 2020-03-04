@@ -5,15 +5,16 @@
        <div class="create_todo">
            <div class="row">
                <div class="col-12 col-sm-6">
-                   <form action="#">
+                   <form action="#" @submit="addTodo">
                         <div class="md-form input-group mt-0 mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text md-addon" id="material-addon1">
-                                  <a href="#" @click.prevent="addTodo">
+                                  <a href="#" @click.prevent="addTodo" >
                                       <i class="fas fa-plus fa-2x"></i>
                                   </a>
                                 </span>
                             </div>
+                            <button type="submit" style="display:none"></button>
                             <input v-model="todoInput" type="text" class="form-control" placeholder="Write todo..." aria-label="Todo" aria-describedby="material-addon1">
                         </div>
                     </form>
@@ -93,14 +94,19 @@
                 })
             },
             addTodo(){
-                this.$http.post('todolist/store',{
-                    'desc':this.todoInput
-                })
-                .then(res=>{
-                    this.todoInput = '';
-                    this.getActiveTodos();
-                })
-                .catch(err=>console.log(err));
+                if(this.todoInput){
+                    this.$http.post('todolist/store',{
+                        'desc':this.todoInput
+                    })
+                    .then(res=>{
+                        this.todoInput = '';
+                        this.getActiveTodos();
+                    })
+                    .catch(err=>console.log(err));
+                    }else{
+                        alert('Todo field can not be empty!')
+                    }
+                
             },
             deleteDoneTodo(id){
                 if(confirm('Are you sure?')){
