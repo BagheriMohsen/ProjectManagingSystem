@@ -1977,6 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2006,15 +2007,19 @@ __webpack_require__.r(__webpack_exports__);
     addTodo: function addTodo() {
       var _this3 = this;
 
-      this.$http.post('todolist/store', {
-        'desc': this.todoInput
-      }).then(function (res) {
-        _this3.todoInput = '';
+      if (this.todoInput) {
+        this.$http.post('todolist/store', {
+          'desc': this.todoInput
+        }).then(function (res) {
+          _this3.todoInput = '';
 
-        _this3.getActiveTodos();
-      })["catch"](function (err) {
-        return console.log(err);
-      });
+          _this3.getActiveTodos();
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      } else {
+        alert('Todo field can not be empty!');
+      }
     },
     deleteDoneTodo: function deleteDoneTodo(id) {
       var _this4 = this;
@@ -37440,7 +37445,7 @@ var render = function() {
     _c("div", { staticClass: "create_todo" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-12 col-sm-6" }, [
-          _c("form", { attrs: { action: "#" } }, [
+          _c("form", { attrs: { action: "#" }, on: { submit: _vm.addTodo } }, [
             _c("div", { staticClass: "md-form input-group mt-0 mb-3" }, [
               _c("div", { staticClass: "input-group-prepend" }, [
                 _c(
@@ -37466,6 +37471,11 @@ var render = function() {
                   ]
                 )
               ]),
+              _vm._v(" "),
+              _c("button", {
+                staticStyle: { display: "none" },
+                attrs: { type: "submit" }
+              }),
               _vm._v(" "),
               _c("input", {
                 directives: [
