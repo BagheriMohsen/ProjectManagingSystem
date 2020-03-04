@@ -13,7 +13,7 @@
             'name'          =>  'Project',
             'btn_content'   =>  "New Project",
             'is_modal'      =>  False,
-            'btn_href'      =>  "project.create"
+            'btn_href'      =>  "projects.create"
         ]
     @endphp
     @include('Master.path')

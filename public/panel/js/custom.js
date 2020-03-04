@@ -1,23 +1,6 @@
 $(document).ready(function() {
    
-    // Check project's process percentage before creating new project
-    $('#project_create').submit(function(event){
-        event.preventDefault();
-
-        let percent = 0;
-
-        $('.project_percent').each(function(index,item){
-            percent += parseInt(item.value);
-            console.log(percent)
-        })
-        
-        if(percent == '100'){
-            $(this)[0].submit();
-        }else{
-            alert('Sum of process percentage should be equal to 100');
-        }
-    })
-
+   
     $('.post-comments .toggle-reply').on('click',function(){
         var post_comments = $(this).parents('.post-comments');
         var reply_box = post_comments.find('form');

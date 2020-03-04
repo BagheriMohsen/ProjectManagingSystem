@@ -5,6 +5,9 @@ namespace Modules\Project\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Carbon\Carbon;
+
+use Modules\Project\Entities\Project;
 
 class ProjectController extends Controller
 {
@@ -14,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project::project-index');
+        return view('project::Project.project-index');
     }
 
     /**
@@ -23,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project::project-create');
+        return view('project::Project.project-create');
     }
 
     /**
@@ -41,9 +44,9 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show()
     {
-        return view('project::show');
+        return view('project::Project.project-single');
     }
 
     /**
@@ -76,4 +79,76 @@ class ProjectController extends Controller
     {
         //
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Request Project
+    |--------------------------------------------------------------------------
+    */
+    public function request_project() {
+
+        $user = auth()->user();
+        
+        $units = "Modules\User\Entities\Unit"::latest()->get();
+
+        return view("project::Project.request-project",compact(
+            "user",
+            "units"
+        ));
+        
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Store Request Project
+    |--------------------------------------------------------------------------
+    */
+    public function store_request_project(Request $req) {
+
+        $data = $req->validate([
+            "title"             =>  "required | unique:projects",
+            "subject"           =>  "required",
+            "color"             =>  "required",
+            "desc"              =>  "required",
+            "priority"          =>  "required",
+            "operating_unit_id" =>  "required",
+            'estimated_time'    =>  'required'
+        ]);
+
+        $estimated_time = Carbon::parse($data["estimated_time"]);
+      
+        $data["req_date"]           = Carbon::now();  
+        $data["estimated_time"]     = $estimated_time;
+        $data["applicant_unit_id"]  = auth()->user()->unit->id;
+        
+
+        Project::create($data);
+
+      
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Request Project List
+    |--------------------------------------------------------------------------
+    */
+    public function request_project_list() {
+
+        $user = auth()->user();
+        
+        $projects = Project::where([
+            ["operating_unit_id","=",$user->unit->id],
+            ["is_verify","=",False]
+        ])
+        ->latest()->get();
+
+        return view("project::Project.unverified-project-list",compact(
+            "user",
+            "projects"
+        ));
+
+    }
+
+
+
 }

@@ -10,20 +10,25 @@ class Project extends Model
 
     protected $fillable = [
         'user_id',
-        'category_id',
-        'operating_unit_id',
-        'manager_id',
-        'supervisor_id',
         'title',
         'slug',
-        'applicant_unit',
+        'subject',
+        'operating_unit_id',
+        'applicant_unit_id',
+        'manager_id',
+        'supervisor_id',
         'priority',
         'req_date',
         'start_date',
         'complete_date',
         'close_date',
         'desc',
-        'status'
+        'color',
+        'status',
+        'estimated_time',
+        'is_public',
+        'is_verify',
+        'verify_date'
     ];
 
     /**

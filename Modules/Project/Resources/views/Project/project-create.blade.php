@@ -36,7 +36,7 @@
             </div>
             <br>
             
-            <form id="project_create" action="{{route("project.store")}}" method="POST">
+            <form id="project_create" action="{{route("projects.store")}}" method="POST">
                 @csrf
                 
             <div class="addproject-wr">
