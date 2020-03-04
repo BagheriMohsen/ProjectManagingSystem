@@ -11,10 +11,7 @@
 |
 */
 Route::group(["middleware"=>"auth","prefix"=>"users/","as"=>"users."],function(){
-    Route::get("","UserController@index")->name("index");
-    Route::get("edit/{user_id}","UserController@edit")->name("edit");
-    Route::post("store/","UserController@store")->name("store");
-    Route::post("update/{user_id}","UserController@update")->name("update");
+    
     Route::get("change-unit/{unit_id}","UserController@change_unitID")->name("change_unitID");
     
     /** user edit own profile */
@@ -46,10 +43,9 @@ Route::group(["middleware"=>"auth","prefix"=>"users/","as"=>"users."],function()
         Route::post("store/","GroupController@store")->name("store");
     });
     
-
-
-
 });
+
+Route::middleware("auth")->resource("users", "UserController");
 
 
 

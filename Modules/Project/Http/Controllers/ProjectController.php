@@ -54,9 +54,19 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        return view('project::edit');
+        $user = auth()->user();
+
+        $units = "Modules\User\Entities\Unit"::latest()->get();
+        $users = "App\User"::where("unit_id",$user->unit_id)
+        ->latest()->get();
+
+        return view('project::Project.project-edit',compact(
+            "project",
+            "units",
+            "users"
+        ));
     }
 
     /**
@@ -65,9 +75,11 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, Project $project)
     {
-        //
+
+        dd($req->all());
+        $project->update($data);
     }
 
     /**
@@ -75,9 +87,9 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
     }
 
     /*
@@ -123,6 +135,9 @@ class ProjectController extends Controller
         
 
         Project::create($data);
+
+        return redirect()->back()
+        ->with("message","your project request is sended!");
 
       
     }

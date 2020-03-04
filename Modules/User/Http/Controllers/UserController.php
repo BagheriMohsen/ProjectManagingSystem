@@ -103,10 +103,9 @@ class UserController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($user_id)
+    public function edit(User $user)
     {   
 
-        $user   = User::findOrFail($user_id);
         $units  = Unit::latest()->get();
 
         return view('user::User.users-edit',compact(
@@ -121,7 +120,7 @@ class UserController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $req, $id)
+    public function update(Request $req, User $user)
     {
         $data = $req->validate([
             "first_name"        =>  "required",
@@ -132,9 +131,6 @@ class UserController extends Controller
             "job_title"         =>  "required"
         ]);
         
-
-
-        $user = User::findOrFail($id);
 
         if($req->hasFile("avatar")){
 
@@ -200,9 +196,7 @@ class UserController extends Controller
     | Edit Profile
     |--------------------------------------------------------------------------
     */
-    public function edit_profile($user_id) {
-
-        $user = User::findOrFail($user_id);
+    public function edit_profile(User $user) {
 
         return view("user::User.edit-profile",compact("user"));
 

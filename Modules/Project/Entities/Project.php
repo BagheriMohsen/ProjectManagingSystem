@@ -44,4 +44,25 @@ class Project extends Model
             ]
         ];
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\User\Entities\Unit
+    |--------------------------------------------------------------------------
+    */
+    public function Operating_unit() {
+        return $this->belongsTo("Modules\User\Entities\Unit", "operating_unit_id", "id");
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\User\Entities\Unit
+    |--------------------------------------------------------------------------
+    */
+    public function applicant_unit() {
+        return $this->belongsTo("Modules\User\Entities\Unit", "applicant_unit_id", "id");
+    }
+
+
 }
