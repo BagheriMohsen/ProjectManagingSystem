@@ -37,23 +37,32 @@
     <table class="table tx-12">
         <tr class="tx-16">
             <td colspan="4">
-                <a href="project-single">
-                Project title: {{ $project->title }}
+                <a href="{{ route('projects.edit',$project->id) }}">
+                    <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
+                    Project title: 
+                    {{ $project->title }}
                 </a>
                 <div class="progress mg-b-5 mg-t-5 ht-15">
-                    <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated wd-0p" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                 </div>
             </td>
             <td class="bg-light">
-                Priority: {{ $project->priority }}
+                Priority: 
+                @if($project->priority == "low")
+                    <span class="text-warning">{{ $project->priority }}</span>
+                @elseif($project->priority == "normal")
+                    <span class="text-primary">{{ $project->priority }}</span>
+                @else 
+                    <span class="text-danger">{{ $project->priority }}</span>
+                @endif
             </td>
         </tr>
         <tr>
             <td>
-                Applicant: {{ "==="}}
+                Applicant: {{ $project->applicant_unit->name }}
             </td>
             <td>
-                Operating unit: {{ "===" }}
+                Operating unit: {{ $project->Operating_unit->name }}
             </td>
             <td>
                 Request date: {{ $project->created_at }}
@@ -62,7 +71,10 @@
                 Start date: {{ "None" }}
             </td>
             <td class="bg-light">
-                Status: {{ $project->status }}
+                Status: 
+                <span class="text-secondary">
+                    {{ $project->status }}
+                </span>
             </td>
         </tr>
     </table>

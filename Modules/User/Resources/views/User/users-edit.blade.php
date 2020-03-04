@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-sm-12 col-xl-6 text-center">
                                         @if(is_null($user->avatar))
-                                            <img style="width:147px;" src="{{asset('panel/icon/user.svg')}}"
+                                            <img style="width:147px;" src="{{ Avatar::create($user->first_name." ".$user->last_name)->toBase64() }}"
                                             class="rounded-circle mg-t-20 bg-light" style="width:70%; height:auto;">
                                         @else 
                                             <img style="width:147px;" src="/storage/{{ $user->avatar }}"
