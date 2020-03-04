@@ -57,16 +57,31 @@
             <span class="menu-item-label">Projects</span>
           </a>
           <ul class="br-menu-sub">
+
             <li class="sub-item">
-              <a href="{{route('project.index')}}" class="sub-link">
-                Projects List
+              <a href="{{route('projects.index')}}" class="sub-link">
+                Project List
               </a>
             </li>
+
             <li class="sub-item">
-              <a href="{{route('project.create')}}" class="sub-link">
+              <a href="{{route('projects.request_project_list')}}" class="sub-link">
+                Unverified Projects
+              </a>
+            </li>
+
+            <li class="sub-item">
+              <a href="{{route('projects.create')}}" class="sub-link">
                 New Project
               </a>
             </li>
+
+            <li class="sub-item">
+              <a href="{{route('projects.request_project')}}" class="sub-link">
+                Request Project
+              </a>
+            </li>
+
           </ul>
         </li>
        
@@ -103,7 +118,7 @@
             </li>
             <li class="sub-item">
               <a href="{{route('users.groups.index')}}" class="sub-link">
-                Group
+                Team
               </a>
             </li>
             <li class="sub-item">
