@@ -52,11 +52,11 @@
                             <div class="row row-sm">
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Project Title</label>
-                                    <input class="form-control" type="text" placeholder="Project Title">
+                                    <input name="title" class="form-control" type="text" placeholder="Project Title">
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Project Category</label>
-                                    <input class="form-control" type="text" placeholder="Project Category">
+                                    <input name="category" class="form-control" type="text" placeholder="Project Category">
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="row row-sm">
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Project Manager</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="project_manager">
                                         <option>Hussain Fatemi</option>
                                         <option>Sajjad Rafie</option>
                                         <option>Amir Taha</option>
@@ -72,9 +72,11 @@
                                         <option>Ali Fatemi</option>
                                     </select>
                                 </div>
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-xl-6 col-sm-12 addLog">
                                     <label>Date</label>
-                                    <input class="form-control fc-datepicker" id="datepicker2">
+                                    <br/>
+                                    <input name="hours" type="number" placeholder="HH">:
+                                    <input name="minutes" type="number" placeholder="MM">
                                 </div>
                             </div>
                         </div>
@@ -84,11 +86,11 @@
                             <div class="row row-sm">
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Applicant unit</label>
-                                    <input class="form-control" type="text" value="Network Unit" disabled>
+                                    <input name="applicant_unit" class="form-control" type="text" value="Network Unit" disabled>
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Operating unit</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="operating_unit">
                                         <option>Management Unit</option>
                                         <option>Network Unit</option>
                                         <option>Programming Unit</option>
@@ -104,7 +106,7 @@
                             <div class="row row-sm">
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Priority</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="priority">
                                         <option>Normal</option>
                                         <option>High</option>
                                         <option>low</option>
@@ -112,7 +114,7 @@
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Supervisor</label>
-                                    <select class="form-control">
+                                    <select class="form-control" name="supervisor">
                                         <option>Ali Fatemi</option>
                                         <option>Amir Taha</option>
                                         <option>Hussain Fatemi</option>
@@ -132,7 +134,7 @@
                                 <div class="row row-sm">
                                     <div class="col-xl-12 col-sm-12">
                                         <label>ِDescription...</label>
-                                        <textarea class="form-control textarea" id="editor"></textarea>
+                                        <textarea name="desc" class="form-control textarea" id="editor"></textarea>
                                     </div>
                                 </div>
                             </div>	
@@ -151,11 +153,11 @@
                                         <div class="row row-sm mg-b-10">
                                                 <div class="col-sm-12 col-xl-6">
                                                     <label>title</label>
-                                                    <input type="text" class="form-control" placeholder="Proccess title">
+                                                    <input name="process_title" type="text" class="form-control" placeholder="Proccess title">
                                                 </div>
                                                 <div class="col-sm-12 col-xl-6">
                                                     <label>operator</label>
-                                                    <select class="form-control">
+                                                    <select name="process_operator" class="form-control">
                                                         <option>Ali Fatemi</option>
                                                         <option>Amir Taha</option>
                                                         <option>Hussain Fatemi</option>
@@ -168,15 +170,17 @@
                                         <div class="row row-sm">
                                                 <div class="col-sm-12 col-xl-4">
                                                     <label>Percent of the project</label>
-                                                    <input type="number" class="form-control project_percent" placeholder="Percent">
+                                                    <input name="process_percent" type="number" class="form-control project_percent" placeholder="Percent">
                                                 </div>
-                                                <div class="col-sm-12 col-xl-4">
+                                                <div class="col-sm-12 col-xl-4 addLog">
                                                     <label>Deadline</label>
-                                                    <input class="form-control fc-datepicker" id="datepicker3">
+                                                    <br/>
+                                                    <input type="number" name="process_hours" placeholder="HH">:
+                                                    <input type="number" name="process_minutes" placeholder="MM">
                                                 </div>
                                                 <div class="col-sm-12 col-xl-4">
                                                     <label>Priority</label>
-                                                    <select class="form-control">
+                                                    <select name="process_priority" class="form-control">
                                                         <option>Normal</option>
                                                         <option>High</option>
                                                         <option>low</option>
@@ -189,7 +193,7 @@
                                         <div class="row row-sm">
                                             <div class="col-sm-12">
                                                 <label>Description</label>
-                                                <textarea name="textbody" rows="5" class="form-control"></textarea>
+                                                <textarea  name="process_desc" rows="5" class="form-control"></textarea>
                                             </div>
                                         </div>
                                     </div>

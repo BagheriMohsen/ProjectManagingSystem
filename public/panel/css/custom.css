@@ -44,6 +44,14 @@ main input[type=email]:focus, main input[type=password]:focus, main input[type=t
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.addLog input{
+  width: 45px;
+  text-align: center;
+  height: 44px;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  color: #495057;
+}
 
 
 

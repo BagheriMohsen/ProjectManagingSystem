@@ -43,7 +43,7 @@
         <div class="col-sm-12 col-xl-12">
            
             
-            <form id="project_create" action="{{route("projects.store_request_project")}}" method="POST">
+            <form id="project_request_create" action="{{route("projects.store_request_project")}}" method="POST">
                 @csrf
                 
             <div class="addproject-wr">

@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// require('./bootstrap');
 
 window.Vue = require('vue');
 import axios from 'axios'
@@ -23,6 +23,7 @@ Vue.prototype.$http = axios
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('todo-list', require('./components/TodoList.vue').default);
+Vue.component('task-list', require('./components/TaskList.vue').default);
 
 
 /**

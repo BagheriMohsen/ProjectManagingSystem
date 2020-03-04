@@ -25,9 +25,9 @@
 <script src="{{asset('panel/js/parsley-2.9.2.min.js')}}"></script>
 <script src="{{asset('panel/lib/i18n/ar.js')}}"></script>
 <script src="{{asset('panel/lib/i18n/fa.js')}}"></script>
+<script src="{{asset('panel/lib/timepicker/jquery.timepicker.min.js')}}"></script>
+<script src="{{asset('panel/js/easytimer.min.js')}}"></script>
 <script src="{{asset('panel/js/custom.js')}}"></script>
-
-
 
 
 

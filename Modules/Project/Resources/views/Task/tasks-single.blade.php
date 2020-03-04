@@ -1,5 +1,10 @@
 @extends('Master.layout')
 
+
+@section("scripts")
+    <script src="{{ asset("/js/app.js") }}"></script>
+@endsection
+
 @section('title')
     {{"Task"}}
 @endsection
@@ -25,6 +30,11 @@
     Main Content
 -->
 @section('content')
+
+
+<div id="app">
+    <task-list></task-list>
+</div>
 
 <div class="row row-sm">
     <div class="col-sm-12 col-xl-8">
@@ -67,103 +77,6 @@
             <div class="card-body p20">
                 Process Details...
             </div>					
-        </div>
-        
-        <div class="card mg-b-20">
-            <div class="card-header bg-info tx-white p5">
-                Actions
-            </div>
-            <div class="card-body p20">
-                
-                <div id="accordion2" class="accordion accordion-head-colored accordion-info mg-b-20" role="tablist" aria-multiselectable="true">
-                    <div class="card">
-        <div class="card-header" role="tab" id="headingTwo">
-          <h6 class="mg-b-0">
-            <a data-toggle="collapse" data-parent="#accordion2" href="#neweventform"
-            aria-expanded="true" aria-controls="neweventform" class="tx-gray-800 transition">
-              + New action
-            </a>
-          </h6>
-        </div><!-- card-header -->
-
-        <div id="neweventform" class="collapse" role="tabpanel" aria-labelledby="neweventform">
-          <div class="card-body rounded-bottom pd-20">
-            <div>
-                <form class="form">
-                    <input class="form-control mg-b-10" type="text" placeholder="title">
-                    <textarea class="form-control mg-b-10 textarea" name="textbody" placeholder="Summary"></textarea>
-                    <input type="file" name="file-1[]" id="file-1" class="inputfile mg-t-10"
-data-multiple-caption="{count} files selected" multiple>
-                    <label for="file-1" class="tx-white bg-info">
-                    <i class="icon ion-ios-upload-outline tx-24"></i>
-                    <span>Attachments...</span>
-                    </label>
-                    <input class="btn btn-block btn-info mg-b-10" value="Save">
-                </form>  
-            </div>
-          </div>
-        </div>
-        </div>
-                </div>
-                
-                <div class="card mg-b-20">
-                    <div class="card-header bg-primary tx-white">
-                        Content cheking...
-                    </div>
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead class="bg-light">
-                                <th>
-                                    <span class="tx-11 font-normal">Hisam aljasem</span>
-                                    <span class="tx-11 font-normal f-left">June 30 - 11:20</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                    Action Summary...
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="card mg-b-20">
-                    <div class="card-header bg-primary tx-white">
-                        Action title
-                    </div>
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead class="bg-light">
-                                <th>
-                                    <span class="tx-11 font-normal">Executor</span>
-                                    <span class="tx-11 font-normal f-left">date</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                    Action Summary...
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                
-                
-                
-            </div>
         </div>
     </div>
     <div class="col-sm-12 col-xl-4">
@@ -278,3 +191,59 @@ data-multiple-caption="{count} files selected" multiple>
 </div>
 
 @endsection
+
+
+  {{-- <div class="card mg-b-20">
+                    <div class="card-header bg-primary tx-white">
+                        Content cheking...
+                    </div>
+                    <div class="card-body mp0">
+                        <table class="table tx-12">
+                            <thead class="bg-light">
+                                <th>
+                                    <span class="tx-11 font-normal">Hisam aljasem</span>
+                                    <span class="tx-11 font-normal f-left">June 30 - 11:20</span>
+                                </th>
+                            </thead>
+                            <tr>
+                                <td>
+                                    Action Summary...
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <a href="">
+                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments</i>
+                                </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div> --}}
+                {{-- <div class="card mg-b-20">
+                    <div class="card-header bg-primary tx-white">
+                        Action title
+                    </div>
+                    <div class="card-body mp0">
+                        <table class="table tx-12">
+                            <thead class="bg-light">
+                                <th>
+                                    <span class="tx-11 font-normal">Executor</span>
+                                    <span class="tx-11 font-normal f-left">date</span>
+                                </th>
+                            </thead>
+                            <tr>
+                                <td>
+                                    Action Summary...
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <a href="">
+                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments</i>
+                                </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div> --}}
