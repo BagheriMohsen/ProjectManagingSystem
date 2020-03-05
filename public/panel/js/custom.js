@@ -29,13 +29,14 @@ $(document).ready(function() {
     $('#project_create').submit(function(event){
         event.preventDefault();
         var form = $(this);
-        var taskes = [];
+        var tasks = [];
         var action_url          = $(this).attr('action');
         var token               = $(this).find('input[name="_token"]').val();
         var title               = $(this).find('input[name="title"]').val();
         var subject             = $(this).find('input[name="subject"]').val();
         var manager_id          = $(this).find('select[name="manager_id"]').val();
         var start_date          = $(this).find('input[name="start_date"]').val();
+        var color               = $(this).find('input[name="color"]').val();
         var dead_date           = $(this).find('input[name="dead_date"]').val();
         var applicant_unit_id   = $(this).find('input[name="applicant_unit_id"]').val();
         var operating_unit_id   = $(this).find('select[name="operating_unit_id"]').val();
@@ -53,7 +54,7 @@ $(document).ready(function() {
             task.task_desc = $(this).find('textarea[name="task_desc"]').val();
             task.reminder_time = $(this).find('input[name="reminder_time"]').val();
             task.reminder_type = $(this).find('select[name="reminder_type"]').val();
-            taskes.push(task);
+            tasks.push(task);
         })
        
         var formData = {
@@ -71,9 +72,6 @@ $(document).ready(function() {
             'color':color,
             'tasks': tasks,
             'is_private':is_private,
-            'reminder_time':reminder_time,
-            'reminder_type':reminder_type,
-
         }
         console.log(formData);
 
