@@ -7,27 +7,30 @@
                 </div>
                 <div class="card-body p20">
                     <form action="#">
-                        <div class="form-row">
+                        <div class="form-row justify-content-center">
                             <div class="col-auto">
-                                <button class="btn btn-sm">Add</button>
+                                <button class="btn btn-sm btn-info">Add</button>
                             </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control" placeholder="Add your text here...">
+                            <div class="col-8 align-self-center">
+                                <input type="text" class="form-control" style="height: 34px;" placeholder="Add your text here...">
                             </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Your estimate time">
+                            <div class="col-auto align-self-center">
+                                <div class="timepicker-box ">
+                                    <input class="timepicker" type="text" placeholder="HH">:
+                                    <input class="timepicker" type="text" placeholder="MM">
+                                </div>
                             </div>
                         </div>
                     </form>
-                   
+                    <hr>
                     <div class="accordion mt-3" id="accordionExample">
-                        <div class="d-flex justify-content-between align-items-center" >
+                        <div class="task-header">
                             <div class="d-flex align-items-center">
-                                <div class="form-check">
+                                <div class="form-check d-flex pl-0">
                                     <input type="checkbox" class="form-check-input" id="todoCheckbox">
                                     <label class="form-check-label" for="todoCheckbox"></label>
                                 </div>
-                                <span data-toggle="collapse" data-target="#taskCollapse1">
+                                <span data-toggle="collapse" data-target="#taskCollapse1" style="cursor:pointer">
                                      Title of Task
                                 </span>
                             </div>
@@ -35,21 +38,10 @@
                                 Estimated time
                             </div>
                         </div>
-                        <div id="taskCollapse1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div id="taskCollapse1" class="task-body collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="d-flex justify-content-between">
-                                <div class="addLog">
-                                    <button class="btn btn-sm btn-outline-info">Add log</button>
-                                    <input type="number" placeholder="HH">:
-                                    <input type="number" placeholder="MM">
-                                </div>
-                                <div class="timer" @click="startTimer()">
-                                    <timer></timer>
-                                    <button class="btn btn-sm btn-outline-info">Start timer</button>
-                                    <div id="basicUsage">00:00:00</div>
-                                </div>
-                            </div>
-                            <div class="mt-2 pl-2">
-                                Overall time spend on Task : 22:30 
+                                <timepicker/>
+                                <timer></timer>
                             </div>
                         </div>
                     </div>
@@ -68,19 +60,12 @@
             }
         },
         methods:{
-         startTimer(){
-            let timer = new easytimer.Timer();
-            timer.start();
-            timer.addEventListener('secondsUpdated', function (e) {
-                $('#basicUsage').html(timer.getTimeValues().toString());
-            });
-         }
+        
         },
         computed:{
            
         },
         mounted() {
-          console.log(timer)
         }
     }
 </script>

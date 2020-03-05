@@ -107,7 +107,6 @@
     </div>
     
     <div class="col-sm-12 col-xl-4">
-        
         <div id="accordion" class="accordion accordion-head-colored accordion-info mg-b-20" role="tablist" aria-multiselectable="true">
         <div class="card">
         <div class="card-header" role="tab" id="headingOne">

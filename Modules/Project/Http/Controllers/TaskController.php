@@ -14,7 +14,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('project::index');
+        return view('project::Task.tasks-single');
     }
 
     /**

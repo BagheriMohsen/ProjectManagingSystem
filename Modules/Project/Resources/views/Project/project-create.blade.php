@@ -95,10 +95,20 @@
                                         @endforeach
                                     </select>
                                 </div>
+<<<<<<< HEAD
 
                                 <div class="col-xl-4 col-sm-12 ">
                                     <label>Starting Date</label>
                                     <input value="{{ old("start_date") }}" name="start_date" class="form-control fc-datepicker" id="datepicker2">
+=======
+                                <div class="col-xl-6 col-sm-12">
+                                    <label>Date</label>
+                                    <br/>
+                                    <div class="timepicker-box">
+                                        <input class="timepicker" name="hours" type="text" placeholder="HH" style="height:41px">:
+                                        <input class="timepicker" name="minutes" type="text" placeholder="MM" style="height:41px">
+                                    </div>
+>>>>>>> 0ede6061dd10527df38f8dda5bc8725152042ad7
                                 </div>
 
                                 <div class="col-xl-4 col-sm-12 ">
@@ -217,8 +227,10 @@
                                                 <div class="col-sm-12 col-xl-4 addLog">
                                                     <small>Estimated Time</small>
                                                     <br/>
-                                                    <input name="task_hour" type="number" placeholder="HH">:
-                                                    <input name="task_min" type="number" placeholder="MM">
+                                                    <div class="timepicker-box">
+                                                        <input class="timepicker" type="text" name="task_hour" placeholder="HH" style="height:41px">:
+                                                        <input class="timepicker" type="text" name="task_min" placeholder="MM" style="height:41px">
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-12 col-xl-4">
                                                     <small>Priority</small>
