@@ -29,30 +29,31 @@ $(document).ready(function() {
     $('#project_create').submit(function(event){
         event.preventDefault();
         var form = $(this);
-        var processes = [];
-        var action_url = $(this).attr('action');
-        var token = $(this).find('input[name="_token"]').val();
-        var title = $(this).find('input[name="title"]').val();
-        var category = $(this).find('input[name="category"]').val();
-        var project_manager = $(this).find('select[name="project_manager"]').val();
-        var due_time = $(this).find('input[name="hours"]').val() + '/' + $(this).find('input[name="minutes"]').val();
-        var applicant_unit = $(this).find('input[name="applicant_unit"]').val();
-        var operating_unit = $(this).find('select[name="operating_unit"]').val();
-        var priority = $(this).find('select[name="priority"]').val();
-        var supervisor = $(this).find('select[name="supervisor"]').val();
-        var desc = $(this).find('textarea[name="desc"]').val();
-        var is_private = $(this).find('input[name="is_private"]').val(); 
+        var taskes = [];
+        var action_url          = $(this).attr('action');
+        var token               = $(this).find('input[name="_token"]').val();
+        var title               = $(this).find('input[name="title"]').val();
+        var subject             = $(this).find('input[name="subject"]').val();
+        var manager_id          = $(this).find('select[name="manager_id"]').val();
+        var start_date          = $(this).find('input[name="start_date"]').val();
+        var dead_date           = $(this).find('input[name="dead_date"]').val();
+        var applicant_unit_id   = $(this).find('input[name="applicant_unit_id"]').val();
+        var operating_unit_id   = $(this).find('select[name="operating_unit_id"]').val();
+        var priority            = $(this).find('select[name="priority"]').val();
+        var supervisor_id       = $(this).find('select[name="supervisor_id"]').val();
+        var desc                = $(this).find('textarea[name="desc"]').val();
+        var is_private          = $(this).find('input[name="is_private"]').val(); 
         $('.mr-group').each(function(){
-            var process = {};
-            process.process_title = $(this).find('input[name="process_title"]').val();
-            process.process_operator = $(this).find('select[name="process_operator"]').val();
-            process.process_percent = $(this).find('input[name="process_percent"]').val();
-            process.process_due_time = $(this).find('input[name="process_hours"]').val() + '/' + $(this).find('input[name="process_minutes"]').val();
-            process.process_priority = $(this).find('select[name="process_priority"]').val();
-            process.process_desc = $(this).find('textarea[name="process_desc"]').val();
-            process.reminder_time = $(this).find('input[name="reminder_time"]').val();
-            process.reminder_type = $(this).find('select[name="reminder_type"]').val();
-            processes.push(process);
+            var task = {};
+            task.task_title = $(this).find('input[name="task_title"]').val();
+            task.task_operator = $(this).find('select[name="task_operator"]').val();
+            task.task_percent = $(this).find('input[name="task_percent"]').val();
+            task.task_due_time = $(this).find('input[name="task_hour"]').val() + '/' + $(this).find('input[name="task_min"]').val();
+            task.task_priority = $(this).find('select[name="task_priority"]').val();
+            task.task_desc = $(this).find('textarea[name="task_desc"]').val();
+            task.reminder_time = $(this).find('input[name="reminder_time"]').val();
+            task.reminder_type = $(this).find('select[name="reminder_type"]').val();
+            taskes.push(task);
         })
        
         var formData = {

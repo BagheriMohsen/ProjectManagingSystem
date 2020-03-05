@@ -20,7 +20,9 @@ class ProjectTask extends Model
         'priority',
         'color',
         'desc',
-        'status'
+        'status',
+        'reminder_time',
+        'reminder_type'
     ];
 
 
@@ -36,6 +38,24 @@ class ProjectTask extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\Project
+    |--------------------------------------------------------------------------
+    */
+    public function project() {
+        return $this->belongsTo("Modules\Project\Entities\Project");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function operator() {
+        return $this->belongsTo("App\User", "operator_id");
     }
 
 }

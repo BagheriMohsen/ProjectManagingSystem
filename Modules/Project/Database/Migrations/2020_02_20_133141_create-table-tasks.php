@@ -30,6 +30,8 @@ class CreateTableTasks extends Migration
             $table->string('priority');
             $table->text('desc');
             $table->string('color');
+            $table->time('reminder_time')->nullable();
+            $table->string('reminder_type')->nullable();
             $table->string('status')->default('in_progress');
             $table->timestamps();
 

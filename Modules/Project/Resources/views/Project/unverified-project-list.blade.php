@@ -68,12 +68,12 @@
                 Request date: {{ $project->created_at }}
             </td>
             <td>
-                Start date: {{ "None" }}
+                Start date: {{ $project->start_date  }}
             </td>
             <td class="bg-light">
                 Status: 
                 <span class="text-secondary">
-                    {{ $project->status }}
+                    {{ "In Progress..." }}
                 </span>
             </td>
         </tr>

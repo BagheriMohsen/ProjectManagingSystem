@@ -52,7 +52,7 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
     public function Operating_unit() {
-        return $this->belongsTo("Modules\User\Entities\Unit", "operating_unit_id", "id");
+        return $this->belongsTo("Modules\User\Entities\Unit", "operating_unit_id");
     }
 
 
@@ -62,7 +62,34 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
     public function applicant_unit() {
-        return $this->belongsTo("Modules\User\Entities\Unit", "applicant_unit_id", "id");
+        return $this->belongsTo("Modules\User\Entities\Unit", "applicant_unit_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\ProjectTask
+    |--------------------------------------------------------------------------
+    */
+    public function tasks() {
+        return $this->hasMany("Modules\Project\Entities\ProjectTask");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function manager() {
+        return $this->belongsTo("App\User", "manager_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function supervisor() {
+        return $this->belongsTo("App\User", "supervisor_id");
     }
 
 

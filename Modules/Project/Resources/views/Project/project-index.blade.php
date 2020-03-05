@@ -3,22 +3,21 @@
 @section('title')
     {{"Project"}}
 @endsection
+@php 
+    $path = [
+        'name'          =>  'Project',
+        'btn_content'   =>  "New Project",
+        'is_modal'      =>  False,
+        'btn_href'      =>  "projects.create"
+    ];
+@endphp
 
 <!-- 
     path 
 -->
 @section('path')
-    @php 
-        $path = [
-            'name'          =>  'Project',
-            'btn_content'   =>  "New Project",
-            'is_modal'      =>  False,
-            'btn_href'      =>  "projects.create"
-        ]
-    @endphp
     @include('Master.path')
 @endsection
-
 
 
 <!-- 
@@ -34,102 +33,65 @@
         Active Projects
     </div>
     <div class="card-body rounded-bottom table-wr-br">
+
+    @foreach( $active_projects as $project )
+
     <table class="table tx-12">
         <tr class="tx-16">
             <td colspan="4">
-                <a href="project-single">
-                Project title: altareq Hotel Website
+                <a href="{{ route("projects.show",$project->id) }}">
+                <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
+                Project title: {{ $project->title }}
                 </a>
                 <div class="progress mg-b-5 mg-t-5 ht-15">
                     <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
                 </div>
             </td>
             <td class="bg-light">
-                Priority: High
+                Priority: 
+                @if($project->priority == "low")
+                    <span class="text-warning">{{ $project->priority }}</span>
+                @elseif($project->priority == "normal")
+                    <span class="text-primary">{{ $project->priority }}</span>
+                @else 
+                    <span class="text-danger">{{ $project->priority }}</span>
+                @endif
             </td>
         </tr>
         <tr>
             <td>
-                Applicant: Management unit
+                Applicant: 
+                <span class="text-dark">
+                    {{ $project->applicant_unit->name }}
+                </span>
             </td>
             <td>
-                Operating unit: Programming Unit
+                Operating unit: 
+                <span class="text-dark">
+                    {{ $project->Operating_unit->name }}
+                </span>
             </td>
             <td>
-                Request date: June 25
+                Request date: 
+                <span class="text-dark">
+                    {{ $project->created_at }}
+                </span>
             </td>
             <td>
-                Start date: June 28
+                Start date: 
+                <span class="text-dark">
+                    {{ $project->start_date  }}
+                </span>
             </td>
-            <td class="bg-light">
-                Status: In progress
+            <td class="bg-primary text-light">
+                Status: 
+                {{ "In Progress..." }}
             </td>
         </tr>
     </table>
-    <table class="table tx-12">
-        <tr class="tx-16">
-            <td colspan="4">
-                <a href="project-single">
-                Project title
-                </a>	
-                <div class="progress mg-b-5 mg-t-5 ht-15">
-                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated wd-70p" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-                </div>	
-            </td>
-            <td class="bg-light">
-                Project Priority
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Applicant unit name
-            </td>
-            <td>
-                Operating unit name
-            </td>
-            <td>
-                Request date				
-            </td>
-            <td>
-                Start date
-            </td>
-            <td class="bg-light">
-                Project Status
-            </td>
-        </tr>
-    </table>
-    <table class="table tx-12">
-        <tr class="tx-16">
-            <td colspan="4">
-                <a href="project-single">
-                Project title
-                </a>	
-                <div class="progress mg-b-5 mg-t-5 ht-15">
-                    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated wd-20p" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
-                </div>		
-            </td>
-            <td class="bg-light">
-                Project Priority
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Applicant unit name
-            </td>
-            <td>
-                Operating unit name
-            </td>
-            <td>
-                Request date				
-            </td>
-            <td>
-                Start date
-            </td>
-            <td class="bg-light">
-                Project Status
-            </td>
-        </tr>
-    </table>
+   
+    @endforeach
+
     </div>
     </div>
     
@@ -138,93 +100,63 @@
         Complated Projects
     </div>
     <div class="card-body rounded-bottom table-wr-br">
-    <table class="table tx-12">
-        <tr class="tx-16">
-            <td colspan="4">
-                <a href="project-single">
-                Project title
-                </a>		
-            </td>
-            <td class="bg-light">
-                Complate Date: June 18
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Applicant unit name
-            </td>
-            <td>
-                Operating unit name
-            </td>
-            <td>
-                Request date				
-            </td>
-            <td>
-                Start date
-            </td>
-            <td class="bg-success tx-white">
-                Status: Complated
-            </td>
-        </tr>
-    </table>
-    <table class="table tx-12">
-        <tr class="tx-16">
-            <td colspan="4">
-                <a href="project-single">
-                Project title
-                </a>		
-            </td>
-            <td class="bg-light">
-                Complate Date: June 18
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Applicant unit name
-            </td>
-            <td>
-                Operating unit name
-            </td>
-            <td>
-                Request date				
-            </td>
-            <td>
-                Start date
-            </td>
-            <td class="bg-success tx-white">
-                Status: Complated
-            </td>
-        </tr>
-    </table>
-    <table class="table tx-12">
-        <tr class="tx-16">
-            <td colspan="4">
-                <a href="project-single">
-                Project title
-                </a>		
-            </td>
-            <td class="bg-light">
-                Complate Date: June 18
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Applicant unit name
-            </td>
-            <td>
-                Operating unit name
-            </td>
-            <td>
-                Request date				
-            </td>
-            <td>
-                Start date
-            </td>
-            <td class="bg-success tx-white">
-                Status: Complated
-            </td>
-        </tr>
-    </table>
+        @foreach( $complete_projects as $project )
+
+        <table class="table tx-12">
+            <tr class="tx-16">
+                <td colspan="4">
+                    <a href="{{ route("projects.show",$project->id) }}">
+                    <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
+                    Project title: {{ $project->title }}
+                    </a>
+                    <div class="progress mg-b-5 mg-t-5 ht-15">
+                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                    </div>
+                </td>
+                <td class="bg-light">
+                    Priority: 
+                    @if($project->priority == "low")
+                        <span class="text-warning">{{ $project->priority }}</span>
+                    @elseif($project->priority == "normal")
+                        <span class="text-primary">{{ $project->priority }}</span>
+                    @else 
+                        <span class="text-danger">{{ $project->priority }}</span>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Applicant: 
+                    <span class="text-dark">
+                        {{ $project->applicant_unit->name }}
+                    </span>
+                </td>
+                <td>
+                    Operating unit: 
+                    <span class="text-dark">
+                        {{ $project->Operating_unit->name }}
+                    </span>
+                </td>
+                <td>
+                    Request date: 
+                    <span class="text-dark">
+                        {{ $project->created_at }}
+                    </span>
+                </td>
+                <td>
+                    Start date: 
+                    <span class="text-dark">
+                        {{ $project->start_date  }}
+                    </span>
+                </td>
+                <td class="bg-success text-light">
+                    Status: 
+                    {{ "In Progress..." }}
+                </td>
+            </tr>
+        </table>
+       
+        @endforeach
     </div>
     </div>
     
@@ -233,35 +165,63 @@
         Closed Projects
     </div>
     <div class="card-body rounded-bottom table-wr-br">
-    <table class="table tx-12">
-        <tr class="tx-16">
-            <td colspan="4">
-                <a href="project-single">
-                Project title
-                </a>		
-            </td>
-            <td class="bg-light">
-                the reason
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Applicant unit name
-            </td>
-            <td>
-                Operating unit name
-            </td>
-            <td>
-                Request date				
-            </td>
-            <td>
-                Start date: -
-            </td>
-            <td class="bg-dark tx-white">
-                Status: Closed
-            </td>
-        </tr>
-    </table>
+        @foreach( $close_projects as $project )
+
+        <table class="table tx-12">
+            <tr class="tx-16">
+                <td colspan="4">
+                    <a href="{{ route("projects.show",$project->id) }}">
+                    <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
+                    Project title: {{ $project->title }}
+                    </a>
+                    <div class="progress mg-b-5 mg-t-5 ht-15">
+                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                    </div>
+                </td>
+                <td class="bg-light">
+                    Priority: 
+                    @if($project->priority == "low")
+                        <span class="text-warning">{{ $project->priority }}</span>
+                    @elseif($project->priority == "normal")
+                        <span class="text-primary">{{ $project->priority }}</span>
+                    @else 
+                        <span class="text-danger">{{ $project->priority }}</span>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Applicant: 
+                    <span class="text-dark">
+                        {{ $project->applicant_unit->name }}
+                    </span>
+                </td>
+                <td>
+                    Operating unit: 
+                    <span class="text-dark">
+                        {{ $project->Operating_unit->name }}
+                    </span>
+                </td>
+                <td>
+                    Request date: 
+                    <span class="text-dark">
+                        {{ $project->created_at }}
+                    </span>
+                </td>
+                <td>
+                    Start date: 
+                    <span class="text-dark">
+                        {{ $project->start_date  }}
+                    </span>
+                </td>
+                <td class="bg-dark text-light">
+                    Status: 
+                    {{ "In Progress..." }}
+                </td>
+            </tr>
+        </table>
+       
+        @endforeach
     </div>
     </div>
     

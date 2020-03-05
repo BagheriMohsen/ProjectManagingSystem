@@ -18,7 +18,30 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project::Project.project-index');
+        $user = auth()->user();
+
+        $active_projects = Project::where([
+            ["operating_unit_id","=",$user->unit->id],
+            ["status","=","in_progress"]
+        ])->get();
+
+        $complete_projects = Project::where([
+            ["operating_unit_id","=",$user->unit->id],
+            ["status","=","complete"]
+        ])->get();
+
+
+        $close_projects = Project::where([
+            ["operating_unit_id","=",$user->unit->id],
+            ["status","=","close"]
+        ])->get();
+
+
+        return view('project::Project.project-index',compact(
+            "active_projects",
+            "complete_projects",
+            "close_projects"
+        ));
     }
 
     /**
@@ -50,6 +73,7 @@ class ProjectController extends Controller
 
         // create project
         $data                       =   $req->all();
+        $data["req_date"]           =   Carbon::now();
         $data["applicant_unit_id"]  =   $user->unit->id;
         $data["start_date"]         =   Carbon::parse($req->start_date);      
         $data["dead_date"]          =   Carbon::parse($req->dead_date);
@@ -76,9 +100,9 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show()
+    public function show(Project $project)
     {
-        return view('project::Project.project-single');
+        return view('project::Project.project-single',compact("project"));
     }
 
     /**

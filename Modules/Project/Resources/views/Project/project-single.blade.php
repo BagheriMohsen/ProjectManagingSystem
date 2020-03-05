@@ -37,14 +37,16 @@
     <div class="col-sm-12 col-xl-8">
         <div class="card p15 mg-b-20">
             <div class="br-pagetitle">
-                <i class="icon ion-ios-gear-outline"></i>
+                <i class="icon ion-ios-gear-outline mx-4"></i>
                 <div>
-                <h4>Altareq Hotel Website</h4>
+                <h4>
+                    {{ $project->title }}
+                </h4>
                 <p class="mg-b-0">Techno Fast</p>
                 </div>
             </div>
                 <div class="tx-center mg-b-4 mg-t-4 tx-13">
-                    Category: Web Design
+                    Subject: {{ $project->subject }}
                 </div>
         </div>
     </div>
@@ -58,7 +60,9 @@
                 <li class="media d-block d-sm-flex">
                   <img class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" src="img/user-hashemi.png">
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
-                    <h6 class="tx-inverse mg-b-10">Seyed Ali Alavi</h6>
+                    <h6 class="tx-inverse mg-b-10">
+                        {{ $project->manager->first_name." ".$project->manager->last_name}}
+                    </h6>
                     <p>Programming Unit</p>
                   </div>
                 </li>
@@ -79,7 +83,9 @@
             </div>
             <div class="col-sm-12 col-xl-4">
                 <div class="card p15 min-h-63">
-                    <a class="btn btn-block bg-grandeur tx-white btn-sm" href="">Status: In Progress</a>
+                    <a class="btn btn-block bg-grandeur tx-white btn-sm" href="">
+                        Status: {{ $project->status }}
+                    </a>
                 </div>
             </div>
             
@@ -89,16 +95,16 @@
             <table class="table mg-0 tx-center tx-12">
                 <tr>
                     <td>
-                        Request date: June 25
+                        Request date: {{ $project->req_date }}
                     </td>
                     <td class="bg-danger tx-white">
-                        Deadline: July 11
+                        Deadline: {{ $project->dead_date }}
                     </td>
                     <td>
-                        Start date: June 28
+                        Start date: {{ $project->start_date }}
                     </td>
                     <td>
-                        Complate Date: -
+                        Complate Date: {{ $project->complete_date }}
                     </td>
                 </tr>
             </table>	
@@ -130,7 +136,7 @@
                             operator
                         </th>
                         <th>
-                            Deadline
+                            Estimated Time
                         </th>
                         <th>
                             Percent of the project
@@ -143,168 +149,42 @@
                         </td>
                     </thead>
                     <tbody>
-                        <tr>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <a href="task-single">
-                                Setting up the documentation
-                            </a>
-                        </td>
-                        <td>
-                            mahdi Hashem
-                        </td>
-                        <td>
-                            June 30
-                        </td>
-                        <td>
-                            35 %
-                        </td>
-                        <td>
-                            High
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-success">
-                                Complated
-                            </button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
-                            2
-                        </td>
-                        <td>
-                            <a href="task-single">
-                                Design Sketch
-                            </a>
-                        </td>
-                        <td>
-                            Hisam aljasem
-                        </td>
-                        <td>
-                            July 02
-                        </td>
-                        <td>
-                            10 %
-                        </td>
-                        <td>
-                            Normal
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-warning">
-                                In Progress 
-                            </button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
-                            3
-                        </td>
-                        <td>
-                            <a href="task-single">
-                            Design Psd Template
-                            </a>
-                        </td>
-                        <td>
-                            Sajjad Rafie 
-                        </td>
-                        <td>
-                            July 07
-                        </td>
-                        <td>
-                            10 %
-                        </td>
-                        <td>
-                            High
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-warning">
-                                In Progress 
-                            </button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
-                            4
-                        </td>
-                        <td>
-                            <a href="task-single">
-                            Define Database
-                            </a>
-                        </td>
-                        <td>
-                            sadigh ahmad
-                        </td>
-                        <td>
-                            July 07
-                        </td>
-                        <td>
-                            15 %
-                        </td>
-                        <td>
-                            High
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-light">
-                                incomplete
-                            </button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            <a href="task-single">
-                            Backend Programming 
-                            </a>
-                        </td>
-                        <td>
-                            Sajjad Rafie
-                        </td>
-                        <td>
-                            July 08
-                        </td>
-                        <td>
-                            10 %
-                        </td>
-                        <td>
-                            High
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-light">
-                                incomplete
-                            </button>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>
-                            6
-                        </td>
-                        <td>
-                            <a href="task-single">
-                            Frontend Programming
-                            </a>
-                        </td>
-                        <td>
-                            Salah salman
-                        </td>
-                        <td>
-                            July 09
-                        </td>
-                        <td>
-                            20 %
-                        </td>
-                        <td>
-                            High
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-light">
-                                incomplete
-                            </button>
-                        </td>
-                        </tr>
+                        @foreach($project->tasks as $task)
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    <a href="task-single">
+                                        {{ $task->title }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{ $task->oprator->first_name." ".$task->oprator->last_name }}
+                                </td>
+                                <td>
+                                    {{ $task->estimated_time }}
+                                </td>
+                                <td>
+                                    35 %
+                                </td>
+                                <td>
+                                    @if($task->priority == "low")
+                                        <span class="text-warning">{{ "Low" }}</span>
+                                    @elseif($task->priority == "normal")
+                                        <span class="text-primary">{{ "Normal" }}</span>
+                                    @else 
+                                        <span class="text-danger">{{ "High" }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">
+                                        {{ $task->status }}
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                       
                     </tbody>
                 </table>
             </div>
@@ -330,13 +210,20 @@
             <div class="row">
                 <ul class="w100">
                     <li>
-                        Applicant: Management unit
+                        Applicant: {{ $project->applicant_unit->name }}
                     </li>
                     <li>
-                        Operating unit: Programming Unit
+                        Operating unit: {{ $project->Operating_unit->name }}
                     </li>
                     <li>
-                        Priority: High
+                        Priority: 
+                        @if($project->priority == "low")
+                            <span class="text-warning">{{ "Low" }}</span>
+                        @elseif($project->priority == "normal")
+                            <span class="text-primary">{{ "Normal" }}</span>
+                        @else 
+                            <span class="text-danger">{{ "High" }}</span>
+                        @endif
                     </li>
                 </ul>
             </div>

@@ -83,5 +83,32 @@ class User extends Authenticatable
         return $this->hasMany("Modules\TimeLine\Entities\TimeLineComment");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relate with Modules\Project\Entities\Project
+    |--------------------------------------------------------------------------
+    */
+    public function manager_projects() {
+        return $this->hasMany("Modules\Project\Entities\Project", "manager_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relate with Modules\Project\Entities\Project
+    |--------------------------------------------------------------------------
+    */
+    public function supervisor_projects() {
+        return $this->hasMany("Modules\Project\Entities\Project", "supervisor_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relate with Modules\Project\Entities\ProjectTask
+    |--------------------------------------------------------------------------
+    */
+    public function operator_tasks() {
+        return $this->hasMany("Modules\Project\Entities\ProjectTask", "operator_id");
+    }
+
 
 }
