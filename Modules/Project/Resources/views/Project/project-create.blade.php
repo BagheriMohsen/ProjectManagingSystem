@@ -88,11 +88,13 @@
                                         <option>Ali Fatemi</option>
                                     </select>
                                 </div>
-                                <div class="col-xl-6 col-sm-12 addLog">
+                                <div class="col-xl-6 col-sm-12">
                                     <label>Date</label>
                                     <br/>
-                                    <input name="hours" type="number" placeholder="HH">:
-                                    <input name="minutes" type="number" placeholder="MM">
+                                    <div class="timepicker-box">
+                                        <input class="timepicker" name="hours" type="text" placeholder="HH" style="height:41px">:
+                                        <input class="timepicker" name="minutes" type="text" placeholder="MM" style="height:41px">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -191,8 +193,10 @@
                                                 <div class="col-sm-12 col-xl-4 addLog">
                                                     <label>Deadline</label>
                                                     <br/>
-                                                    <input type="number" name="process_hours" placeholder="HH">:
-                                                    <input type="number" name="process_minutes" placeholder="MM">
+                                                    <div class="timepicker-box">
+                                                        <input class="timepicker" type="text" name="process_hours" placeholder="HH" style="height:41px">:
+                                                        <input class="timepicker" type="text" name="process_minutes" placeholder="MM" style="height:41px">
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-12 col-xl-4">
                                                     <label>Priority</label>
