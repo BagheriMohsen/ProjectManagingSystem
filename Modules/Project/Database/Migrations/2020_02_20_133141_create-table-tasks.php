@@ -18,20 +18,25 @@ class CreateTableTasks extends Migration
         |  Task
         |--------------------------------------------------------------------------
         */
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('project_tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('project_id')->unsigned()->nullable();
+            $table->bigInteger('operator_id')->unsigned()->nullable();
             $table->string('title');
             $table->string('slug');
             $table->integer('percent');
-            $table->date('dead_line');
+            $table->float('estimated_time');
             $table->string('priority');
             $table->text('desc');
+            $table->string('color');
             $table->string('status')->default('in_progress');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
+
+            $table->foreign('operator_id')->references('id')->on('users')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->foreign('project_id')->references('id')->on('projects')
@@ -44,10 +49,10 @@ class CreateTableTasks extends Migration
         | Sub Task
         |--------------------------------------------------------------------------
         */
-        Schema::create('sub_tasks', function (Blueprint $table) {
+        Schema::create('project_sub_tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->bigInteger('task_id')->unsigned()->nullable();
+            $table->bigInteger('project_task_id')->unsigned()->nullable();
             $table->bigInteger('operator_id');
             $table->string('title');
             $table->string('slug');
@@ -61,7 +66,7 @@ class CreateTableTasks extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
-            $table->foreign('task_id')->references('id')->on('tasks')
+            $table->foreign('project_task_id')->references('id')->on('project_tasks')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
         });

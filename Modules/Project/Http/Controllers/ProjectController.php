@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Carbon\Carbon;
 
 use Modules\Project\Entities\Project;
+use Modules\Project\Entities\ProjectTask;
 
 class ProjectController extends Controller
 {
@@ -26,7 +27,16 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project::Project.project-create');
+        $user = auth()->user();
+
+        $users = "App\User"::where("unit_id",$user->unit_id)
+        ->latest()->get();
+        $units = "Modules\User\Entities\Unit"::latest()->get();
+        
+        return view('project::Project.project-create',compact(
+            "users",
+            "units"
+        ));
     }
 
     /**
@@ -36,7 +46,29 @@ class ProjectController extends Controller
      */
     public function store(Request $req)
     {
-        dd($req);
+        $user = auth()->user();
+
+        // create project
+        $data                       =   $req->all();
+        $data["applicant_unit_id"]  =   $user->unit->id;
+        $data["start_date"]         =   Carbon::parse($req->start_date);      
+        $data["dead_date"]          =   Carbon::parse($req->dead_date);
+        $data["is_verify"]          =   True;
+        $data["user_id"]            =   $user->id;
+
+        $project = Project::create($data);
+
+        // create project tasks
+        foreach( $req->tasks as $task ){
+            
+            $data                   =   $task; 
+            $data["user_id"]        =   $user->id;
+            $data["project_id"]     =   $project->id;
+            ProjectTask::create($data);
+
+        }
+
+        return response()->json("its done");
     }
 
     /**

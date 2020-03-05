@@ -54,17 +54,19 @@ $(document).ready(function() {
         // console.log(title,category,project_manager,date,applicant_unit,operating_unit,priority,supervisor,desc);
         // console.log(processes);
         var formData = {
-            'title': title,
             '_token':token,
-            'category': category,
-            'project_manager': project_manager,
-            'due_time': due_time,
-            'applicant_unit': applicant_unit,
-            'operating_unit': operating_unit,
+            'title': title,
+            'subject': subject,
+            'manager_id': manager_id,
+            'applicant_unit_id': applicant_unit_id,
+            'operating_unit_id': operating_unit_id,
             'priority': priority,
-            'supervisor': supervisor,
+            'start_date':start_date,
+            'dead_date':dead_date,
+            'supervisor_id': supervisor_id,
             'desc': desc,
-            'processes': processes,
+            'color':color,
+            'tasks': tasks,
         }
         console.log(formData);
 

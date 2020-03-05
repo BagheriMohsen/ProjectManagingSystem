@@ -34,11 +34,11 @@ class CreateTableProjects extends Migration
             $table->string('color');
             $table->date('req_date')->nullable();
             $table->date('start_date')->nullable();
+            $table->date('dead_date')->nullable();
             $table->date('complete_date')->nullable();
             $table->date('close_date')->nullable();
             $table->text('desc');
             $table->string('status')->default('in_progress');
-            $table->time('estimated_time')->nullable();
             $table->boolean('is_public')->default(True);
             $table->boolean('is_verify')->default(False);
             $table->date('verify_date')->nullable();
