@@ -41,14 +41,14 @@ $(document).ready(function() {
         var priority = $(this).find('select[name="priority"]').val();
         var supervisor = $(this).find('select[name="supervisor"]').val();
         var desc = $(this).find('textarea[name="desc"]').val();
-        $('.mr-group').each(function(index,item){
+        $('.mr-group').each(function(){
             var process = {};
-            process.process_title = form.find('input[name="process_title"]').val();
-            process.process_operator = form.find('select[name="process_operator"]').val();
-            process.process_percent = form.find('input[name="process_percent"]').val();
-            process.process_due_time = form.find('input[name="process_hours"]').val() + '/' + form.find('input[name="process_minutes"]').val();
-            process.process_priority = form.find('select[name="process_priority"]').val();
-            process.process_desc = form.find('textarea[name="process_desc"]').val();
+            process.process_title = $(this).find('input[name="process_title"]').val();
+            process.process_operator = $(this).find('select[name="process_operator"]').val();
+            process.process_percent = $(this).find('input[name="process_percent"]').val();
+            process.process_due_time = $(this).find('input[name="process_hours"]').val() + '/' + $(this).find('input[name="process_minutes"]').val();
+            process.process_priority = $(this).find('select[name="process_priority"]').val();
+            process.process_desc = $(this).find('textarea[name="process_desc"]').val();
             processes.push(process);
         })
         // console.log(title,category,project_manager,date,applicant_unit,operating_unit,priority,supervisor,desc);
@@ -73,7 +73,11 @@ $(document).ready(function() {
             method:'Post',
             data: formData,
             success:function(reponse){
-                console.log(reponse)
+                alert(res);
+                location.reload();
+            },
+            error:function(err){
+                alert(err);
             }
         })
 
