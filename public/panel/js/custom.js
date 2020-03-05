@@ -41,6 +41,7 @@ $(document).ready(function() {
         var priority = $(this).find('select[name="priority"]').val();
         var supervisor = $(this).find('select[name="supervisor"]').val();
         var desc = $(this).find('textarea[name="desc"]').val();
+        var is_private = $(this).find('input[name="is_private"]').val(); 
         $('.mr-group').each(function(){
             var process = {};
             process.process_title = $(this).find('input[name="process_title"]').val();
@@ -49,10 +50,11 @@ $(document).ready(function() {
             process.process_due_time = $(this).find('input[name="process_hours"]').val() + '/' + $(this).find('input[name="process_minutes"]').val();
             process.process_priority = $(this).find('select[name="process_priority"]').val();
             process.process_desc = $(this).find('textarea[name="process_desc"]').val();
+            process.reminder_time = $(this).find('input[name="reminder_time"]').val();
+            process.reminder_type = $(this).find('select[name="reminder_type"]').val();
             processes.push(process);
         })
-        // console.log(title,category,project_manager,date,applicant_unit,operating_unit,priority,supervisor,desc);
-        // console.log(processes);
+       
         var formData = {
             '_token':token,
             'title': title,
@@ -67,6 +69,10 @@ $(document).ready(function() {
             'desc': desc,
             'color':color,
             'tasks': tasks,
+            'is_private':is_private,
+            'reminder_time':reminder_time,
+            'reminder_type':reminder_type,
+
         }
         console.log(formData);
 

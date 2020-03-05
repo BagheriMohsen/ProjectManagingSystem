@@ -234,11 +234,11 @@
                                         <div class="row row-sm mt-3">
                                             <div class="col-sm-12 col-xl-4">
                                                 <small>Reminder time</small>
-                                                <input name="reminder-time" type="time" class="form-control" placeholder="">
+                                                <input name="reminder_time" type="time" class="form-control" placeholder="">
                                             </div>
                                             <div class="col-sm-12 col-xl-4">
                                                 <small>Reminder type</small>
-                                                <select name="reminder-type" class="form-control">
+                                                <select name="reminder_type" class="form-control">
                                                     <option value="daily">daily</option>
                                                     <option value="weekly">daily</option>
                                                 </select>
@@ -269,7 +269,7 @@
             </div>
 
             <div class="form-check">
-                <input name="is-private" type="checkbox" class="form-check-input" id="private-project-checkbox">
+                <input name="is_private" type="checkbox" class="form-check-input" id="private-project-checkbox">
                 <label class="form-check-label" for="private-project-checkbox">Do you want this project to be private?</label>
             </div>
             <button type="submit" class="btn btn-success mt-3 mb-3">
