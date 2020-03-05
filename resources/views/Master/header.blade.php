@@ -15,7 +15,6 @@
                   {{"Select the part you want looking at"}}
                 @else 
                   {{ "You are looking at: " }}
-
                   <span class="border border-success px-2 mb-3">{{ $user->unit->name }}</span>
                 @endif
 
@@ -135,11 +134,11 @@
               <span class="logged-name hidden-md-down">
                 {{ $user->first_name." ".$user->last_name }}
               </span>
-              {{-- @if(is_null($user->avatar))
+              @if(is_null($user->avatar))
                 <img src="{{ Avatar::create($user->first_name." ".$user->last_name)->toBase64() }}" class="wd-32 rounded-circle" alt="">
               @else 
                 <img src="/storage/{{ $user->avatar }}" class="wd-32 rounded-circle" alt="">
-              @endif --}}
+              @endif
               
 
 

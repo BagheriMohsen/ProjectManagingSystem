@@ -4,6 +4,7 @@ namespace Modules\Project\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+
 class Project extends Model
 {
     use Sluggable;
@@ -20,12 +21,12 @@ class Project extends Model
         'priority',
         'req_date',
         'start_date',
+        'dead_date',
         'complete_date',
         'close_date',
         'desc',
         'color',
         'status',
-        'estimated_time',
         'is_public',
         'is_verify',
         'verify_date'

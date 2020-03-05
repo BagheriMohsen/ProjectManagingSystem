@@ -41,7 +41,14 @@
     @include('Master.path')
 @endsection
 
+@section("styles")
+    <link rel="stylesheet" href="{{ asset("panel/color_picker/la_color_picker.min.css") }}">
+@endsection
 
+
+@section("scripts")
+    <script src="{{ asset("panel/color_picker/la_color_picker.min.js") }}"></script>
+@endsection
 
 
 <!-- 
@@ -54,7 +61,7 @@
             
             <form id="project_create" action="{{route("projects.store")}}" method="POST">
                 @csrf
-                
+
             <div class="addproject-wr">
                 <div class="row row-sm mp0">
                     <div class="col-xs-12 col-xl-12">
@@ -71,29 +78,36 @@
                                     <input name="title" class="form-control" type="text" placeholder="Project Title">
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
-                                    <label>Project Category</label>
-                                    <input name="category" class="form-control" type="text" placeholder="Project Category">
+                                    <label>Project Subject</label>
+                                    <input name="subject" class="form-control" type="text" placeholder="Project Subject">
                                 </div>
                             </div>
                         </div>
                                 <div class="card mg-b-20 p20">
                             <div class="row row-sm">
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-xl-4 col-sm-12">
                                     <label>Project Manager</label>
-                                    <select class="form-control" name="project_manager">
-                                        <option>Hussain Fatemi</option>
-                                        <option>Sajjad Rafie</option>
-                                        <option>Amir Taha</option>
-                                        <option>ibrahim khalil</option>
-                                        <option>Ali Fatemi</option>
+                                    <select name="manager_id" class="form-control" >
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">
+                                                {{ $user->first_name." ".$user->last_name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xl-6 col-sm-12 addLog">
-                                    <label>Date</label>
-                                    <br/>
-                                    <input name="hours" type="number" placeholder="HH">:
-                                    <input name="minutes" type="number" placeholder="MM">
+
+                                <div class="col-xl-4 col-sm-12 ">
+                                    <label>Starting Date</label>
+                                    <input value="{{ old("start_date") }}" name="start_date" class="form-control fc-datepicker" id="datepicker2">
                                 </div>
+
+                                <div class="col-xl-4 col-sm-12 ">
+                                    <label>DeadLine Date</label>
+                                    <input value="{{ old("dead_date") }}" name="dead_date" class="form-control fc-datepicker" id="datepicker3">
+                                </div>
+                                
+
+                                
                             </div>
                         </div>
                             </div>
@@ -102,17 +116,16 @@
                             <div class="row row-sm">
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Applicant unit</label>
-                                    <input name="applicant_unit" class="form-control" type="text" value="Network Unit" disabled>
+                                    <input value="{{ auth()->user()->unit->name }}" name="applicant_unit_id" class="form-control" type="text"  disabled>
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
                                     <label>Operating unit</label>
-                                    <select class="form-control" name="operating_unit">
-                                        <option>Management Unit</option>
-                                        <option>Network Unit</option>
-                                        <option>Programming Unit</option>
-                                        <option>Support Unit</option>
-                                        <option>Research Unit</option>
-                                        <option>Finance Unit</option>
+                                    <select class="form-control" name="operating_unit_id">
+                                        @foreach( $units as $unit )
+                                            <option value="{{ $unit->id }}" >
+                                                {{ $unit->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -120,22 +133,28 @@
                         
                         <div class="card mg-b-20 p20">
                             <div class="row row-sm">
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-xl-4 col-sm-12">
+                                    <label>Color</label>
+                                    <input value="{{ old('color') }}" name="color" type="color" class="form-control">
+                                   
+                                </div>
+                                <div class="col-xl-3 col-sm-12">
                                     <label>Priority</label>
                                     <select class="form-control" name="priority">
-                                        <option>Normal</option>
-                                        <option>High</option>
-                                        <option>low</option>
+                                        <option value="low" >low</option>
+                                        <option value="normal" >Normal</option>
+                                        <option value="high" >High</option>
                                     </select>
                                 </div>
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-xl-5 col-sm-12">
                                     <label>Supervisor</label>
-                                    <select class="form-control" name="supervisor">
-                                        <option>Ali Fatemi</option>
-                                        <option>Amir Taha</option>
-                                        <option>Hussain Fatemi</option>
-                                        <option>Sajjad Rafie</option>
-                                        <option>ibrahim khalil</option>
+                                    <select class="form-control" name="supervisor_id">
+                                        @foreach( $users as $user )
+                                            <option value="{{ $user->id }}" >
+                                                {{ $user->first_name." ".$user->last_name }}
+                                            </option>
+                                        @endforeach
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -157,7 +176,7 @@
                             </div>	
                         </div>
                         </section>
-                        <h5>Processes...</h5>
+                        <h5>Tasks</h5>
                         <section class="border1ccc p20 mg-b-20">
                             <div id="mrgroupwr">
                             <div class="mr-group">
@@ -167,49 +186,58 @@
                                     <div class="col-xs-12 col-xl-6">
                                         
                                         <div class="row row-sm mg-b-10">
-                                                <div class="col-sm-12 col-xl-6">
-                                                    <label>title</label>
-                                                    <input name="process_title" type="text" class="form-control" placeholder="Proccess title">
+                                                <div class="col-sm-12 col-xl-4">
+                                                    <small>Title</small>
+                                                    <input name="task_title" type="text" class="form-control" placeholder="Proccess title">
                                                 </div>
-                                                <div class="col-sm-12 col-xl-6">
-                                                    <label>operator</label>
-                                                    <select name="process_operator" class="form-control">
-                                                        <option>Ali Fatemi</option>
-                                                        <option>Amir Taha</option>
-                                                        <option>Hussain Fatemi</option>
-                                                        <option>Sajjad Rafie</option>
-                                                        <option>ibrahim khalil</option>
+                                                <div class="col-sm-12 col-xl-4">
+                                                    <small>Operator</small>
+                                                    <select name="task_operator_id" class="form-control">
+                                                        @foreach( $users as $user )
+                                                        <option value="{{ $user->id }}">
+                                                                {{ $user->first_name." ".$user->last_name }}
+                                                            </option>
+                                                        @endforeach
+                                                      
                                                     </select>
                                                 </div>
+
+                                                <div class="col-xl-4 col-sm-12">
+                                                    <small>Color</small>
+                                                    <input value="{{ old('task_color') }}" name="task_color" type="color" class="form-control" >
+                                                </div>
+
                                             </div>
                                             
-                                        <div class="row row-sm">
+                                        <div class="row row-sm mt-3">
                                                 <div class="col-sm-12 col-xl-4">
-                                                    <label>Percent of the project</label>
-                                                    <input name="process_percent" type="number" class="form-control project_percent" placeholder="Percent">
+                                                    <small>Percent of the project</small>
+                                                    <input name="task_percent" type="number" class="form-control project_percent" placeholder="Percent">
                                                 </div>
                                                 <div class="col-sm-12 col-xl-4 addLog">
-                                                    <label>Deadline</label>
+                                                    <small>Estimated Time</small>
                                                     <br/>
-                                                    <input type="number" name="process_hours" placeholder="HH">:
-                                                    <input type="number" name="process_minutes" placeholder="MM">
+                                                    <input name="task_hour" type="number" placeholder="HH">:
+                                                    <input name="task_min" type="number" placeholder="MM">
                                                 </div>
                                                 <div class="col-sm-12 col-xl-4">
-                                                    <label>Priority</label>
-                                                    <select name="process_priority" class="form-control">
-                                                        <option>Normal</option>
-                                                        <option>High</option>
-                                                        <option>low</option>
+                                                    <small>Priority</small>
+                                                    <select name="task_priority" class="form-control">
+                                                        <option value="low">low</option>
+                                                        <option value="normal">Normal</option>
+                                                        <option value="high">High</option>
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            
                                     </div>
                                     
                                     <div class="col-xs-12 col-xl-6">
                                         <div class="row row-sm">
                                             <div class="col-sm-12">
-                                                <label>Description</label>
-                                                <textarea  name="process_desc" rows="5" class="form-control"></textarea>
+                                                <small>Description</small>
+                                                <textarea  name="task_desc" rows="5" class="form-control"></textarea>
                                             </div>
                                         </div>
                                     </div>

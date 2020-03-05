@@ -29,42 +29,47 @@ $(document).ready(function() {
     $('#project_create').submit(function(event){
         event.preventDefault();
         var form = $(this);
-        var processes = [];
-        var action_url = $(this).attr('action');
-        var token = $(this).find('input[name="_token"]').val();
-        var title = $(this).find('input[name="title"]').val();
-        var category = $(this).find('input[name="category"]').val();
-        var project_manager = $(this).find('select[name="project_manager"]').val();
-        var due_time = $(this).find('input[name="hours"]').val() + '/' + $(this).find('input[name="minutes"]').val();
-        var applicant_unit = $(this).find('input[name="applicant_unit"]').val();
-        var operating_unit = $(this).find('select[name="operating_unit"]').val();
-        var priority = $(this).find('select[name="priority"]').val();
-        var supervisor = $(this).find('select[name="supervisor"]').val();
-        var desc = $(this).find('textarea[name="desc"]').val();
+        var tasks           = [];
+        var action_url          =   $(this).attr('action');
+        var token               =   $(this).find('input[name="_token"]').val();
+        var title               =   $(this).find('input[name="title"]').val();
+        var subject             =   $(this).find('input[name="subject"]').val();
+        var manager_id          =   $(this).find('select[name="manager_id"]').val();
+        var start_date           =   $(this).find('input[name="start_date"]').val();
+        var dead_date           =   $(this).find('input[name="dead_date"]').val();
+        var color               =   $(this).find('input[name="color"]').val();
+        var applicant_unit_id   =   $(this).find('input[name="applicant_unit_id"]').val();
+        var operating_unit_id   =   $(this).find('select[name="operating_unit_id"]').val();
+        var priority            =   $(this).find('select[name="priority"]').val();
+        var supervisor_id       =   $(this).find('select[name="supervisor_id"]').val();
+        var desc                =   $(this).find('textarea[name="desc"]').val();
         $('.mr-group').each(function(index,item){
-            var process = {};
-            process.process_title = form.find('input[name="process_title"]').val();
-            process.process_operator = form.find('select[name="process_operator"]').val();
-            process.process_percent = form.find('input[name="process_percent"]').val();
-            process.process_due_time = form.find('input[name="process_hours"]').val() + '/' + form.find('input[name="process_minutes"]').val();
-            process.process_priority = form.find('select[name="process_priority"]').val();
-            process.process_desc = form.find('textarea[name="process_desc"]').val();
-            processes.push(process);
+            var task = {};
+            task.title          = form.find('input[name="task_title"]').val();
+            task.operator_id    = form.find('select[name="task_operator_id"]').val();
+            task.percent        = form.find('input[name="task_percent"]').val();
+            task.estimated_time = form.find('input[name="task_hour"]').val() + '.' + form.find('input[name="task_min"]').val();
+            task.priority       = form.find('select[name="task_priority"]').val();
+            task.desc           = form.find('textarea[name="task_desc"]').val();
+            task.color           = form.find('input[name="task_color"]').val();
+            tasks.push(task);
         })
         // console.log(title,category,project_manager,date,applicant_unit,operating_unit,priority,supervisor,desc);
         // console.log(processes);
         var formData = {
-            'title': title,
             '_token':token,
-            'category': category,
-            'project_manager': project_manager,
-            'due_time': due_time,
-            'applicant_unit': applicant_unit,
-            'operating_unit': operating_unit,
+            'title': title,
+            'subject': subject,
+            'manager_id': manager_id,
+            'applicant_unit_id': applicant_unit_id,
+            'operating_unit_id': operating_unit_id,
             'priority': priority,
-            'supervisor': supervisor,
+            'start_date':start_date,
+            'dead_date':dead_date,
+            'supervisor_id': supervisor_id,
             'desc': desc,
-            'processes': processes,
+            'color':color,
+            'tasks': tasks,
         }
         console.log(formData);
 

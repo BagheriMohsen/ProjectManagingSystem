@@ -22,7 +22,7 @@ class CreateProjectNotes extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
-            $table->bigInteger('task_id')->unsigned();
+            $table->bigInteger('project_task_id')->unsigned();
             $table->string('attach')->nullable();
             $table->string('title');
             $table->string('desc');
@@ -35,7 +35,7 @@ class CreateProjectNotes extends Migration
             $table->foreign('project_id')->references('id')->on('projects')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
 
-            $table->foreign('task_id')->references('id')->on('tasks')
+            $table->foreign('project_task_id')->references('id')->on('project_tasks')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             
         });
