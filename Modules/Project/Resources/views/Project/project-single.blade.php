@@ -58,7 +58,13 @@
             <div class="card-body">
             <div class="row">
                 <li class="media d-block d-sm-flex">
-                  <img class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" src="img/user-hashemi.png">
+                    @if(is_null($project->manager->avatar))
+                        <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
+                        class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" >
+                    @else 
+                        <img src="/storage/{{ $project->manager->avatar }}"
+                        class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle"  >
+                    @endif
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
                     <h6 class="tx-inverse mg-b-10">
                         {{ $project->manager->first_name." ".$project->manager->last_name}}
@@ -150,7 +156,8 @@
                     </thead>
                     <tbody>
                         @foreach($project->tasks as $task)
-                            <tr>
+
+                        <tr>
                                 <td>
                                     1
                                 </td>
@@ -160,7 +167,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    {{ $task->oprator->first_name." ".$task->oprator->last_name }}
+                                    {{ $task->operator->first_name." ".$task->operator->last_name }}
                                 </td>
                                 <td>
                                     {{ $task->estimated_time }}
@@ -178,7 +185,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-success">
+                                    <button class="btn btn-sm btn-primary">
                                         {{ $task->status }}
                                     </button>
                                 </td>
@@ -193,8 +200,12 @@
             <table class="table mg-0 tx-center">
                 <tr>
                     <td class="bg-dark tx-white">Observers</td>
-                    <td>Hussain Fatemi</td>
-                    <td>Taha muhammad</td>
+                    <td>
+                        {{ $project->manager->first_name." ".$project->manager->last_name  }}
+                    </td>
+                    <td>
+                        {{ $project->supervisor->first_name." ".$project->supervisor->last_name }}
+                    </td>
                 </tr>
             </table>	
         </div>
@@ -236,7 +247,7 @@
           <h6 class="mg-b-0">
             <a data-toggle="collapse" data-parent="#accordion" href="#newinlinenote"
             aria-expanded="true" aria-controls="newinlinenote" class="tx-gray-800 transition">
-              + New Note
+              + New Action
             </a>
           </h6>
         </div><!-- card-header -->
@@ -263,7 +274,7 @@ data-multiple-caption="{count} files selected" multiple>
         
         <div class="card mg-b-20">
             <div class="card-header p5">
-                Project's Notes
+                Project's Actions
             </div>
             <div class="card-body">
                 <div class="card bg-light mg-b-20">

@@ -71,7 +71,7 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
     public function tasks() {
-        return $this->hasMany("Modules\Project\Entities\ProjectTask");
+        return $this->hasMany("Modules\Project\Entities\ProjectTask", "project_id");
     }
 
     /*

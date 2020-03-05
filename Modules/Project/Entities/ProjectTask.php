@@ -46,7 +46,7 @@ class ProjectTask extends Model
     |--------------------------------------------------------------------------
     */
     public function project() {
-        return $this->belongsTo("Modules\Project\Entities\Project");
+        return $this->belongsTo("Modules\Project\Entities\Project", "project_id");
     }
 
     /*

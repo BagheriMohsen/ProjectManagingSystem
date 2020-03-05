@@ -23,18 +23,18 @@ class ProjectController extends Controller
         $active_projects = Project::where([
             ["operating_unit_id","=",$user->unit->id],
             ["status","=","in_progress"]
-        ])->get();
+        ])->latest()->get();
 
         $complete_projects = Project::where([
             ["operating_unit_id","=",$user->unit->id],
             ["status","=","complete"]
-        ])->get();
+        ])->latest()->get();
 
 
         $close_projects = Project::where([
             ["operating_unit_id","=",$user->unit->id],
             ["status","=","close"]
-        ])->get();
+        ])->latest()->get();
 
 
         return view('project::Project.project-index',compact(

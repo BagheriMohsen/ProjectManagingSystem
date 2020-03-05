@@ -46,14 +46,15 @@ $(document).ready(function() {
         var is_private          = $(this).find('input[name="is_private"]').val(); 
         $('.mr-group').each(function(){
             var task = {};
-            task.task_title = $(this).find('input[name="task_title"]').val();
-            task.task_operator = $(this).find('select[name="task_operator"]').val();
-            task.task_percent = $(this).find('input[name="task_percent"]').val();
-            task.task_due_time = $(this).find('input[name="task_hour"]').val() + '/' + $(this).find('input[name="task_min"]').val();
-            task.task_priority = $(this).find('select[name="task_priority"]').val();
-            task.task_desc = $(this).find('textarea[name="task_desc"]').val();
-            task.reminder_time = $(this).find('input[name="reminder_time"]').val();
-            task.reminder_type = $(this).find('select[name="reminder_type"]').val();
+            task.title          = $(this).find('input[name="task_title"]').val();
+            task.operator_id    = $(this).find('select[name="task_operator"]').val();
+            task.percent        = $(this).find('input[name="task_percent"]').val();
+            task.estimated_time = $(this).find('input[name="task_hour"]').val() + '.' + $(this).find('input[name="task_min"]').val();
+            task.priority       = $(this).find('select[name="task_priority"]').val();
+            task.desc           = $(this).find('textarea[name="task_desc"]').val();
+            task.color          = $(this).find('input[name="task_color"]').val();
+            task.reminder_time  = $(this).find('input[name="reminder_time"]').val();
+            task.reminder_type  = $(this).find('select[name="reminder_type"]').val();
             tasks.push(task);
         })
        
