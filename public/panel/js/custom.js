@@ -35,7 +35,7 @@ $(document).ready(function() {
         var title               =   $(this).find('input[name="title"]').val();
         var subject             =   $(this).find('input[name="subject"]').val();
         var manager_id          =   $(this).find('select[name="manager_id"]').val();
-        var start_date           =   $(this).find('input[name="start_date"]').val();
+        var start_date          =   $(this).find('input[name="start_date"]').val();
         var dead_date           =   $(this).find('input[name="dead_date"]').val();
         var color               =   $(this).find('input[name="color"]').val();
         var applicant_unit_id   =   $(this).find('input[name="applicant_unit_id"]').val();
