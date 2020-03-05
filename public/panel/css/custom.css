@@ -44,14 +44,46 @@ main input[type=email]:focus, main input[type=password]:focus, main input[type=t
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.addLog input{
+/* .addLog input{
   width: 45px;
   text-align: center;
   height: 44px;
   border: 1px solid #ced4da;
   border-radius: 3px;
   color: #495057;
+} */
+.task-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f3f3;
+  padding: .5rem .8rem;
 }
+.task-body{
+  border: 1px solid #ecdede;
+  border-top: 0;
+  padding: .5rem;
+}
+.timer-control{
+  border-radius: 6px;
+}
+.timepicker-box{
+  display: inline-block;
+  border: 1px solid #d8cdcd;
+  border-radius: 4px;
+}
+input.timepicker{
+  width: 40px;
+  text-align: center;
+  height: 30px;
+  color: #495057;
+  border: 0;
+}
+input.timepicker::placeholder { 
+  color: #959ba0;
+  opacity: 1; 
+}
+
 
 
 

@@ -1961,6 +1961,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  computed: {},
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timepicker.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Timepicker.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1971,21 +2006,121 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      timepickerDisplay: 'none',
+      btnDisplay: 'inline',
+      hours: '',
+      minutes: ''
+    };
   },
   methods: {
-    startTimer: function startTimer() {
-      var timer = new easytimer.Timer();
-      timer.start();
-      timer.addEventListener('secondsUpdated', function (e) {
-        $('#basicUsage').html(timer.getTimeValues().toString());
-      });
+    cancelLog: function cancelLog() {
+      this.timepickerDisplay = 'none';
+      this.btnDisplay = 'inline-block';
+      this.hours = '';
+      this.minutes = '';
+    },
+    addLog: function addLog() {
+      this.timepickerDisplay = 'none';
+      this.btnDisplay = 'inline-block'; //Get request
+
+      this.hours = '';
+      this.minutes = '';
+    },
+    showTimepicker: function showTimepicker() {
+      this.timepickerDisplay = 'inline-block';
+      this.btnDisplay = 'none';
     }
   },
   computed: {},
-  mounted: function mounted() {
-    console.log(timer);
-  }
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timer.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Timer.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var timer = new window.easytimer.Timer();
+console.log(timer);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      timerBox: '00:00:00',
+      startDisplay: 'inline-block',
+      resumeDisplay: 'none',
+      stopDisplay: 'none',
+      pauseDisplay: 'none',
+      timerControlDisplay: 'none'
+    };
+  },
+  methods: {
+    startTimer: function startTimer() {
+      var _this = this;
+
+      timer.start();
+      timer.addEventListener('secondsUpdated', function (e) {
+        _this.timerBox = timer.getTimeValues().toString();
+      });
+      this.startDisplay = 'none';
+      this.pauseDisplay = 'inline-block';
+      this.stopDisplay = 'inline-block';
+      this.timerControlDisplay = 'block';
+      this.resumeDisplay = 'none';
+    },
+    pauseTimer: function pauseTimer() {
+      timer.pause();
+      this.pauseDisplay = 'none';
+      this.resumeDisplay = 'none';
+      this.resumeDisplay = 'inline-block';
+    },
+    resetTimer: function resetTimer() {
+      timer.reset();
+    },
+    stopTimer: function stopTimer() {
+      timer.stop();
+      this.timerBox = '00:00:00';
+      this.startDisplay = 'inline-block';
+      this.pauseDisplay = 'none';
+      this.stopDisplay = 'none';
+      this.resumeDisplay = 'none';
+      this.timerControlDisplay = 'none';
+    }
+  },
+  computed: {
+    timeBox: function timeBox() {
+      return this.timerBox;
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -1999,7 +2134,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2655,6 +2789,8 @@ var render = function() {
         _c("div", { staticClass: "card-body p20" }, [
           _vm._m(0),
           _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
           _c(
             "div",
             {
@@ -2667,7 +2803,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "collapse",
+                  staticClass: "task-body collapse",
                   attrs: {
                     id: "taskCollapse1",
                     "aria-labelledby": "headingOne",
@@ -2675,41 +2811,12 @@ var render = function() {
                   }
                 },
                 [
-                  _c("div", { staticClass: "d-flex justify-content-between" }, [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "timer",
-                        on: {
-                          click: function($event) {
-                            return _vm.startTimer()
-                          }
-                        }
-                      },
-                      [
-                        _c("timer"),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-sm btn-outline-info" },
-                          [_vm._v("Start timer")]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { attrs: { id: "basicUsage" } }, [
-                          _vm._v("00:00:00")
-                        ])
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mt-2 pl-2" }, [
-                    _vm._v(
-                      "\n                            Overall time spend on Task : 22:30 \n                        "
-                    )
-                  ])
+                  _c(
+                    "div",
+                    { staticClass: "d-flex justify-content-between" },
+                    [_c("timepicker"), _vm._v(" "), _c("timer")],
+                    1
+                  )
                 ]
               )
             ]
@@ -2725,23 +2832,31 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("form", { attrs: { action: "#" } }, [
-      _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-row justify-content-center" }, [
         _c("div", { staticClass: "col-auto" }, [
-          _c("button", { staticClass: "btn btn-sm" }, [_vm._v("Add")])
+          _c("button", { staticClass: "btn btn-sm btn-info" }, [_vm._v("Add")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-8" }, [
+        _c("div", { staticClass: "col-8 align-self-center" }, [
           _c("input", {
             staticClass: "form-control",
+            staticStyle: { height: "34px" },
             attrs: { type: "text", placeholder: "Add your text here..." }
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "Your estimate time" }
-          })
+        _c("div", { staticClass: "col-auto align-self-center" }, [
+          _c("div", { staticClass: "timepicker-box " }, [
+            _c("input", {
+              staticClass: "timepicker",
+              attrs: { type: "text", placeholder: "HH" }
+            }),
+            _vm._v(":\n                                "),
+            _c("input", {
+              staticClass: "timepicker",
+              attrs: { type: "text", placeholder: "MM" }
+            })
+          ])
         ])
       ])
     ])
@@ -2750,62 +2865,265 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex justify-content-between align-items-center" },
-      [
-        _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: { type: "checkbox", id: "todoCheckbox" }
-            }),
-            _vm._v(" "),
-            _c("label", {
-              staticClass: "form-check-label",
-              attrs: { for: "todoCheckbox" }
-            })
-          ]),
+    return _c("div", { staticClass: "task-header" }, [
+      _c("div", { staticClass: "d-flex align-items-center" }, [
+        _c("div", { staticClass: "form-check d-flex pl-0" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "todoCheckbox" }
+          }),
           _vm._v(" "),
-          _c(
-            "span",
-            {
-              attrs: {
-                "data-toggle": "collapse",
-                "data-target": "#taskCollapse1"
-              }
-            },
-            [
-              _vm._v(
-                "\n                                 Title of Task\n                            "
-              )
-            ]
-          )
+          _c("label", {
+            staticClass: "form-check-label",
+            attrs: { for: "todoCheckbox" }
+          })
         ]),
         _vm._v(" "),
-        _c("div", [
-          _vm._v(
-            "\n                            Estimated time\n                        "
-          )
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "addLog" }, [
-      _c("button", { staticClass: "btn btn-sm btn-outline-info" }, [
-        _vm._v("Add log")
+        _c(
+          "span",
+          {
+            staticStyle: { cursor: "pointer" },
+            attrs: {
+              "data-toggle": "collapse",
+              "data-target": "#taskCollapse1"
+            }
+          },
+          [
+            _vm._v(
+              "\n                                 Title of Task\n                            "
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c("input", { attrs: { type: "number", placeholder: "HH" } }),
-      _vm._v(":\n                                "),
-      _c("input", { attrs: { type: "number", placeholder: "MM" } })
+      _c("div", [
+        _vm._v(
+          "\n                            Estimated time\n                        "
+        )
+      ])
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timepicker.vue?vue&type=template&id=6806b4c6&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Timepicker.vue?vue&type=template&id=6806b4c6& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-sm btn-outline-info",
+        style: { display: _vm.btnDisplay },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.showTimepicker($event)
+          }
+        }
+      },
+      [_vm._v("Add log")]
+    ),
+    _vm._v(" "),
+    _c("div", { style: { display: _vm.timepickerDisplay } }, [
+      _c("div", { staticClass: "timepicker-box" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.hours,
+              expression: "hours"
+            }
+          ],
+          staticClass: "timepicker",
+          attrs: { type: "text", placeholder: "HH" },
+          domProps: { value: _vm.hours },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.hours = $event.target.value
+            }
+          }
+        }),
+        _vm._v(":\n            "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.minutes,
+              expression: "minutes"
+            }
+          ],
+          staticClass: "timepicker",
+          attrs: { type: "text", placeholder: "MM" },
+          domProps: { value: _vm.minutes },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.minutes = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "p-1 text-danger",
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.cancelLog($event)
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-times" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "p-1",
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.addLog($event)
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-check" })]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "pl-2 mt-2" }, [
+      _vm._v("\n        Overall time spend on Task : 22:30 \n    ")
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timer.vue?vue&type=template&id=54f9552c&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Timer.vue?vue&type=template&id=54f9552c& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "timer" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-sm btn-outline-info",
+        style: { display: _vm.startDisplay },
+        on: {
+          click: function($event) {
+            return _vm.startTimer()
+          }
+        }
+      },
+      [_vm._v("Start timer")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "p-2 bg-info timer-control text-white",
+        style: { display: _vm.timerControlDisplay }
+      },
+      [
+        _c("span", { staticClass: "text-right text-white px-3" }, [
+          _vm._v(_vm._s(_vm.timerBox))
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-white px-1",
+            style: { display: _vm.pauseDisplay },
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.pauseTimer()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-pause" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-white px-1",
+            style: { display: _vm.resumeDisplay },
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.startTimer()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-play" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "text-white px-1",
+            style: { display: _vm.stopDisplay },
+            attrs: { href: "#" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.stopTimer()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-stop" })]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -15191,6 +15509,8 @@ Vue.prototype.$http = axios__WEBPACK_IMPORTED_MODULE_0___default.a;
 
 Vue.component('todo-list', __webpack_require__(/*! ./components/TodoList.vue */ "./resources/js/components/TodoList.vue")["default"]);
 Vue.component('task-list', __webpack_require__(/*! ./components/TaskList.vue */ "./resources/js/components/TaskList.vue")["default"]);
+Vue.component('timer', __webpack_require__(/*! ./components/Timer.vue */ "./resources/js/components/Timer.vue")["default"]);
+Vue.component('timepicker', __webpack_require__(/*! ./components/Timepicker.vue */ "./resources/js/components/Timepicker.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -15267,6 +15587,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_template_id_0afd8bae___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TaskList_vue_vue_type_template_id_0afd8bae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Timepicker.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/Timepicker.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Timepicker_vue_vue_type_template_id_6806b4c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timepicker.vue?vue&type=template&id=6806b4c6& */ "./resources/js/components/Timepicker.vue?vue&type=template&id=6806b4c6&");
+/* harmony import */ var _Timepicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timepicker.vue?vue&type=script&lang=js& */ "./resources/js/components/Timepicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Timepicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Timepicker_vue_vue_type_template_id_6806b4c6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Timepicker_vue_vue_type_template_id_6806b4c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Timepicker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Timepicker.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Timepicker.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timepicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Timepicker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timepicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timepicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Timepicker.vue?vue&type=template&id=6806b4c6&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/Timepicker.vue?vue&type=template&id=6806b4c6& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timepicker_vue_vue_type_template_id_6806b4c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Timepicker.vue?vue&type=template&id=6806b4c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timepicker.vue?vue&type=template&id=6806b4c6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timepicker_vue_vue_type_template_id_6806b4c6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timepicker_vue_vue_type_template_id_6806b4c6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Timer.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Timer.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Timer_vue_vue_type_template_id_54f9552c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Timer.vue?vue&type=template&id=54f9552c& */ "./resources/js/components/Timer.vue?vue&type=template&id=54f9552c&");
+/* harmony import */ var _Timer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Timer.vue?vue&type=script&lang=js& */ "./resources/js/components/Timer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Timer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Timer_vue_vue_type_template_id_54f9552c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Timer_vue_vue_type_template_id_54f9552c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Timer.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Timer.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Timer.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Timer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timer.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Timer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Timer.vue?vue&type=template&id=54f9552c&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Timer.vue?vue&type=template&id=54f9552c& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timer_vue_vue_type_template_id_54f9552c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Timer.vue?vue&type=template&id=54f9552c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Timer.vue?vue&type=template&id=54f9552c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timer_vue_vue_type_template_id_54f9552c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Timer_vue_vue_type_template_id_54f9552c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

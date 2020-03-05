@@ -24,6 +24,9 @@ Vue.prototype.$http = axios
 
 Vue.component('todo-list', require('./components/TodoList.vue').default);
 Vue.component('task-list', require('./components/TaskList.vue').default);
+Vue.component('timer', require('./components/Timer.vue').default);
+Vue.component('timepicker', require('./components/Timepicker.vue').default);
+
 
 
 /**
