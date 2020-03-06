@@ -6,15 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class TaskController extends Controller
+use Modules\Project\Entities\ProjectTask;
+use Modules\Project\Entities\ProjectSubTask;
+
+class SubTaskController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index($slug)
     {
-        return view('project::Task.tasks-single');
+        $task = ProjectTask::where("slug",$slug)->firstOrFail();
+
+        return view('project::Task.tasks-index',compact("task"));
     }
 
     /**
@@ -31,9 +36,16 @@ class TaskController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req,$task_id)
     {
-        //
+        $data = $req->all();
+
+        $data["user_id"]            =   auth()->user()->id;
+        $data["project_task_id"]    =   $task_id;
+
+        ProjectSubTask::create($data);
+
+        return response()->json("sub task is created!");
     }
 
     /**
@@ -51,9 +63,9 @@ class TaskController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(ProjectSubTask $projectSubTask)
     {
-        return view('project::edit');
+        return response()->json($projectSubTask);
     }
 
     /**
@@ -62,9 +74,13 @@ class TaskController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, ProjectSubTask $projectSubTask)
     {
-        //
+        $data = $req->all();
+
+        $projectSubTask->update($data);
+
+        return response()->json("sub task updated !");
     }
 
     /**
@@ -74,6 +90,8 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ProjectSubTask::destroy($id);
+
+        return response()->json("sub task deleted !");
     }
 }

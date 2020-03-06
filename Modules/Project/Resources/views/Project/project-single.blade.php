@@ -1,13 +1,13 @@
 @extends('Master.layout')
 
 @section('title')
-    {{"Project single"}}
+    {{ $project->title }}
 @endsection
 @php
 
     // path option
     $path = [
-            'name'          =>  'Project',
+            'name'          =>  $project->title,
             'is_modal'      =>  False,
             'btn_href'      =>  ''
     ];
@@ -118,10 +118,10 @@
         
         <div class="card mg-b-20">
             <div class="card-header p5">
-                Project Summary
+                Project Description
             </div>
             <div class="card-body p20">
-                project description...
+                {!! $project->desc !!}
             </div>					
         </div>
         
@@ -162,7 +162,7 @@
                                     1
                                 </td>
                                 <td>
-                                    <a href="task-single">
+                                    <a href="{{ route("subTasks.index",$task->slug) }}">
                                         {{ $task->title }}
                                     </a>
                                 </td>
@@ -185,9 +185,20 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary">
-                                        {{ $task->status }}
-                                    </button>
+                                    <a href="{{ route("subTasks.index",$task->slug) }}" 
+                                        @if( $task->status == "in_progress" )
+                                            class="btn btn-sm btn-primary col-sm-12">
+                                                {{ "In Progress" }}
+                                        @elseif( $task->status == "close" )
+                                            class="btn btn-sm btn-dark col-sm-12">
+                                                {{ "Close" }}
+                                        @else 
+                                            class="btn btn-sm btn-success col-sm-12">
+                                                {{ "Complete" }}
+                                            
+                                        @endif
+                                    </a>
+                                    
                                 </td>
                             </tr>
                         @endforeach

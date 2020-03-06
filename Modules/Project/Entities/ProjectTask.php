@@ -22,7 +22,9 @@ class ProjectTask extends Model
         'desc',
         'status',
         'reminder_time',
-        'reminder_type'
+        'reminder_type',
+        'complete_date',
+        'close_date'
     ];
 
 

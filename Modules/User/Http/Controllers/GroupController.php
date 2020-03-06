@@ -94,6 +94,8 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        Group::destroy($id);
+        return response()->json("item is deleted!");
     }
 }

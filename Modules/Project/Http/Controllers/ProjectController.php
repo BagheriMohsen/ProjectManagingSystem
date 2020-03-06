@@ -51,7 +51,7 @@ class ProjectController extends Controller
     public function create()
     {
         $user = auth()->user();
-
+       
         $users = "App\User"::where("unit_id",$user->unit_id)
         ->latest()->get();
         $units = "Modules\User\Entities\Unit"::latest()->get();
@@ -100,8 +100,10 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show(Project $project)
+    public function show($project_slug)
     {
+        $project = Project::where("slug", $project_slug)->firstOrFail();
+
         return view('project::Project.project-single',compact("project"));
     }
 
@@ -219,6 +221,8 @@ class ProjectController extends Controller
         ));
 
     }
+
+
 
 
 

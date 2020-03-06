@@ -1,31 +1,19 @@
 @extends('Master.layout')
 
 @section('title')
-    {{"Group"}}
+    {{"Team"}}
 @endsection
 
-<!-- 
-    path 
--->
-@section('path')
-    @php 
-        $path = [
-            'name'          =>  'Groups',
-            'btn_content'   =>  'New Group',
+@php 
+    $path = [
+            'name'          =>  'Teams',
+            'btn_content'   =>  'New Team',
             'is_modal'      =>  True,
             'btn_href'      =>  '',
             'modal_name'    =>  'newgroup'
-        ]
-    @endphp
-    @include('Master.path')
-@endsection
+    ];
 
-<!-- 
-    Modal for store data
--->
-@section('create_modal')
-    @php 
-        $text_editor = [
+    $text_editor = [
             'route_name'    =>  'users.groups.store',
             'image'         =>  False,
             'file'          =>  False,
@@ -33,8 +21,20 @@
             'tags'          =>  true,
             'tags_item'     =>  array(),
             'title'         =>  False
-        ]
-    @endphp
+    ];
+@endphp
+
+<!-- 
+    path 
+-->
+@section('path')
+    @include('Master.path')
+@endsection
+
+<!-- 
+    Modal for store data
+-->
+@section('create_modal')
     @include('Master.Modal.create-groups')
 @endsection
 
@@ -56,7 +56,7 @@
                     <div class="col-xs-12 col-xl-12">
                         <div class="card bd-0 mg-b-20">
                             <div class="card-header bg-side-panel bd-0 d-flex align-items-center justify-content-between">
-                            <h6 class="mg-b-0 tx-14 tx-white tx-normal">Groups List</h6>
+                            <h6 class="mg-b-0 tx-14 tx-white tx-normal">Team List</h6>
                             </div>
                             <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
                                 <table class="table table-hover table-striped table-bordered  tx-center">
@@ -75,7 +75,10 @@
                                                 <td>
                                                     <a class="mg-l-10 tx-18 tx-primary" href="" title="Send Message"><i class="icon ion-chatbubble-working"></i></a>
                                                     <a class="mg-l-10 tx-18 tx-info" href="" title="Edit"><i class="icon ion-gear-a"></i></a>
-                                                    <a class="mg-l-10 tx-18 tx-danger" href="" title="Delete"><i class="icon ion-close"></i></a>
+                                                    <a id="item_delete" class="mg-l-10 tx-18 tx-danger" 
+                                                        href="{{ route("users.groups.destroy",$group->id) }}" title="Delete">
+                                                        <i class="icon ion-close"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

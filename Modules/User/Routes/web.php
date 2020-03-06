@@ -38,9 +38,10 @@ Route::group(["middleware"=>"auth","prefix"=>"users/","as"=>"users."],function()
     | User Group Route
     |--------------------------------------------------------------------------
     */
-    Route::group(["prefix"=>"group/","as"=>"groups."],function(){
+    Route::group(["prefix"=>"groups/","as"=>"groups."],function(){
         Route::get("","GroupController@index")->name("index");
         Route::post("store/","GroupController@store")->name("store");
+        Route::delete("destroy/{id}","GroupController@destroy")->name("destroy");
     });
     
 });

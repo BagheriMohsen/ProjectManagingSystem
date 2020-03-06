@@ -1,11 +1,11 @@
 @extends('Master.layout')
 
 @section('title')
-    {{"Project"}}
+    {{"Projects"}}
 @endsection
 @php 
     $path = [
-        'name'          =>  'Project',
+        'name'          =>  'Projects',
         'btn_content'   =>  "New Project",
         'is_modal'      =>  False,
         'btn_href'      =>  "projects.create"
@@ -39,7 +39,7 @@
     <table class="table tx-12">
         <tr class="tx-16">
             <td colspan="4">
-                <a href="{{ route("projects.show",$project->id) }}">
+                <a href="{{ route("projects.show",$project->slug) }}">
                 <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
                 Project title: {{ $project->title }}
                 </a>
@@ -105,7 +105,7 @@
         <table class="table tx-12">
             <tr class="tx-16">
                 <td colspan="4">
-                    <a href="{{ route("projects.show",$project->id) }}">
+                    <a href="{{ route("projects.show",$project->slug) }}">
                     <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
                     Project title: {{ $project->title }}
                     </a>
@@ -170,7 +170,7 @@
         <table class="table tx-12">
             <tr class="tx-16">
                 <td colspan="4">
-                    <a href="{{ route("projects.show",$project->id) }}">
+                    <a href="{{ route("projects.show",$project->slug) }}">
                     <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
                     Project title: {{ $project->title }}
                     </a>
@@ -216,7 +216,13 @@
                 </td>
                 <td class="bg-dark text-light">
                     Status: 
-                    {{ "In Progress..." }}
+                    @if( $project->status == "in_progress" )
+                        {{ "In Progress" }}
+                    @elseif( $project->status == "complete" )
+                        {{ "Complete" }}
+                    @elseif( $project->status == "close" )
+                        {{ "Close" }}
+                    @endif
                 </td>
             </tr>
         </table>

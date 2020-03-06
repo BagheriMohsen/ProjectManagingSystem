@@ -80,7 +80,7 @@ $(document).ready(function() {
             url: action_url,
             method:'Post',
             data: formData,
-            success:function(reponse){
+            success:function(res){
                 alert(res);
                 location.reload();
             },
@@ -90,4 +90,27 @@ $(document).ready(function() {
         })
 
     })
+
+
+    $("#item_delete").click(function(e){
+        e.preventDefault();
+        var action_url = $(this).attr('href');
+        $.ajax({
+            url: action_url,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            method:'DELETE',
+            success:function(res){
+                alert(res);
+                location.reload();
+            },
+            error:function(err){
+                alert(err);
+            }
+        })
+
+    });
+
+
 });

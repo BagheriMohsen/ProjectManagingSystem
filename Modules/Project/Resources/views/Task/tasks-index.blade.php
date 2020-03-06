@@ -6,13 +6,12 @@
 @endsection
 
 @section('title')
-    {{"Task"}}
+    {{ $task->title }}
 @endsection
 
 @php 
     $path = [
-        'name'          =>  'Project',
-        'btn_content'   =>  "New Project",
+        'name'          =>  $task->title,
         'is_modal'      =>  False,
         'btn_href'      =>  "projects.create"
     ];
@@ -42,10 +41,15 @@
     <div class="col-sm-12 col-xl-8">
         <div class="card p15 mg-b-20">
             <div class="br-pagetitle">
-                <i class="icon ion-flash"></i>
+                <i class="icon ion-flash mx-4"></i>
                 <div>
-                <h4>Setting up the documentation</h4>
-                    <p class="mg-b-0">Parent Project: <a href="project-single" ><span class="tx-info"></span>Altareq Hotel Website</a></p>
+                <h4>{{ $task->title }}</h4>
+                    <p class="mg-b-0">Parent Project: 
+                        <a href="project-single" >
+                            <span class="tx-info"></span>
+                            {{ $task->project->title }}
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -58,13 +62,13 @@
             <table class="table mg-0 tx-center tx-12">
                 <tr>
                     <td class="bg-danger tx-white">
-                        Deadline: June 30
+                        Deadline: {{ $task->estimated_time }}
                     </td>
                     <td>
-                        Start Date: June 27
+                        Start Date: {{ $task->project->start_date }}
                     </td>
                     <td>
-                        Complate Date: June 29
+                        Complate Date: {{ $task->complete_date }}
                     </td>
                 </tr>
             </table>	
@@ -72,10 +76,10 @@
         
         <div class="card mg-b-20">
             <div class="card-header p5">
-                Process Description
+                Task Description
             </div>
             <div class="card-body p20">
-                Process Details...
+                {{ $task->desc }}
             </div>					
         </div>
     </div>
@@ -87,10 +91,18 @@
             <div class="card-body">
             <div class="row">
                 <li class="media d-block d-sm-flex">
-                  <img class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" src="img/user-blank2.png">
+                    @if(is_null($task->operator->avatar))
+                        <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
+                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
+                    @else 
+                        <img src="/storage/{{ $task->operator->avatar }}"
+                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
+                    @endif
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
-                    <h6 class="tx-inverse mg-b-10">mahdi Hashem</h6>
-                    <p>Programming Unit</p>
+                    <h6 class="tx-inverse mg-b-10">
+                        {{ $task->operator->first_name." ".$task->operator->last_name }}
+                    </h6>
+                    <p>{{ $task->operator->unit->name }}</p>
                   </div>
                 </li>
             </div>
@@ -100,7 +112,9 @@
             <a class="btn btn-block btn-light active" href="">PERCENT: 35 %</a>
         </div>
         <div class="card p15 mg-b-20">
-            <a class="btn btn-block btn-success tx-white" href="">Status: Complated</a>
+            <a class="btn btn-block btn-success tx-white" href="">
+                Status: {{ $task->status }}
+            </a>
         </div>
     </div>
     </div>
@@ -140,7 +154,7 @@ data-multiple-caption="{count} files selected" multiple>
         
         <div class="card mg-b-20">
             <div class="card-header p5">
-                Process Note
+               Task Action
             </div>
             <div class="card-body">
                 <div class="card bg-light mg-b-20">

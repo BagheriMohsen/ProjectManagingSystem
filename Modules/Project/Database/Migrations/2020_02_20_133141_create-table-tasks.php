@@ -33,6 +33,8 @@ class CreateTableTasks extends Migration
             $table->time('reminder_time')->nullable();
             $table->string('reminder_type')->nullable();
             $table->string('status')->default('in_progress');
+            $table->date("complete_date")->nullable();
+            $table->date("close_date")->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
@@ -55,13 +57,14 @@ class CreateTableTasks extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('project_task_id')->unsigned()->nullable();
-            $table->bigInteger('operator_id');
             $table->string('title');
-            $table->string('slug');
             $table->integer('percent');
-            $table->date('dead_line');
+            $table->float('estimated_time');
             $table->string('priority');
+            $table->string('color');
             $table->text('desc');
+            $table->time('reminder_time')->nullable();
+            $table->string('reminder_type')->nullable();
             $table->string('status')->default('in_progress');
             $table->timestamps();
 
