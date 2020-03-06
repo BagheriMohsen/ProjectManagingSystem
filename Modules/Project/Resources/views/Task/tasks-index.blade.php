@@ -1,8 +1,12 @@
 @extends('Master.layout')
 
+@section("styles")
+    <link rel="stylesheet" href="{{ asset("panel/color_picker/la_color_picker.min.css") }}">
+@endsection
 
 @section("scripts")
-    <script src="{{ asset("/js/app.js") }}"></script>
+{{-- <script src="{{ asset("/js/app.js") }}"></script> --}}
+    <script src="{{ asset("panel/color_picker/la_color_picker.min.js") }}"></script>
 @endsection
 
 @section('title')
@@ -12,8 +16,11 @@
 @php 
     $path = [
         'name'          =>  $task->title,
-        'is_modal'      =>  False,
-        'btn_href'      =>  "projects.create"
+        'btn_content'   =>  'New subtask',
+        'is_modal'      =>  true,
+        'btn_href'      =>  "",
+        'modal_name'    =>  'newsubtask'
+
     ];
 @endphp
 <!-- 
@@ -23,7 +30,9 @@
     @include('Master.path')
 @endsection
 
-
+@section('create_modal')
+    @include('Master.Modal.create-subtask')
+@endsection
 
 <!-- 
     Main Content
@@ -31,8 +40,65 @@
 @section('content')
 
 
-<div id="app">
+{{-- <div id="app">
     <task-list></task-list>
+</div> --}}
+
+<div class="row row-sm">
+    <div id="taskList" class="col-12">
+        <div class="card mg-b-20">
+            <div class="card-header bg-info tx-white p5">
+                Tasks 
+            </div>
+            <div class="card-body p20">
+                <div class="accordion mt-3" id="accordionExample">
+                    <div class="task-header" style="border-left:4px solid blue">
+                        <div class="d-flex align-items-center">
+                            <div class="form-check d-flex pl-0">
+                                <input type="checkbox" class="form-check-input" id="todoCheckbox">
+                                <label class="form-check-label" for="todoCheckbox"></label>
+                            </div>
+                            <span data-toggle="collapse" data-target="#taskCollapse1" style="cursor:pointer">
+                                 Title of Task
+                            </span>
+                        </div>
+                        <div>
+                            Priority Low
+                        </div>
+                    </div>
+                    <div id="taskCollapse1" class="task-body collapse" style="border-left:4px solid blue" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="d-flex justify-content-between">
+                            <div class="addLog">
+                                <button class="btn btn-sm btn-outline-info">Add log</button>
+                                <div class="timepicker-box">
+                                    <input class="hours-subtask timepicker" type="text" placeholder="HH">:
+                                    <input class="minutes-subtask timepicker" type="text" placeholder="MM">
+                                </div>
+                                <div class="pl-2 mt-2">
+                                    Overall time spend on Task : 22:30 
+                                </div>
+                            </div>
+                            <div class="timer">
+                                <button class="startTimer btn btn-sm btn-outline-info">Start timer</button>
+                                <div class="p-2 bg-info timer-control text-white" style="display:none">
+                                    <span class="timerText text-right text-white px-3">00:00:00</span>
+                                    <a href="#" class="pauseTimer text-white px-1">
+                                        <i class="fas fa-pause"></i>
+                                    </a>
+                                    <a href="#" class="resumeTimer text-white px-1" style="display:none">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                    <a href="#" class="stopTimer text-white px-1">
+                                        <i class="fas fa-stop"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row row-sm">
@@ -92,8 +158,8 @@
             <div class="row">
                 <li class="media d-block d-sm-flex">
                     @if(is_null($task->operator->avatar))
-                        <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
-                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
+                        {{-- <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
+                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt=""> --}}
                     @else 
                         <img src="/storage/{{ $task->operator->avatar }}"
                          class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">

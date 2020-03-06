@@ -3,21 +3,21 @@
         <div id="taskList" class="col-12">
             <div class="card mg-b-20">
                 <div class="card-header bg-info tx-white p5">
-                    Tasks
+                    Tasks 
                 </div>
                 <div class="card-body p20">
-                    <form action="#">
+                    <form action="#" @submit.prevent="addSubTask()">
                         <div class="form-row justify-content-center">
                             <div class="col-auto">
-                                <button class="btn btn-sm btn-info">Add</button>
+                                <button @click.prevent="addSubTask()" class="btn btn-sm btn-info">Add</button>
                             </div>
                             <div class="col-8 align-self-center">
-                                <input type="text" class="form-control" style="height: 34px;" placeholder="Add your text here...">
+                                <input v-model="subTask_title" type="text" class="form-control" style="height: 34px;" placeholder="Add your text here...">
                             </div>
                             <div class="col-auto align-self-center">
                                 <div class="timepicker-box ">
-                                    <input class="timepicker" type="text" placeholder="HH">:
-                                    <input class="timepicker" type="text" placeholder="MM">
+                                    <input v-model="subTask_hours" class="timepicker" type="text" placeholder="HH">:
+                                    <input v-model="subTask_minutes" class="timepicker" type="text" placeholder="MM">
                                 </div>
                             </div>
                         </div>
@@ -52,20 +52,38 @@
 </template>
 
 <script>
-
     export default {
         data(){
             return{
-            
+                subTask_title : 'fdsafda',
+                subTask_hours : '',
+                subTask_minutes : ''
             }
         },
         methods:{
+            addSubTask(){
+                this.$http.get('subTasks/store/1',{
+
+                    params:{
+                        title:this.subTask_title,
+                       
+                    }
+
+                }).then(res => console.log(res))
+                .catch(err => console.log(err));
+            },
+            updateSubTask(){
+
+            },
         
         },
         computed:{
            
         },
         mounted() {
+            this.$http.get('subTasks/all-sub-tasks')
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
         }
     }
 </script>

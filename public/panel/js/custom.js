@@ -113,7 +113,58 @@ $(document).ready(function() {
     });
 
 
+    //Timer for subtasks
 
+    $('.timer').each(function(){
+
+        var timer = new easytimer.Timer();
+        var startBtn = $(this).find('.startTimer');
+        var pauseBtn = $(this).find('.pauseTimer');
+        var stopBtn = $(this).find('.stopTimer');
+        var resumeBtn = $(this).find('.resumeTimer');
+        var timerText = $(this).find('.timerText');
+        var timerControl = $(this).find('.timer-control');
+
+        var addLogDiv = $(this).siblings('.addLog');
+        var hours_input = addLogDiv.find('.hours-subtask');
+        var minutes_input = addLogDiv.find('.minutes-subtask');
+        console.log(hours_input,minutes_input);
+
+        startBtn.on('click',function(){
+            startBtn.css('display','none');
+            timerControl.css('display','block');
+            timer.start();
+            timer.addEventListener('secondsUpdated', (e) => {
+                timerText.html(timer.getTimeValues().toString());
+            });
+        })
+
+        pauseBtn.on('click',function(){
+            timer.pause();
+            pauseBtn.css('display','none');
+            resumeBtn.css('display','inline');
+        })
+        stopBtn.on('click',function(){
+            
+            hours_input.val(timer.getTimeValues().hours);
+            minutes_input.val(timer.getTimeValues().minutes);
+            timer.stop();
+            timerText.html('00:00:00');
+            pauseBtn.css('display','inline');
+            resumeBtn.css('display','none');
+            startBtn.css('display','inline');
+            timerControl.css('display','none');
+        })
+        resumeBtn.on('click',function(){
+            pauseBtn.css('display','inline');
+            resumeBtn.css('display','none');
+            timer.start();
+            timer.addEventListener('secondsUpdated', (e) => {
+                timerText.html(timer.getTimeValues().toString());
+            });
+        })
+       
+    });
 
    
 

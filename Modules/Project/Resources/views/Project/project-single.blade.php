@@ -59,8 +59,8 @@
             <div class="row">
                 <li class="media d-block d-sm-flex">
                     @if(is_null($project->manager->avatar))
-                        <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
-                        class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" >
+                        {{-- <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
+                        class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" > --}}
                     @else 
                         <img src="/storage/{{ $project->manager->avatar }}"
                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle"  >
