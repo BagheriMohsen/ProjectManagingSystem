@@ -1963,11 +1963,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      subTask_title: 'fdsafda',
+      subTask_hours: '',
+      subTask_minutes: ''
+    };
   },
-  methods: {},
+  methods: {
+    addSubTask: function addSubTask() {
+      this.$http.get('subTasks/store/1', {
+        params: {
+          title: this.subTask_title
+        }
+      }).then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    updateSubTask: function updateSubTask() {}
+  },
   computed: {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.$http.get('subTasks/all-sub-tasks').then(function (res) {
+      return console.log(res);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  }
 });
 
 /***/ }),
@@ -2783,11 +2806,117 @@ var render = function() {
     _c("div", { staticClass: "col-12", attrs: { id: "taskList" } }, [
       _c("div", { staticClass: "card mg-b-20" }, [
         _c("div", { staticClass: "card-header bg-info tx-white p5" }, [
-          _vm._v("\n                Tasks\n            ")
+          _vm._v("\n                Tasks \n            ")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body p20" }, [
-          _vm._m(0),
+          _c(
+            "form",
+            {
+              attrs: { action: "#" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addSubTask()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-row justify-content-center" }, [
+                _c("div", { staticClass: "col-auto" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-info",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.addSubTask()
+                        }
+                      }
+                    },
+                    [_vm._v("Add")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-8 align-self-center" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.subTask_title,
+                        expression: "subTask_title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    staticStyle: { height: "34px" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Add your text here..."
+                    },
+                    domProps: { value: _vm.subTask_title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.subTask_title = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-auto align-self-center" }, [
+                  _c("div", { staticClass: "timepicker-box " }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.subTask_hours,
+                          expression: "subTask_hours"
+                        }
+                      ],
+                      staticClass: "timepicker",
+                      attrs: { type: "text", placeholder: "HH" },
+                      domProps: { value: _vm.subTask_hours },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.subTask_hours = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(":\n                                "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.subTask_minutes,
+                          expression: "subTask_minutes"
+                        }
+                      ],
+                      staticClass: "timepicker",
+                      attrs: { type: "text", placeholder: "MM" },
+                      domProps: { value: _vm.subTask_minutes },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.subTask_minutes = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
@@ -2798,7 +2927,7 @@ var render = function() {
               attrs: { id: "accordionExample" }
             },
             [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "div",
@@ -2827,40 +2956,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#" } }, [
-      _c("div", { staticClass: "form-row justify-content-center" }, [
-        _c("div", { staticClass: "col-auto" }, [
-          _c("button", { staticClass: "btn btn-sm btn-info" }, [_vm._v("Add")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-8 align-self-center" }, [
-          _c("input", {
-            staticClass: "form-control",
-            staticStyle: { height: "34px" },
-            attrs: { type: "text", placeholder: "Add your text here..." }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-auto align-self-center" }, [
-          _c("div", { staticClass: "timepicker-box " }, [
-            _c("input", {
-              staticClass: "timepicker",
-              attrs: { type: "text", placeholder: "HH" }
-            }),
-            _vm._v(":\n                                "),
-            _c("input", {
-              staticClass: "timepicker",
-              attrs: { type: "text", placeholder: "MM" }
-            })
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
