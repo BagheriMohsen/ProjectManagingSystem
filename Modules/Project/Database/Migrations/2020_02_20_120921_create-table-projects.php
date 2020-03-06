@@ -31,7 +31,7 @@ class CreateTableProjects extends Migration
             $table->string('slug');
             $table->string('subject');
             $table->string('priority');
-            $table->string('color');
+            $table->string('color')->default("black");
             $table->date('req_date')->nullable();
             $table->date('start_date')->nullable();
             $table->date('dead_date')->nullable();

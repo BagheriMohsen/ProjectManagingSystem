@@ -70,11 +70,17 @@
                          <div class="card mg-b-20 p20">
                             <div class="row row-sm">
                                
-                                <div class="col-xl-6 col-sm-12">
-                                    <label>Estimated Time</label>
-                                    <input value="{{ old("estimated_time") }}" name="estimated_time" class="form-control fc-datepicker" id="datepicker2">
+                                <div class="col-xl-4 col-sm-12 ">
+                                    <label>Starting Date</label>
+                                    <input value="{{ old("start_date") }}" name="start_date" class="form-control fc-datepicker" id="datepicker2">
                                 </div>
-                                <div class="col-xl-6 col-sm-12">
+    
+                                <div class="col-xl-4 col-sm-12 ">
+                                    <label>DeadLine Date</label>
+                                    <input value="{{ old("dead_date") }}" name="dead_date" class="form-control fc-datepicker" id="datepicker3">
+                                </div>
+
+                                <div class="col-xl-4 col-sm-12">
                                     <label>Priority</label>
                                     <select name="priority" class="form-control">
                                         <option @if(old("priority") == "low" ) selected @endif value="low" class="text-warning">Low</option>
@@ -114,13 +120,15 @@
                         
                         <div class="card mg-b-20 p20">
                             <div class="row row-sm">
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-xl-4 col-sm-12">
                                     <label>Color</label>
-                                    <input value="{{ old('color') }}" name="color" type="text" class="form-control inp" id="colorPicker">
-                                    <div class="palette" id="colorPalette"></div>
+                                    <input value="{{ old('color') }}" name="color" type="color" class="form-control">
                                 </div>
-                               
+
+                                
+
                             </div>
+                           
                         </div>
                         
                         

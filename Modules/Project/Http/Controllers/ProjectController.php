@@ -136,8 +136,14 @@ class ProjectController extends Controller
     public function update(Request $req, Project $project)
     {
 
-        dd($req->all());
+        $data = $req->all();
         $project->update($data);
+
+        if( is_null($project->is_verify) ){
+            $project->update(['is_verify'=>True]);
+        }
+
+        return redirect()->route("projects.index");
     }
 
     /**
@@ -182,15 +188,15 @@ class ProjectController extends Controller
             "desc"              =>  "required",
             "priority"          =>  "required",
             "operating_unit_id" =>  "required",
-            'estimated_time'    =>  'required'
+            'start_date'        =>  'required',
+            'dead_date'         =>  'required'
+
         ]);
 
-        $estimated_time = Carbon::parse($data["estimated_time"]);
-      
-        $data["req_date"]           = Carbon::now();  
-        $data["estimated_time"]     = $estimated_time;
-        $data["applicant_unit_id"]  = auth()->user()->unit->id;
-        
+        $data["req_date"]           =   Carbon::now();  
+        $data["applicant_unit_id"]  =   auth()->user()->unit->id;
+        $data["start_date"]         =   Carbon::parse($req->start_date);      
+        $data["dead_date"]          =   Carbon::parse($req->dead_date);
 
         Project::create($data);
 

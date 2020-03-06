@@ -7,6 +7,7 @@
 */
 Route::group(["middleware"=>"auth",'prefix'=>'projects/','as'=>'projects.'],function(){
     Route::get("show/{project_slug}/","ProjectController@show")->name("show");
+    Route::post("update/{project_id}/","ProjectController@update")->name("update");
     // Request Project
     Route::get("request-project/","ProjectController@request_project")->name("request_project");
     Route::post("store-request-project/","ProjectController@store_request_project")->name("store_request_project");
@@ -15,7 +16,8 @@ Route::group(["middleware"=>"auth",'prefix'=>'projects/','as'=>'projects.'],func
 });
 Route::middleware("auth")->resource("projects","ProjectController", ["except"=>
 
-    "show"
+    "show",
+    "update"
     
 ]);
 

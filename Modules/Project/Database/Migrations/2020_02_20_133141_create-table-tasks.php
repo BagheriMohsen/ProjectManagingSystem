@@ -29,7 +29,7 @@ class CreateTableTasks extends Migration
             $table->float('estimated_time');
             $table->string('priority');
             $table->text('desc');
-            $table->string('color');
+            $table->string('color')->default("black");
             $table->time('reminder_time')->nullable();
             $table->string('reminder_type')->nullable();
             $table->string('status')->default('in_progress');
@@ -61,7 +61,7 @@ class CreateTableTasks extends Migration
             $table->integer('percent');
             $table->float('estimated_time');
             $table->string('priority');
-            $table->string('color');
+            $table->string('color')->default("black");
             $table->text('desc');
             $table->time('reminder_time')->nullable();
             $table->string('reminder_type')->nullable();
