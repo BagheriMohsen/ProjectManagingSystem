@@ -28,11 +28,16 @@ Route::middleware("auth")->resource("projects","ProjectController", ["except"=>
 */
 Route::group(["middleware"=>"auth",'prefix'=>'subTasks/','as'=>'subTasks.'],function() {
     Route::get("tasks/{slug}/","SubTaskController@index")->name("index");
+    Route::get("store/{sub_task_id}/","SubTaskController@store")->name("store");
+    Route::get("all-sub-tasks","SubTaskController@all_subTask")->name("all_subTask");
+
+
 });
 
 Route::middleware("auth")->resource("subTasks","subTaskController",["except"=>
 
-    "index"
+    "index",
+    "store"
 
 ]);
 

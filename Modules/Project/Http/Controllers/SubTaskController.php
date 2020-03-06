@@ -94,4 +94,15 @@ class SubTaskController extends Controller
 
         return response()->json("sub task deleted !");
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | All SubTask
+    |--------------------------------------------------------------------------
+    */
+    public function all_subTask(ProjectSubTask $projectSubTask) {
+
+        return response()->json($projectSubTask);
+
+    }
 }
