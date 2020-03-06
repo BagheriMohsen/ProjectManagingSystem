@@ -125,6 +125,11 @@ $(document).ready(function() {
         var timerText = $(this).find('.timerText');
         var timerControl = $(this).find('.timer-control');
 
+        var addLogDiv = $(this).siblings('.addLog');
+        var hours_input = addLogDiv.find('.hours-subtask');
+        var minutes_input = addLogDiv.find('.minutes-subtask');
+        console.log(hours_input,minutes_input);
+
         startBtn.on('click',function(){
             startBtn.css('display','none');
             timerControl.css('display','block');
@@ -140,6 +145,9 @@ $(document).ready(function() {
             resumeBtn.css('display','inline');
         })
         stopBtn.on('click',function(){
+            
+            hours_input.val(timer.getTimeValues().hours);
+            minutes_input.val(timer.getTimeValues().minutes);
             timer.stop();
             timerText.html('00:00:00');
             pauseBtn.css('display','inline');

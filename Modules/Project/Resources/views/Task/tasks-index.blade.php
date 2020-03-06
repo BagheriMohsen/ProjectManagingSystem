@@ -52,7 +52,7 @@
             </div>
             <div class="card-body p20">
                 <div class="accordion mt-3" id="accordionExample">
-                    <div class="task-header">
+                    <div class="task-header" style="border-left:4px solid blue">
                         <div class="d-flex align-items-center">
                             <div class="form-check d-flex pl-0">
                                 <input type="checkbox" class="form-check-input" id="todoCheckbox">
@@ -66,20 +66,18 @@
                             Priority Low
                         </div>
                     </div>
-                    <div id="taskCollapse1" class="task-body collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div id="taskCollapse1" class="task-body collapse" style="border-left:4px solid blue" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="d-flex justify-content-between">
-
-                            <div>
+                            <div class="addLog">
                                 <button class="btn btn-sm btn-outline-info">Add log</button>
                                 <div class="timepicker-box">
-                                    <input class="timepicker" type="text" placeholder="HH">:
-                                    <input class="timepicker" type="text" placeholder="MM">
+                                    <input class="hours-subtask timepicker" type="text" placeholder="HH">:
+                                    <input class="minutes-subtask timepicker" type="text" placeholder="MM">
                                 </div>
                                 <div class="pl-2 mt-2">
                                     Overall time spend on Task : 22:30 
                                 </div>
                             </div>
-
                             <div class="timer">
                                 <button class="startTimer btn btn-sm btn-outline-info">Start timer</button>
                                 <div class="p-2 bg-info timer-control text-white" style="display:none">
