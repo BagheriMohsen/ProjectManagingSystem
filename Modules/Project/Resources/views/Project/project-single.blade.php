@@ -168,7 +168,8 @@
                                     1
                                 </td>
                                 <td>
-                                    <a href="{{ route("subTasks.index",$task->slug) }}">
+                                    <a href="{{ route("projects.subTasks.index",
+                                    ["project_slug"=>$project->slug,"task_slug"=>$task->slug]) }}">
                                         {{ $task->title }}
                                     </a>
                                 </td>
@@ -191,7 +192,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route("subTasks.index",$task->slug) }}" 
+                                    <a href="{{ route("projects.subTasks.index",["project_slug"=>$project->slug,"task_slug"=>$task->slug]) }}" 
                                         @if( $task->status == "in_progress" )
                                             class="btn btn-sm btn-primary col-sm-12">
                                                 {{ "In Progress" }}

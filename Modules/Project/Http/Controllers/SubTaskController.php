@@ -15,9 +15,9 @@ class SubTaskController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index($slug)
+    public function index($project_slug,$task_slug)
     {
-        $task = ProjectTask::where("slug",$slug)->firstOrFail();
+        $task = ProjectTask::where("slug",$task_slug)->firstOrFail();
 
         return view('project::Task.tasks-index',compact("task"));
     }
