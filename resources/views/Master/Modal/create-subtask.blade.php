@@ -6,8 +6,9 @@
                 </div>
                 <div class="modal-body pd-20">
 
-                    <form action="#">
+                    <form action="{{ route("subTasks.store") }}" method="POST">
                         @csrf
+                        <input value="{{ $task->id }}" class="form-control" name="project_task_id" type="hidden">
                         <div class="row row-sm">
                             <div class="col-sm-12 col-xl-6 form-group">
                                 <label>Subtask title</label>

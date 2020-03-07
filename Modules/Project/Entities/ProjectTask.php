@@ -60,4 +60,23 @@ class ProjectTask extends Model
         return $this->belongsTo("App\User", "operator_id");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\ProjectSubTask
+    |--------------------------------------------------------------------------
+    */
+    public function sub_tasks() {
+        return $this->hasMany("Modules\Project\Entities\ProjectSubTask", "project_task_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\ProjectAction
+    |--------------------------------------------------------------------------
+    */
+    public function task_actions() {
+        return $this->hasMany("Modules\Project\Entities\ProjectTaskAction", "project_task_id")
+        ->latest();
+    }
+
 }

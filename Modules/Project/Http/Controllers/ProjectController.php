@@ -133,17 +133,22 @@ class ProjectController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $req, Project $project)
+    public function update(Request $req, $id)
     {
-
+        return response()->json($req);
         $data = $req->all();
+
+        $project = Project::findOrFail($id);
         $project->update($data);
 
         if( is_null($project->is_verify) ){
             $project->update(['is_verify'=>True]);
         }
 
-        return redirect()->route("projects.index");
+        foreach( $project->tasks as $task )
+
+
+        return response()->json("this prject is updated!");
     }
 
     /**

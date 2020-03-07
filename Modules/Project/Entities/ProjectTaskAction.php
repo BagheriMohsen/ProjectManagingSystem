@@ -4,20 +4,13 @@ namespace Modules\Project\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectSubTask extends Model
+class ProjectTaskAction extends Model
 {
     protected $fillable = [
-        'user_id',
-        'project_task_id',
-        'title',
-        'percent',
-        'time_passes',
-        'priority',
-        'color',
+        "user_id",
+        "project_task_id",
         'desc',
-        'status',
-        'reminder_time',
-        'reminder_type'
+        'attach'
     ];
 
     /*
@@ -25,7 +18,16 @@ class ProjectSubTask extends Model
     | relate with Modules\Project\Entities\ProjectTask
     |--------------------------------------------------------------------------
     */
-    public function task() {
+    public function project() {
         return $this->belongsTo("Modules\Project\Entities\ProjectTask", "project_task_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function user() {
+        return $this->belongsTo("App\User");
     }
 }

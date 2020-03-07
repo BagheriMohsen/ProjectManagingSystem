@@ -92,5 +92,17 @@ class Project extends Model
         return $this->belongsTo("App\User", "supervisor_id");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\ProjectAction
+    |--------------------------------------------------------------------------
+    */
+    public function project_actions() {
+        return $this->hasMany("Modules\Project\Entities\ProjectAction", "project_id")
+        ->latest();
+    }
+
+    
+
 
 }

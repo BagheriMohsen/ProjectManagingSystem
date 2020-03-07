@@ -196,8 +196,10 @@ class UserController extends Controller
     | Edit Profile
     |--------------------------------------------------------------------------
     */
-    public function edit_profile(User $user) {
+    public function edit_profile($user_id) {
 
+        $user = User::findOrFail($user_id);
+        
         return view("user::User.edit-profile",compact("user"));
 
     }
@@ -208,7 +210,7 @@ class UserController extends Controller
     |--------------------------------------------------------------------------
     */
     public function update_profile(Request $req,$user_id) {
-
+       
         $req->validate([
             "first_name"    =>  "required",
             "last_name"     =>  "required"

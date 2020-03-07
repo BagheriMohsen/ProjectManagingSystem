@@ -5,21 +5,19 @@ namespace Modules\Project\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
-use Modules\Project\Entities\ProjectTask;
-use Modules\Project\Entities\ProjectSubTask;
+use Modules\Project\Entities\ProjectAction;
 
-class SubTaskController extends Controller
+class ProjectActionController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      * @return Response
      */
-    public function index($slug)
+    public function index()
     {
-        $task = ProjectTask::where("slug",$slug)->firstOrFail();
-
-        return view('project::Task.tasks-index',compact("task"));
+        return view('project::index');
     }
 
     /**
@@ -38,14 +36,17 @@ class SubTaskController extends Controller
      */
     public function store(Request $req)
     {
-
         $data = $req->all();
 
-        $data["user_id"]   =   auth()->user()->id;
-        ProjectSubTask::create($data);
+        if( $req->hasFile("attach") ){
+            $path = Storage::disk("public")->put("Porject_Action_File",$req->File("attach"));
+            $data["attach"] = $path;
+        }
+     
+        ProjectAction::create($data);
 
         return redirect()->back()
-        ->with("message","your sub task is created!");
+        ->with("message","your action for this project is created!");
     }
 
     /**
@@ -63,9 +64,9 @@ class SubTaskController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit(ProjectSubTask $projectSubTask)
+    public function edit($id)
     {
-        return response()->json($projectSubTask);
+        return view('project::edit');
     }
 
     /**
@@ -74,13 +75,9 @@ class SubTaskController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $req, ProjectSubTask $projectSubTask)
+    public function update(Request $request, $id)
     {
-        $data = $req->all();
-
-        $projectSubTask->update($data);
-
-        return response()->json("sub task updated !");
+        //
     }
 
     /**
@@ -90,30 +87,19 @@ class SubTaskController extends Controller
      */
     public function destroy($id)
     {
-        ProjectSubTask::destroy($id);
-
-        return response()->json("sub task deleted !");
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | All SubTask
-    |--------------------------------------------------------------------------
-    */
-    public function all_subTask(ProjectSubTask $projectSubTask) {
-
-        return response()->json($projectSubTask);
-
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Store Time Passes Or Check Sub Task for complete
-    |--------------------------------------------------------------------------
-    */
-    public function modify_subtask() {
-
         //
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | File Download
+    |--------------------------------------------------------------------------
+    */
+    public function file_download($action_id) {
+        
+        $action = ProjectAction::findOrFail($action_id);
+    
+        return Storage::disk("public")->download($action->attach);
 
     }
 }

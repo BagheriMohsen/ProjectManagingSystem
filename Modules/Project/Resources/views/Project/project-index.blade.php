@@ -10,6 +10,7 @@
         'is_modal'      =>  False,
         'btn_href'      =>  "projects.create"
     ];
+    $user = auth()->user();
 @endphp
 
 <!-- 
@@ -29,7 +30,7 @@
     <div class="col-xs-12 col-xl-12">
     
     <div class="card mg-b-20">
-    <div class="card-header bg-grandeur tx-white">
+    <div class="card-header bg-info tx-white">
         Active Projects
     </div>
     <div class="card-body rounded-bottom table-wr-br">
@@ -38,6 +39,11 @@
 
     <table class="table tx-12">
         <tr class="tx-16">
+            @if( $project->user_id == $user->id || $project->operating_unit_id == $user->id || $project->applicant_unit == $user->id )
+                <a href="{{ route("projects.edit",$project->id) }}" class="btn btn-sm btn-primary">
+                    Edit Project
+                </a>
+            @endif
             <td colspan="4">
                 <a href="{{ route("projects.show",$project->slug) }}">
                 <i style="color:{{ $project->color }}" class="fas fa-stop"></i>
@@ -46,6 +52,8 @@
                 <div class="progress mg-b-5 mg-t-5 ht-15">
                     <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
                 </div>
+                
+
             </td>
             <td class="bg-light">
                 Priority: 
@@ -83,9 +91,9 @@
                     {{ $project->start_date  }}
                 </span>
             </td>
-            <td class="bg-primary text-light">
+            <td class="btn btn-info text-light">
                 Status: 
-                {{ "In Progress..." }}
+                {{ "In Progress" }}
             </td>
         </tr>
     </table>
@@ -96,7 +104,7 @@
     </div>
     
     <div class="card mg-b-20">
-    <div class="card-header bg-success tx-white">
+    <div class="card-header bg-primary tx-white">
         Complated Projects
     </div>
     <div class="card-body rounded-bottom table-wr-br">
@@ -149,9 +157,9 @@
                         {{ $project->start_date  }}
                     </span>
                 </td>
-                <td class="bg-success text-light">
+                <td class="btn btn-primary text-light">
                     Status: 
-                    {{ "In Progress..." }}
+                    {{ "Complete" }}
                 </td>
             </tr>
         </table>
@@ -214,15 +222,9 @@
                         {{ $project->start_date  }}
                     </span>
                 </td>
-                <td class="bg-dark text-light">
+                <td class="btn btn-dark text-light">
                     Status: 
-                    @if( $project->status == "in_progress" )
-                        {{ "In Progress" }}
-                    @elseif( $project->status == "complete" )
-                        {{ "Complete" }}
-                    @elseif( $project->status == "close" )
-                        {{ "Close" }}
-                    @endif
+                    {{ "Close" }}
                 </td>
             </tr>
         </table>

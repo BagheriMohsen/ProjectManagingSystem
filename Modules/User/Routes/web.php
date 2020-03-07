@@ -11,7 +11,6 @@
 |
 */
 Route::group(["middleware"=>"auth","prefix"=>"users/","as"=>"users."],function(){
-    
     Route::get("change-unit/{unit_id}","UserController@change_unitID")->name("change_unitID");
     
     /** user edit own profile */

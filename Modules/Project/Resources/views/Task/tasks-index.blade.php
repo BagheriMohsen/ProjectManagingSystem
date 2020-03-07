@@ -14,14 +14,27 @@
 @endsection
 
 @php 
-    $path = [
-        'name'          =>  $task->title,
-        'btn_content'   =>  'New subtask',
-        'is_modal'      =>  true,
-        'btn_href'      =>  "",
-        'modal_name'    =>  'newsubtask'
+    
 
-    ];
+    if( $task->operator_id == auth()->user()->id ) {
+        $path = [
+            'name'          =>  $task->title,
+            'btn_content'   =>  'New subtask',
+            'is_modal'      =>  true,
+            'btn_href'      =>  "",
+            'modal_name'    =>  'newsubtask'
+
+        ];
+    }else{
+        $path = [
+            'name'          =>  $task->title,
+            'is_modal'      =>  False,
+            'btn_href'      =>  "",
+            'modal_name'    =>  'newsubtask'
+
+        ];
+    }  
+
 @endphp
 <!-- 
     path 
@@ -44,62 +57,10 @@
     <task-list></task-list>
 </div> --}}
 
-<div class="row row-sm">
-    <div id="taskList" class="col-12">
-        <div class="card mg-b-20">
-            <div class="card-header bg-info tx-white p5">
-                Tasks 
-            </div>
-            <div class="card-body p20">
-                <div class="accordion mt-3" id="accordionExample">
-                    <div class="task-header" style="border-left:4px solid blue">
-                        <div class="d-flex align-items-center">
-                            <div class="form-check d-flex pl-0">
-                                <input type="checkbox" class="form-check-input" id="todoCheckbox">
-                                <label class="form-check-label" for="todoCheckbox"></label>
-                            </div>
-                            <span data-toggle="collapse" data-target="#taskCollapse1" style="cursor:pointer">
-                                 Title of Task
-                            </span>
-                        </div>
-                        <div>
-                            Priority Low
-                        </div>
-                    </div>
-                    <div id="taskCollapse1" class="task-body collapse" style="border-left:4px solid blue" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="d-flex justify-content-between">
-                            <div class="addLog">
-                                <button class="btn btn-sm btn-outline-info">Add log</button>
-                                <div class="timepicker-box">
-                                    <input class="hours-subtask timepicker" type="text" placeholder="HH">:
-                                    <input class="minutes-subtask timepicker" type="text" placeholder="MM">
-                                </div>
-                                <div class="pl-2 mt-2">
-                                    Overall time spend on Task : 22:30 
-                                </div>
-                            </div>
-                            <div class="timer">
-                                <button class="startTimer btn btn-sm btn-outline-info">Start timer</button>
-                                <div class="p-2 bg-info timer-control text-white" style="display:none">
-                                    <span class="timerText text-right text-white px-3">00:00:00</span>
-                                    <a href="#" class="pauseTimer text-white px-1">
-                                        <i class="fas fa-pause"></i>
-                                    </a>
-                                    <a href="#" class="resumeTimer text-white px-1" style="display:none">
-                                        <i class="fas fa-play"></i>
-                                    </a>
-                                    <a href="#" class="stopTimer text-white px-1">
-                                        <i class="fas fa-stop"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include("Messages.errors")
+@include("Messages.message")
+
+
 
 <div class="row row-sm">
     <div class="col-sm-12 col-xl-8">
@@ -128,7 +89,7 @@
             <table class="table mg-0 tx-center tx-12">
                 <tr>
                     <td class="bg-danger tx-white">
-                        Deadline: {{ $task->estimated_time }}
+                        Your legal time: {{ $task->estimated_time }}
                     </td>
                     <td>
                         Start Date: {{ $task->project->start_date }}
@@ -139,7 +100,73 @@
                 </tr>
             </table>	
         </div>
+
+        {{-- sub task list --}}
         
+        <div id="#sub_task" class="row row-sm">
+            <div id="taskList" class="col-12">
+                <div class="card mg-b-20">
+                    <div class="card-header bg-info tx-white p5">
+                        Tasks 
+                    </div>
+                    <div class="card-body p20">
+                        @foreach( $task->sub_tasks as $sub_task )
+                            <div class="accordion mt-3" id="accordionExample">
+                                <div class="task-header"
+                                 style="border-left:4px solid {{ $sub_task->color }}">
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check d-flex pl-0">
+                                            <input type="checkbox" class="form-check-input" id="todoCheckbox">
+                                            <label class="form-check-label" for="todoCheckbox"></label>
+                                        </div>
+                                        <span data-toggle="collapse" data-target="#taskCollapse{{ $sub_task->id }}" style="cursor:pointer">
+                                            {{ $sub_task->title }}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        Priority {{ $sub_task->priority }}
+                                    </div>
+                                </div>
+                                @if( $task->operator_id == auth()->user()->id )
+                                    <div id="taskCollapse{{ $sub_task->id }}" class="task-body collapse"
+                                         style="border-left:4px solid {{ $sub_task->color }}" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="addLog">
+                                                <button class="btn btn-sm btn-outline-info">Add log</button>
+                                                <div class="timepicker-box">
+                                                    <input class="hours-subtask timepicker" type="text" placeholder="HH">:
+                                                    <input class="minutes-subtask timepicker" type="text" placeholder="MM">
+                                                </div>
+                                                <div class="pl-2 mt-2">
+                                                    Overall time spend on Task : {{ $sub_task->time_passes }} 
+                                                </div>
+                                            </div>
+                                            <div class="timer">
+                                                <button class="startTimer btn btn-sm btn-outline-info">Start timer</button>
+                                                <div class="p-2 bg-info timer-control text-white" style="display:none">
+                                                    <span class="timerText text-right text-white px-3">00:00:00</span>
+                                                    <a href="#" class="pauseTimer text-white px-1">
+                                                        <i class="fas fa-pause"></i>
+                                                    </a>
+                                                    <a href="#" class="resumeTimer text-white px-1" style="display:none">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                    <a href="#" class="stopTimer text-white px-1">
+                                                        <i class="fas fa-stop"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- end sub task list --}}
         <div class="card mg-b-20">
             <div class="card-header p5">
                 Task Description
@@ -158,8 +185,8 @@
             <div class="row">
                 <li class="media d-block d-sm-flex">
                     @if(is_null($task->operator->avatar))
-                        {{-- <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
-                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt=""> --}}
+                        <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
+                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
                     @else 
                         <img src="/storage/{{ $task->operator->avatar }}"
                          class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
@@ -201,17 +228,23 @@
         <div id="newinlinenote" class="collapse" role="tabpanel" aria-labelledby="newinlinenote">
           <div class="card-block pd-20">
             <div>
-                <form class="form">
-                    <input class="form-control mg-b-10" type="text" placeholder="title">
-                    <textarea class="form-control mg-b-10 textarea" name="textbody2" placeholder="Note body"></textarea>
-                    <input type="file" name="file-1[]" id="file-1" class="inputfile"
-data-multiple-caption="{count} files selected" multiple>
+                
+                <form action="{{ route("taskActions.store") }}" method="POST" class="form" enctype="multipart/form-data">
+                    @csrf
+                    <input name="user_id"         value="{{ auth()->user()->id }}" class="form-control mg-b-10" type="hidden">
+                    <input name="project_task_id" value="{{ $task->id }}" class="form-control mg-b-10" type="hidden">
+                    <textarea class="form-control mg-b-10 textarea" name="desc" placeholder="Note body"></textarea>
+                    <input type="file" name="attach" id="file-1" class="inputfile"
+                    data-multiple-caption="{count} files selected" multiple>
                     <label for="file-1" class="tx-white bg-info">
                       <i class="icon ion-ios-upload-outline tx-24"></i>
                       <span>Browse File...</span>
                     </label>
-                    <input class="btn btn-block btn-info mg-b-10" value="Send">
-                </form>  
+                    <button type="submit" class="btn btn-block btn-info mg-b-10">
+                        Send
+                    </button>
+                </form>
+
             </div>
           </div>
         </div>
@@ -223,47 +256,47 @@ data-multiple-caption="{count} files selected" multiple>
                Task Action
             </div>
             <div class="card-body">
-                <div class="card bg-light mg-b-20">
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead>
-                                <th>
-                                    <span class="tx-11 font-normal">sadigh ahmad</span>
-                                    <span class="tx-11 font-normal f-left">June 28 - 02:07</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                body
-                                </td>
-                            </tr>
-                        </table>
+                @foreach( $task->task_actions as $action)
+
+                    <div class="card bg-light mg-b-20">
+                        <div class="card-body mp0">
+                            <table class="table tx-12">
+                                <thead>
+                                    <th>
+                                        
+                                        <span class="tx-11 font-normal">
+                                            {{ $action->user->first_name." ".$action->user->last_name }}
+                                        </span>
+                                        <span class="tx-11 font-normal f-right">
+                                            {{ $action->created_at }}
+                                        </span>
+                                        
+                                    </th>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        {!! $action->desc !!}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    @if( !is_null($action->attach) )
+                                        <a href="{{ route("projectActions.file_download",$action->id) }}">
+                                            <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">
+                                                Attachment
+                                            </i>
+                                        </a>
+                                    @endif
+                                    
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="card bg-light mg-b-20">
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead>
-                                <th>
-                                    <span class="tx-11 font-normal">majed Karim</span>
-                                    <span class="tx-11 font-normal f-left">June 27 - 20:44</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                body
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+
+                @endforeach
+                
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ use Modules\User\Entities\Unit;
 use Modules\Project\Entities\Project;
 use Modules\Project\Entities\ProjectTask;
 use Modules\User\Entities\Group;
-
+use Modules\Project\Entities\ProjectSubTask;
 
 class StartingSeeder extends Seeder
 {
@@ -75,12 +75,13 @@ class StartingSeeder extends Seeder
             'desc'                  =>  "description",
             'color'                 =>  "white",
             'status'                =>  "in_progress",
-            'is_public'             =>  False
+            'is_public'             =>  False,
+            'is_verify'             =>  True
         ]);
         
             // Project Task 
             #1
-            ProjectTask::create([
+            $task = ProjectTask::create([
                 'user_id'           =>  $user->id,
                 'project_id'        =>  $project->id,
                 'operator_id'       =>  $user->id,
@@ -93,6 +94,27 @@ class StartingSeeder extends Seeder
                 'desc'              =>  "description for first task",
                 'status'            =>  "in_progress",
             ]);
+                #sub task
+                #1
+                ProjectSubTask::create([
+                    'user_id'           =>  $user->id,
+                    'project_task_id'   =>  $task->id,
+                    'title'             =>  "first sub task",
+                    'percent'           =>  10,
+                    'time_passes'       =>  2.2,
+                    'priority'          =>  "low",
+                    'color'             =>  "green",
+                ]);
+                #2
+                ProjectSubTask::create([
+                    'user_id'           =>  $user->id,
+                    'project_task_id'   =>  $task->id,
+                    'title'             =>  "second sub task",
+                    'percent'           =>  10,
+                    'priority'          =>  "low",
+                    'color'             =>  "red",
+                ]);
+
             #2
             ProjectTask::create([
                 'user_id'           =>  1,
@@ -138,7 +160,8 @@ class StartingSeeder extends Seeder
                 'desc'                  =>  "description",
                 'color'                 =>  "white",
                 'status'                =>  "complete",
-                'is_public'             =>  False
+                'is_public'             =>  False,
+                'is_verify'             =>  True
             ]);
             // Project Task 
             #1

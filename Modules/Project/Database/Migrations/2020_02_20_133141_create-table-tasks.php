@@ -59,10 +59,10 @@ class CreateTableTasks extends Migration
             $table->bigInteger('project_task_id')->unsigned()->nullable();
             $table->string('title');
             $table->integer('percent');
-            $table->float('estimated_time');
+            $table->float('time_passes')->default(0);
             $table->string('priority');
             $table->string('color')->default("black");
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->time('reminder_time')->nullable();
             $table->string('reminder_type')->nullable();
             $table->string('status')->default('in_progress');

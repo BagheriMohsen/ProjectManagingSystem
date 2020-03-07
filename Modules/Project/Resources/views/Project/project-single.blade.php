@@ -31,6 +31,12 @@
     Main Content
 -->
 @section('content')
+
+    @include("Messages.message")
+    @include("Messages.errors")
+    @include("Messages.error")
+
+
 <div class="row row-sm">
     <div class="col-sm-12 col-xl-8">
     <div class="row row-sm">
@@ -59,8 +65,8 @@
             <div class="row">
                 <li class="media d-block d-sm-flex">
                     @if(is_null($project->manager->avatar))
-                        {{-- <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
-                        class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" > --}}
+                        <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
+                        class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" >
                     @else 
                         <img src="/storage/{{ $project->manager->avatar }}"
                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle"  >
@@ -89,7 +95,7 @@
             </div>
             <div class="col-sm-12 col-xl-4">
                 <div class="card p15 min-h-63">
-                    <a class="btn btn-block bg-grandeur tx-white btn-sm" href="">
+                    <a class="btn btn-block btn-sm btn-warning " href="">
                         Status: {{ $project->status }}
                     </a>
                 </div>
@@ -266,17 +272,25 @@
         <div id="newinlinenote" class="collapse" role="tabpanel" aria-labelledby="newinlinenote">
           <div class="card-block pd-20">
             <div>
-                <form class="form">
-                    <input class="form-control mg-b-10" type="text" placeholder="title">
-                    <textarea name="textbody" class="form-control mg-b-10 textarea" placeholder="body"></textarea>
-                    <input type="file" name="file-1[]" id="file-1" class="inputfile"
-data-multiple-caption="{count} files selected" multiple>
+
+                <form action="{{ route("projectActions.store") }}" 
+                method="POST" class="form" enctype="multipart/form-data" >
+                    @csrf
+                    <input name="user_id"    value="{{ auth()->user()->id }}"  class="form-control mg-b-10" type="hidden" >
+                    <input name="project_id" value="{{ $project->id }}"     class="form-control mg-b-10" type="hidden" >
+                    <textarea name="desc" class="form-control mg-b-10 textarea" placeholder="body"></textarea>
+                    <input type="file" name="attach" id="file-1" class="inputfile"
+                    data-multiple-caption="{count} files selected" multiple>
                     <label for="file-1" class="tx-white bg-info">
                       <i class="icon ion-ios-upload-outline tx-24"></i>
                       <span>Select File...</span>
                     </label>
-                    <input class="btn btn-block btn-info mg-b-10" value="Send">
+                    <button type="submit" class="btn btn-block btn-info mg-b-10" >
+                        Send
+                    </button>
                 </form>  
+
+
             </div>
           </div>
         </div>
@@ -287,103 +301,45 @@ data-multiple-caption="{count} files selected" multiple>
             <div class="card-header p5">
                 Project's Actions
             </div>
-            <div class="card-body">
-                <div class="card bg-light mg-b-20">
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead>
-                                <th>
-                                    <span class="tx-11 font-normal">Sajjad Rafie</span>
-                                    <span class="tx-11 font-normal f-right">july 1 - 13:20</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                body
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments...</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="card bg-light mg-b-20">
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead>
-                                <th>
-                                    <span class="tx-11 font-normal">Ali Fatemi </span>
-                                    <span class="tx-11 font-normal f-right">july 4 - 07:59</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                body
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments...</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="card bg-light mg-b-20">
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead>
-                                <th>
-                                    <span class="tx-11 font-normal">Hussain Fatemi</span>
-                                    <span class="tx-11 font-normal f-right">july 4 - 10:00</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                body
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments...</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="card bg-light mg-b-20">
-                    <div class="card-body mp0">
-                        <table class="table tx-12">
-                            <thead>
-                                <th>
-                                    <span class="tx-11 font-normal">Amir Hasib</span>
-                                    <span class="tx-11 font-normal f-right">july 09 - 21:48</span>
-                                </th>
-                            </thead>
-                            <tr>
-                                <td>
-                                body
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <a href="">
-                                    <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">Attachments...</i>
-                                </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+                <div class="card-body">
+                    @foreach( $project->project_actions as $action )
+                        <div class="card bg-light mg-b-20">
+                            <div class="card-body mp0">
+                                <table class="table tx-12">
+                                    <thead>
+                                        <th>
+                                            
+                                            <span class="tx-11 font-normal">
+                                                {{ $action->user->first_name." ".$action->user->last_name }}
+                                            </span>
+                                            <span class="tx-11 font-normal f-right">
+                                                {{ $action->created_at }}
+                                            </span>
+                                            
+                                        </th>
+                                    </thead>
+                                    <tr>
+                                        <td>
+                                            {!! $action->desc !!}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        @if( !is_null($action->attach) )
+                                            <a href="{{ route("projectActions.file_download",$action->id) }}">
+                                                <i class="icon ion-document non-i"></i><i class="mg-l-5 non-i">
+                                                    Attachment
+                                                </i>
+                                            </a>
+                                        @endif
+                                        
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

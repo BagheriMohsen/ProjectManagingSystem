@@ -59,7 +59,7 @@
         <div class="col-sm-12 col-xl-12">
             
             
-        <form id="project_create" action="{{route("projects.update",$project->id)}}" method="POST">
+        <form id="project_create" action="{{route("projects.update_project",$project->id)}}" method="POST">
                 @csrf
                 
             <div class="addproject-wr">

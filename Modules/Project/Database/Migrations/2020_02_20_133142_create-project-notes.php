@@ -15,17 +15,15 @@ class CreateProjectNotes extends Migration
     {
         /*
         |--------------------------------------------------------------------------
-        | Projects Operating Units
+        | Projects Action
         |--------------------------------------------------------------------------
         */
-        Schema::create('project_notes', function (Blueprint $table) {
+        Schema::create('project_actions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('project_id')->unsigned();
-            $table->bigInteger('project_task_id')->unsigned();
-            $table->string('attach')->nullable();
-            $table->string('title');
             $table->string('desc');
+            $table->string('attach')->nullable();
             $table->timestamps();
 
 
@@ -34,11 +32,31 @@ class CreateProjectNotes extends Migration
 
             $table->foreign('project_id')->references('id')->on('projects')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
+            
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Projects Operating Units
+        |--------------------------------------------------------------------------
+        */
+        Schema::create('project_task_actions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('project_task_id')->unsigned();
+            $table->string('desc');
+            $table->string('attach')->nullable();
+            $table->timestamps();
+
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->foreign('project_task_id')->references('id')->on('project_tasks')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
             
         });
+
     }
 
     /**

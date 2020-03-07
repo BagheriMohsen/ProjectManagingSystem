@@ -110,5 +110,23 @@ class User extends Authenticatable
         return $this->hasMany("Modules\Project\Entities\ProjectTask", "operator_id");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\ProjectAction
+    |--------------------------------------------------------------------------
+    */
+    public function project_action() {
+        return $this->hasMany("Modules\Project\Entities\ProjectAction");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\ProjectTaskAction
+    |--------------------------------------------------------------------------
+    */
+    public function task_action() {
+        return $this->hasMany("Modules\Project\Entities\ProjectTaskAction");
+    }
+
 
 }
