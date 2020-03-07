@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+    var baseUrl = 'http://localhost:8000/';
    
     $('.post-comments .toggle-reply').on('click',function(){
         var post_comments = $(this).parents('.post-comments');
@@ -166,7 +168,60 @@ $(document).ready(function() {
        
     });
 
-   
+    //  Adding log time via ajax 
+    $('.addLog').submit(function(event){
+        event.preventDefault();
+        var action_url = $(this).attr('action');
+        var token = $('meta[name="csrf-token"]').attr('content');
+        var minutes = $(this).find('.minutes-subtask').val();
+        var hours = $(this).find('.hours-subtask').val();
+        if(!minutes || !hours){
+            alert('Hours and minutes fields cannot be empty');
+        }else{
+            var time = hours + '.' + minutes;
+            console.log(parseFloat(time));
+            $.ajax({
+                url: action_url,
+                method: 'post',
+                data : {
+                    _token:token,
+                    time : time
+                },
+                success:function(res){
+                    console.log(res);
+                    location.reload();
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            })
+        }
+    })
 
+
+    $('.checkSubTask input').on('click',function(event){
+        if(confirm('Are you sure?')){
+            var form = $(this).parents('.checkSubTask');
+            var action_url = form.attr('action');
+            var token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: action_url,
+                method: 'post',
+                data : {
+                    _token:token,
+                    check:true
+                },
+                success:function(res){
+                    console.log(res);
+                    location.reload();
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            })
+        }else{
+            event.preventDefault();
+        }
+    })
 
 });

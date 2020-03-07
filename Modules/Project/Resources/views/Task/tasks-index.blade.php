@@ -116,8 +116,10 @@
                                  style="border-left:4px solid {{ $sub_task->color }}">
                                     <div class="d-flex align-items-center">
                                         <div class="form-check d-flex pl-0">
-                                            <input type="checkbox" class="form-check-input" id="todoCheckbox">
-                                            <label class="form-check-label" for="todoCheckbox"></label>
+                                            <form class="checkSubTask" action="{{route('subTasks.modify_subtask',$sub_task->id)}}">
+                                                <input type="checkbox" class="form-check-input" id="todoCheckbox">
+                                                <label class="form-check-label" for="todoCheckbox"></label>
+                                            </form>
                                         </div>
                                         <span data-toggle="collapse" data-target="#taskCollapse{{ $sub_task->id }}" style="cursor:pointer">
                                             {{ $sub_task->title }}
@@ -131,27 +133,28 @@
                                     <div id="taskCollapse{{ $sub_task->id }}" class="task-body collapse"
                                          style="border-left:4px solid {{ $sub_task->color }}" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="d-flex justify-content-between">
-                                            <div class="addLog">
-                                                <button class="btn btn-sm btn-outline-info">Add log</button>
+                                            <form class="addLog" action="{{route('subTasks.modify_subtask',$sub_task->id)}}">
+                                                <button type="submit" class="btn btn-sm btn-outline-info">Add log</button>
                                                 <div class="timepicker-box">
+                                                    <input class="subtask-id" type="hidden" value="{{ $sub_task->id }}">
                                                     <input class="hours-subtask timepicker" type="text" placeholder="HH">:
                                                     <input class="minutes-subtask timepicker" type="text" placeholder="MM">
                                                 </div>
                                                 <div class="pl-2 mt-2">
                                                     Overall time spend on Task : {{ $sub_task->time_passes }} 
                                                 </div>
-                                            </div>
+                                            </form>
                                             <div class="timer">
                                                 <button class="startTimer btn btn-sm btn-outline-info">Start timer</button>
                                                 <div class="p-2 bg-info timer-control text-white" style="display:none">
                                                     <span class="timerText text-right text-white px-3">00:00:00</span>
-                                                    <a href="#" class="pauseTimer text-white px-1">
+                                                    <a href="javascript:void(0)" class="pauseTimer text-white px-1">
                                                         <i class="fas fa-pause"></i>
                                                     </a>
-                                                    <a href="#" class="resumeTimer text-white px-1" style="display:none">
+                                                    <a href="javascript:void(0)" class="resumeTimer text-white px-1" style="display:none">
                                                         <i class="fas fa-play"></i>
                                                     </a>
-                                                    <a href="#" class="stopTimer text-white px-1">
+                                                    <a href="javascript:void(0)" class="stopTimer text-white px-1">
                                                         <i class="fas fa-stop"></i>
                                                     </a>
                                                 </div>
@@ -184,13 +187,13 @@
             <div class="card-body">
             <div class="row">
                 <li class="media d-block d-sm-flex">
-                    @if(is_null($task->operator->avatar))
+                    {{-- @if(is_null($task->operator->avatar))
                         <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
                          class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
                     @else 
                         <img src="/storage/{{ $task->operator->avatar }}"
                          class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
-                    @endif
+                    @endif --}}
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
                     <h6 class="tx-inverse mg-b-10">
                         {{ $task->operator->first_name." ".$task->operator->last_name }}

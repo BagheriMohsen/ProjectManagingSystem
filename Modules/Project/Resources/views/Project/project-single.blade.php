@@ -64,13 +64,13 @@
             <div class="card-body">
             <div class="row">
                 <li class="media d-block d-sm-flex">
-                    @if(is_null($project->manager->avatar))
+                    {{-- @if(is_null($project->manager->avatar))
                         <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" >
                     @else 
                         <img src="/storage/{{ $project->manager->avatar }}"
                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle"  >
-                    @endif
+                    @endif --}}
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
                     <h6 class="tx-inverse mg-b-10">
                         {{ $project->manager->first_name." ".$project->manager->last_name}}
