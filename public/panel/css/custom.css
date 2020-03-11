@@ -1,9 +1,11 @@
+/* Some fix and amend in elements*/
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
     left:-1px;
     top: -5px;
     color: white;
     opacity:1;
 }
+
 .br-header-right .dropdown .dropdown-menu-left{
     left: -1px !important;
     right: auto !important;
@@ -39,19 +41,17 @@ main input[type=email]:focus, main input[type=password]:focus, main input[type=t
 .modal-body{
   background-color: #f3f0f0!important
 }
+/* End some fix and amend in elements*/
+
+/* Todolist*/
 #app #todolist{
   height: 400px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-/* .addLog input{
-  width: 45px;
-  text-align: center;
-  height: 44px;
-  border: 1px solid #ced4da;
-  border-radius: 3px;
-  color: #495057;
-} */
+/* End odolist*/
+
+/*Task section*/
 .task-header{
   display: flex;
   justify-content: space-between;
@@ -83,47 +83,7 @@ input.timepicker::placeholder {
   color: #959ba0;
   opacity: 1; 
 }
-
-
-
-
-/* Parsly Css */
-input.parsley-success,
-select.parsley-success,
-textarea.parsley-success {
-  color: #468847;
-  background-color: #DFF0D8;
-  border: 1px solid #D6E9C6;
-}
-
-input.parsley-error,
-select.parsley-error,
-textarea.parsley-error {
-  color: #B94A48;
-  background-color: #F2DEDE;
-  border: 1px solid #EED3D7;
-}
-
-.parsley-errors-list {
-  margin: 2px 0 3px;
-  padding: 0;
-  list-style-type: none;
-  font-size: 0.9em;
-  line-height: 0.9em;
-  opacity: 0;
-  color: #B94A48;
-
-  transition: all .3s ease-in;
-  -o-transition: all .3s ease-in;
-  -moz-transition: all .3s ease-in;
-  -webkit-transition: all .3s ease-in;
-}
-
-.parsley-errors-list.filled {
-  opacity: 1;
-}
-
-/* End Parsly */
+/*End task section*/
 
 /*Blog Comments*/
 
@@ -212,3 +172,29 @@ textarea.parsley-error {
 }
 
 /*End Blog Comments*/
+
+/*Ticket*/
+.ticket-item{
+  padding: 10px;
+  border: 1px solid #e6d2d2;
+  border-radius: 5px;
+  background: #ecdddd;
+  overflow: auto;
+  margin-bottom: 15px;
+}
+.ticket-item-header{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted #b7a6a6;
+}
+
+.ticket-item.reply{
+  margin-left: auto;
+  background: #d9f596;
+}
+/*End ticket*/
+
+/* Colors*/
+.text-light-1{
+  color: #e8e8ec;
+}

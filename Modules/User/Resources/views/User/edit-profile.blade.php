@@ -28,7 +28,7 @@
                 @csrf
                 <div class="addproject-wr">
                     <div class="row row-sm mp0">
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-6 mx-auto">
                             <div id="addproject-wizard1" class="mg-b-20">
                                 <h5>User Info</h5>
                                 <section class="border1ccc p20 mg-b-20">
@@ -36,18 +36,20 @@
                                         <div class="col-sm-12">
                                             <div class="card mg-b-20 p20">
                                                 <div class="row row-sm">
-                                                    <div class="col-12 form-group">
-                                                        <label>FirstName</label>
-                                                        <input value="{{ $user->first_name }}" name="first_name" class="form-control" type="text" placeholder="">
-                                                    </div>
-                                                    <div class="col-12 form-group">
-                                                        <label>LastName</label>
-                                                        <input value="{{ $user->last_name }}" name="last_name" class="form-control" type="text" placeholder="">
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <button type="submit" class="btn btn-secondary px-3 py-2">
-                                                            save
-                                                        </button>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label>FirstName</label>
+                                                            <input value="{{ $user->first_name }}" name="first_name" class="form-control" type="text" placeholder="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>LastName</label>
+                                                            <input value="{{ $user->last_name }}" name="last_name" class="form-control" type="text" placeholder="">
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-outline-info px-3 py-2">
+                                                                save
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

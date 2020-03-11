@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-notify modal-dark" role="document">
             <div class="modal-content tx-size-sm">
                 <div class="modal-header pd-x-20">
-                    {{-- <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">New Item</h6> --}}
+                    <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">Add message</h6>
                 </div>
                 <div class="modal-body pd-20">
                     <form class="form" action="{{route("timeline.store")}}" method="POST" 
@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-green btn-sm mg-l-10">Add Unit</button>
+                    <button type="submit" class="btn btn-green btn-sm mg-l-10">Add Message</button>
                 </div>
 
             </form>

@@ -281,13 +281,13 @@
                                             </div>
                                         </div>
                                   
-                               
+                                     
                             </div>
-                        
+                            <a class="btnRemove"></a>
                                 </div>
                          
                             @endforeach  
-                                <a class="btnRemove"></a>
+                                
                                 
                             </div>
                             </div>

@@ -29,7 +29,7 @@
                 @csrf
                 <div class="addproject-wr">
                     <div class="row row-sm mp0">
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-6 mx-auto">
                             <div id="addproject-wizard1" class="mg-b-20">
                                 <h5>Please insert your old and new password</h5>
                                 <section class="border1ccc p20 mg-b-20">
@@ -50,7 +50,7 @@
                                                         <input name="pass_confirm" type="password" class="form-control" type="text" placeholder="">
                                                     </div>
                                                     <div class="col-12 text-center">
-                                                        <button type="submit" class="btn btn-secondary px-3 py-2">
+                                                        <button type="submit" class="btn btn-outline-info px-3 py-2">
                                                             save
                                                         </button>
                                                     </div>
