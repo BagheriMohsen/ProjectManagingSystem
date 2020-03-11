@@ -29,7 +29,8 @@ class Project extends Model
         'status',
         'is_public',
         'is_verify',
-        'verify_date'
+        'verify_date',
+        'is_done'
     ];
 
     /**

@@ -64,13 +64,13 @@
             <div class="card-body">
             <div class="row">
                 <li class="media d-block d-sm-flex">
-                    {{-- @if(is_null($project->manager->avatar))
+                    @if(is_null($project->manager->avatar))
                         <img src="{{ Avatar::create($project->manager->first_name." ".$project->manager->last_name)->toBase64() }}"
                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" >
                     @else 
                         <img src="/storage/{{ $project->manager->avatar }}"
                         class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle"  >
-                    @endif --}}
+                    @endif
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
                     <h6 class="tx-inverse mg-b-10">
                         {{ $project->manager->first_name." ".$project->manager->last_name}}
@@ -89,7 +89,20 @@
             <div class="col-sm-12 col-xl-8">
                 <div class="card p15 min-h-63">
                 <div class="progress bg-light mg-b-5 mg-t-5 ht-20">
-                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">35%</div>
+                    <div class="progress-bar
+                    @if( $percent <= 40 )
+                        bg-danger
+                    @elseif( $percent <= 70 ) 
+                        bg-warning
+                    @elseif( $percent < 100 ) 
+                        bg-info
+                    @else 
+                        bg-success
+                    @endif 
+                    progress-bar-striped progress-bar-animated wd-{{ $percent }}p" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
+                    {{ $percent }}
+                    %
+                </div>
                 </div>
                 </div>
             </div>
@@ -168,7 +181,7 @@
                                     1
                                 </td>
                                 <td>
-                                    <a href="{{ route("projects.subTasks.index",
+                                    <a href="{{ route("projects.subtask_index",
                                     ["project_slug"=>$project->slug,"task_slug"=>$task->slug]) }}">
                                         {{ $task->title }}
                                     </a>
@@ -177,10 +190,21 @@
                                     {{ $task->operator->first_name." ".$task->operator->last_name }}
                                 </td>
                                 <td>
-                                    {{ $task->estimated_time }}
+                                    @php 
+                                    $time = explode(".",$task->estimated_time);
+                                    if( isset($time[1]) ){
+                                        $hh = $time[0];
+                                        $mm = $time[1];
+                                    }else{
+                                        $hh = 00;
+                                        $mm = 00;
+                                    }
+                                    @endphp
+                                    {{ $hh ." : ". $mm }}
                                 </td>
                                 <td>
-                                    35 %
+                                    
+                                    {{ $task->percent }} %
                                 </td>
                                 <td>
                                     @if($task->priority == "low")
@@ -192,17 +216,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route("projects.subTasks.index",["project_slug"=>$project->slug,"task_slug"=>$task->slug]) }}" 
-                                        @if( $task->status == "in_progress" )
+                                    <a href="{{ route("projects.subtask_index",["project_slug"=>$project->slug,"task_slug"=>$task->slug]) }}" 
+                                        @if( !$task->is_done )
                                             class="btn btn-sm btn-primary col-sm-12">
-                                                {{ "In Progress" }}
-                                        @elseif( $task->status == "close" )
-                                            class="btn btn-sm btn-dark col-sm-12">
-                                                {{ "Close" }}
-                                        @else 
-                                            class="btn btn-sm btn-success col-sm-12">
-                                                {{ "Complete" }}
-                                            
+                                            {{ "In Progress" }}
+                                        @elseif( $task->is_done )
+                                                class="btn btn-sm btn-success col-sm-12">
+                                            {{ "Complete" }}
                                         @endif
                                     </a>
                                     
@@ -253,6 +273,10 @@
                         @else 
                             <span class="text-danger">{{ "High" }}</span>
                         @endif
+                    </li>
+                    <li>
+                        Estimated Time: 
+                        {{ $project->tasks->sum("estimated_time") }}
                     </li>
                 </ul>
             </div>

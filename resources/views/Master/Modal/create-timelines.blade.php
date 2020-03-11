@@ -1,35 +1,14 @@
-@if(isset($text_editor))
-    <div id="modalCompose" class="modal fade">
+
+    <div id="newtimeline" class="modal fade">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-notify modal-dark" role="document">
             <div class="modal-content tx-size-sm">
                 <div class="modal-header pd-x-20">
                     {{-- <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">New Item</h6> --}}
                 </div>
                 <div class="modal-body pd-20">
-                    <form class="form" action="{{route($text_editor['route_name'])}}" method="POST" 
+                    <form class="form" action="{{route("timeline.store")}}" method="POST" 
                     enctype="multipart/form-data">
                         @csrf
-
-                        @if($text_editor['contact'])
-                            <div class="row mp0">
-                                <div class="col-xl-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Contact</label>
-                                        <br/>
-                                        <select id="timelineTags" class="form-control text-dark"  name="contact[]" multiple="multiple" style="width: 100%">
-                                        
-                                            <option selected="selected">
-                                                {{"users"}}
-                                            </option>
-                                           
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-
-                        @if($text_editor['title'])
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
@@ -38,9 +17,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                   
 
-                        @if($text_editor['desc'])
+                    
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
@@ -49,27 +28,21 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                    
 
-                        @if($text_editor['tags'])
+                 
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
                                         <label class="form-control-label">Tags</label>
                                         <br/>
                                         <select id="timelineTags" class="form-control text-dark"  name="tags[]" multiple="multiple" style="width: 100%">
-                                            @foreach($text_editor['tags_item'] as $tag)
-                                            <option selected="selected">
-                                                {{$tag->name}}
-                                            </option>
-                                            @endforeach
+                                            <option > </option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                        @endif
-
-                        @if($text_editor['image'])
+               
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
@@ -82,7 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                 
                     
                 </div>
                 <div class="modal-footer">
@@ -95,4 +68,3 @@
         </div><!-- modal-dialog -->
     </div>
     <!-- modal -->
-@endif

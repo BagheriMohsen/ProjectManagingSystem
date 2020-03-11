@@ -9,11 +9,7 @@
     // text_editor option
     $text_editor = [
         'route_name'    =>  'notes.store',
-        'image'         =>  False,
-        'file'          =>  False,
         'desc'          =>  True,
-        'tags'          =>  False,
-        'tags_item'     =>  array(),
         'title'         =>  True,
         "contact"       =>  True
     ];
@@ -23,7 +19,7 @@
             'name'          =>  'Messages',
             'btn_content'   =>  'New Message',
             'is_modal'      =>  True,
-            'btn_href'      =>  ''
+            'modal_name'    =>  'new_messages'
     ];
 
     // page_title option
@@ -49,7 +45,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-modal')
+    @include('Master.Modal.create-messages')
 @endsection
 
 

@@ -6,7 +6,7 @@
         </div>
         <div class="modal-body pd-20">
             
-        <form action="{{ route($text_editor["route_name"]) }}" method="post">
+        <form action="{{ route("users.units.store") }}" method="post">
             @csrf
             <div class="row row-sm">
                 <div class="col-sm-12">

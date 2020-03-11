@@ -7,11 +7,6 @@
 
 @php
 
-    // text_editor option
-    $text_editor = [
-            'route_name'    =>  'users.store',
-    ];
-
     // path option
     $path = [
             'name'          =>  'Users',

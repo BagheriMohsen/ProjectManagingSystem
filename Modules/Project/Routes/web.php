@@ -7,7 +7,7 @@
 */
 Route::group(["middleware"=>"auth",'prefix'=>'projects/','as'=>'projects.'],function(){
 
-    
+
     Route::get("show/{project_slug}/","ProjectController@show")->name("show");
     Route::post("update/{id}/","ProjectController@update")->name("update_project");
     // Request Project
@@ -15,17 +15,20 @@ Route::group(["middleware"=>"auth",'prefix'=>'projects/','as'=>'projects.'],func
     Route::post("store-request-project/","ProjectController@store_request_project")->name("store_request_project");
     Route::get("request-project-list/","ProjectController@request_project_list")->name("request_project_list");
 
-
+    
     /*
     |--------------------------------------------------------------------------
     | Task Routes
     |--------------------------------------------------------------------------
     */
-    Route::group(["middleware"=>"auth",'prefix'=>'{project_slug}/','as'=>'subTasks.'],function() {
-        Route::get("{task_slug}/","SubTaskController@index")->name("index");
+    Route::get("{project_slug}/{task_slug}/","SubTaskController@index")->name("subtask_index");
+    Route::group(["middleware"=>"auth",'prefix'=>'tasks/','as'=>'subTasks.'],function() {
+        
         Route::get("all-sub-tasks","SubTaskController@all_subTask")->name("all_subTask");
         Route::post("modify-tasks/{subtask_id}","SubTaskController@modify_subtask")->name("modify_subtask");
     });
+   
+
     Route::middleware("auth")->resource("subTasks","SubTaskController",["except" =>
         "index",
     ]);

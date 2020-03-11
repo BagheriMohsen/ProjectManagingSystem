@@ -41,6 +41,7 @@
                         <div class="card-body bd bd-t-0 rounded-bottom-0 table-responsive-sm">
                             <form action="{{ route("users.update",$user->id) }}" method="post" enctype="multipart/form-data"  >
                                 @csrf
+                                @method("put")
                                 <div class="row row-sm">
                                     <div class="col-sm-12 col-xl-6">
                                         <div class="form-group">

@@ -103,8 +103,22 @@ class ProjectController extends Controller
     public function show($project_slug)
     {
         $project = Project::where("slug", $project_slug)->firstOrFail();
+        $percent = $project->tasks->where("is_done",True)->sum("percent"); 
+        
+        // save complete date
+        if( $percent >= 100 && !$project->is_done ) {
 
-        return view('project::Project.project-single',compact("project"));
+            $project->update([
+                "is_done"       =>  True,
+                "complete_date" =>  Carbon::now()
+            ]);
+            
+        }
+
+        return view('project::Project.project-single',compact(
+            "project",
+            "percent"
+        ));
     }
 
     /**

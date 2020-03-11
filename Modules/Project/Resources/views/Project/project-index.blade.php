@@ -8,7 +8,7 @@
         'name'          =>  'Projects',
         'btn_content'   =>  "New Project",
         'is_modal'      =>  False,
-        'btn_href'      =>  "projects.create"
+        'route_name'    =>  "projects.create"
     ];
     $user = auth()->user();
 @endphp

@@ -11,7 +11,9 @@
     @if(isset($path['btn_content']))
         <a 
         @if(!$path['is_modal'])
-        @if(isset($path['route_name'])) href="{{route($path['btn_href'])}}" @endif
+            @if(isset($path['route_name']))
+                href="{{route($path['route_name'])}}" 
+            @endif
         @endif
         
         class="btn btn-success btn-sm btn-with-icon btn-submit-new-timeline p-0"

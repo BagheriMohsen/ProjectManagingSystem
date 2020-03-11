@@ -5,25 +5,12 @@
 @endsection
 
 @php
-
-    // text_editor option
-    $text_editor = [
-            'route_name'    =>  'timeline.store',
-            'image'         =>  True,
-            'file'          =>  False,
-            'desc'          =>  True,
-            'tags'          =>  True,
-            'tags_item'     =>  array(),
-            'title'         =>  True,
-            'contact'       =>  False
-    ];
-
     // path option
     $path = [
             'name'          =>  'TimeLine',
             'btn_content'   =>  'New Discuss',
             'is_modal'      =>  True,
-            'btn_href'      =>  ''
+            'modal_name'    =>  'newtimeline'
     ];
 
     // page_title option
@@ -52,7 +39,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-modal')
+    @include('Master.Modal.create-timelines')
 @endsection
 
 

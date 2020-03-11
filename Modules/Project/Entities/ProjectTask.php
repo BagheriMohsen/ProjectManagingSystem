@@ -24,7 +24,8 @@ class ProjectTask extends Model
         'reminder_time',
         'reminder_type',
         'complete_date',
-        'close_date'
+        'close_date',
+        'is_done'
     ];
 
 

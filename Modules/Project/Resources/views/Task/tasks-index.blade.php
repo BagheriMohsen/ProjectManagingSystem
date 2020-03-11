@@ -31,7 +31,6 @@
             'is_modal'      =>  False,
             'btn_href'      =>  "",
             'modal_name'    =>  'newsubtask'
-
         ];
     }  
 
@@ -82,7 +81,23 @@
         </div>
         <div class="card p15 mg-b-20">
             <div class="progress bg-light mg-b-5 mg-t-5 ht-25">
-                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated wd-100p" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+
+                <div class="progress-bar
+                @if( $percent <= 40 )
+                    bg-danger
+                @elseif( $percent <= 70 ) 
+                    bg-warning
+                @elseif( $percent < 100 ) 
+                    bg-info
+                @else 
+                    bg-success
+                @endif
+                 
+                 progress-bar-striped progress-bar-animated wd-{{ $percent }}p" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    {{ $percent }}
+                    %
+                </div>
+                
             </div>
         </div>
         <div class="card table-wr-br mg-b-20">
@@ -116,9 +131,10 @@
                                  style="border-left:4px solid {{ $sub_task->color }}">
                                     <div class="d-flex align-items-center">
                                         <div class="form-check d-flex pl-0">
-                                            <form class="checkSubTask" action="{{route('subTasks.modify_subtask',$sub_task->id)}}">
-                                                <input type="checkbox" class="form-check-input" id="todoCheckbox">
-                                                <label class="form-check-label" for="todoCheckbox"></label>
+                                            <form class="checkSubTask"
+                                             action="{{ route('projects.subTasks.modify_subtask',$sub_task->id) }} ">
+                                        <input @if( $sub_task->is_done ) checked disabled @endif type="checkbox" class="form-check-input" id="todoCheckbox{{ $sub_task->id }}">
+                                                <label class="form-check-label" for="todoCheckbox{{ $sub_task->id }}"></label>
                                             </form>
                                         </div>
                                         <span data-toggle="collapse" data-target="#taskCollapse{{ $sub_task->id }}" style="cursor:pointer">
@@ -133,7 +149,7 @@
                                     <div id="taskCollapse{{ $sub_task->id }}" class="task-body collapse"
                                          style="border-left:4px solid {{ $sub_task->color }}" aria-labelledby="headingOne" data-parent="#accordionExample">
                                         <div class="d-flex justify-content-between">
-                                            <form class="addLog" action="{{route('subTasks.modify_subtask',$sub_task->id)}}">
+                                            <form class="addLog" action="{{route('projects.subTasks.modify_subtask',$sub_task->id)}}">
                                                 <button type="submit" class="btn btn-sm btn-outline-info">Add log</button>
                                                 <div class="timepicker-box">
                                                     <input class="subtask-id" type="hidden" value="{{ $sub_task->id }}">
@@ -141,7 +157,21 @@
                                                     <input class="minutes-subtask timepicker" type="text" placeholder="MM">
                                                 </div>
                                                 <div class="pl-2 mt-2">
-                                                    Overall time spend on Task : {{ $sub_task->time_passes }} 
+                                                    Overall time spend on Task : 
+                                                    @php 
+                                                        $time = explode(".",$sub_task->time_passes);
+                                                      
+                                                        if( isset($time[1]) ){
+                                                            $hh = $time[0];
+                                                            $mm = $time[1];
+                                                        }else{
+                                                            $hh = 00;
+                                                            $mm = 00;
+                                                        }
+                                                        
+                                                        
+                                                    @endphp
+                                                    {{ $hh ." : ". $mm }}
                                                 </div>
                                             </form>
                                             <div class="timer">
@@ -187,13 +217,13 @@
             <div class="card-body">
             <div class="row">
                 <li class="media d-block d-sm-flex">
-                    {{-- @if(is_null($task->operator->avatar))
+                    @if(is_null($task->operator->avatar))
                         <img src="{{ Avatar::create($task->operator->first_name." ".$task->operator->last_name)->toBase64() }}"
                          class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
                     @else 
                         <img src="/storage/{{ $task->operator->avatar }}"
                          class="d-flex mg-r-10 mg-l-10 wd-80 rounded-circle" alt="">
-                    @endif --}}
+                    @endif
                   <div class="media-body align-self-center mg-t-20 mg-sm-t-0">
                     <h6 class="tx-inverse mg-b-10">
                         {{ $task->operator->first_name." ".$task->operator->last_name }}
@@ -205,12 +235,18 @@
             </div>
         </div>
         <div class="card p15 mg-b-20">
-            <a class="btn btn-block btn-light active" href="">PERCENT: 35 %</a>
+            <a class="btn btn-block btn-light active" href="">PERCENT: {{ $task->percent }} %</a>
         </div>
         <div class="card p15 mg-b-20">
-            <a class="btn btn-block btn-success tx-white" href="">
-                Status: {{ $task->status }}
-            </a>
+            @if( $task->is_done )
+                <a class="btn btn-block btn-success tx-white" href="">
+                    Status: {{ "Complete" }}
+                </a>
+            @else 
+                <a class="btn btn-block btn-success tx-white" href="">
+                    Status: {{ "In Progress" }}
+                </a>
+            @endif
         </div>
     </div>
     </div>

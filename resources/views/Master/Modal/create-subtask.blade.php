@@ -12,20 +12,20 @@
                         <div class="row row-sm">
                             <div class="col-sm-12 col-xl-6 form-group">
                                 <label>Subtask title</label>
-                                <input value="" class="form-control" name="title" type="text">
+                                <input value="{{ old("title") }}" class="form-control" name="title" type="text">
                             </div>
                             <div class="col-sm-12 col-xl-6 form-group">
                                 <label>Percent of task</label>
-                                <input name="percent" type="number" class="form-control " placeholder="Percent">
+                                <input value="{{ old("percent") }}" name="percent" type="number" class="form-control " placeholder="Percent">
                             </div>
                         </div>
                           <div class="row row-sm">
                             <div class="col-sm-12 col-xl-6 form-group">
                                 <label>Priority</label>
                                 <select name="priority" class="form-control">
-                                    <option value="low">low</option>
-                                    <option value="normal">Normal</option>
-                                    <option value="high">High</option>
+                                    <option @if( old("low") ) selected @endif value="low">low</option>
+                                    <option @if( old("normal") ) selected @endif value="normal">Normal</option>
+                                    <option @if( old("high") ) selected @endif value="high">High</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-xl-6 form-group">
@@ -44,6 +44,7 @@
                                 <label>Reminder type</label>
                                 <select name="reminder_type" class="form-control">
                                     <option value="daily">daily</option>
+                                    <option value="weekly">weekly</option>
                                     <option value="weekly">weekly</option>
                                 </select>
                             </div>

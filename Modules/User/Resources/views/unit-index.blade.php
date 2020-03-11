@@ -4,19 +4,21 @@
     {{"Unit"}}
 @endsection
 
+
+@php 
+    $path = [
+        'name'          =>  'Units',
+        'btn_content'   =>  'New unit',
+        'is_modal'      =>  True,
+        'btn_href'      =>  '',
+        'modal_name'    =>  'newunit'
+    ]
+@endphp
+
 <!-- 
     path 
 -->
 @section('path')
-    @php 
-        $path = [
-            'name'          =>  'Units',
-            'btn_content'   =>  'New unit',
-            'is_modal'      =>  True,
-            'btn_href'      =>  '',
-            'modal_name'    =>  'newunit'
-        ]
-    @endphp
     @include('Master.path')
 @endsection
 
@@ -24,17 +26,6 @@
     Modal for store data
 -->
 @section('create_modal')
-    @php 
-        $text_editor = [
-            'route_name'    =>  'users.units.store',
-            'image'         =>  False,
-            'file'          =>  False,
-            'desc'          =>  False,
-            'tags'          =>  False,
-            'tags_item'     =>  array(),
-            'title'         =>  False
-        ]
-    @endphp
     @include('Master.Modal.create-units')
 @endsection
 

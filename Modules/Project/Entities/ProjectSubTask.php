@@ -17,7 +17,8 @@ class ProjectSubTask extends Model
         'desc',
         'status',
         'reminder_time',
-        'reminder_type'
+        'reminder_type',
+        'is_done'
     ];
 
     /*

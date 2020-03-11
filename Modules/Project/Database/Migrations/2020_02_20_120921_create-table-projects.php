@@ -42,6 +42,7 @@ class CreateTableProjects extends Migration
             $table->boolean('is_public')->default(True);
             $table->boolean('is_verify')->default(False);
             $table->date('verify_date')->nullable();
+            $table->boolean('is_done')->default(False);
             $table->timestamps();
 
             

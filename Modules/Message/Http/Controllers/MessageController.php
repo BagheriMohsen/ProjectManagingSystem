@@ -14,7 +14,10 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('message::messages-index');
+        $user = auth()->user();
+        $users = "App\User"::where("unit_id",$user->unit_id)->get();
+
+        return view('message::messages-index',compact("users"));
     }
 
     /**

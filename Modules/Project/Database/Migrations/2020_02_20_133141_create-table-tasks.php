@@ -35,6 +35,7 @@ class CreateTableTasks extends Migration
             $table->string('status')->default('in_progress');
             $table->date("complete_date")->nullable();
             $table->date("close_date")->nullable();
+            $table->boolean('is_done')->default(False);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
@@ -66,6 +67,7 @@ class CreateTableTasks extends Migration
             $table->time('reminder_time')->nullable();
             $table->string('reminder_type')->nullable();
             $table->string('status')->default('in_progress');
+            $table->boolean('is_done')->default(False);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
