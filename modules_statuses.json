@@ -6,5 +6,6 @@
     "WorkTime": true,
     "Note": true,
     "TodoList": true,
-    "User": true
+    "User": true,
+    "Ticket": true
 }

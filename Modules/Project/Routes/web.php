@@ -8,7 +8,7 @@
 Route::group(["middleware"=>"auth",'prefix'=>'projects/','as'=>'projects.'],function(){
 
 
-    Route::get("show/{project_slug}/","ProjectController@show")->name("show");
+    Route::get("{project_slug}/","ProjectController@show")->name("show");
     Route::post("update/{id}/","ProjectController@update")->name("update_project");
     // Request Project
     Route::get("request-project/","ProjectController@request_project")->name("request_project");

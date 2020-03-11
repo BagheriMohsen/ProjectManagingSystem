@@ -16,7 +16,8 @@ class AuthController extends Controller
     */
     public function login() {
         
-        if(auth()->check()){
+        if(auth()->check()) {
+
             return abort(404);
         }
 
@@ -30,7 +31,8 @@ class AuthController extends Controller
     */
     public function login_check(Request $req) {
 
-        if(auth()->check()){
+        if(auth()->check()) {
+
             return abort(404);
         }
 
