@@ -23,12 +23,8 @@
     @include('Master.path')
 @endsection
 
-<!-- 
-    Modal for store data
--->
-@section('create_modal')
-    @include('Master.Modal.create-modal')
-@endsection
+
+
 
 
 @section('content')
