@@ -6,23 +6,12 @@
 
 @php
 
-    // text_editor option
-    $text_editor = [
-        'route_name'    =>  'notes.store',
-        'image'         =>  False,
-        'file'          =>  False,
-        'desc'          =>  True,
-        'tags'          =>  False,
-        'tags_item'     =>  array(),
-        'title'         =>  True
-    ];
-
     // path option
     $path = [
             'name'          =>  'Notes',
             'btn_content'   =>  'New Note',
             'is_modal'      =>  True,
-            'btn_href'      =>  ''
+            'modal_name'    =>  'new_notes'
     ];
 
     // page_title option
@@ -48,7 +37,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-modal')
+    @include('Master.Modal.create-notes')
 @endsection
 
 
