@@ -178,7 +178,7 @@ input.timepicker::placeholder {
   padding: 10px;
   border: 1px solid #e6d2d2;
   border-radius: 5px;
-  background: #ecdddd;
+  background: #fbf1f1;
   overflow: auto;
   margin-bottom: 15px;
 }
@@ -190,7 +190,7 @@ input.timepicker::placeholder {
 
 .ticket-item.reply{
   margin-left: auto;
-  background: #d9f596;
+  background: #fcfdb6;
 }
 /*End ticket*/
 
