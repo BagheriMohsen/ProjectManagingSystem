@@ -11,9 +11,7 @@
     right: auto !important;
     top:45px !important;
 }
-.modal-dialog.modal-notify.modal-dark .modal-header {
-  background-color: white;
-}
+
 main input[type=email]:focus, main input[type=password]:focus, main input[type=text]:focus, main input[type=url]:focus, main textarea:focus {
   border: 0;
 }
@@ -23,6 +21,10 @@ main input[type=email]:focus, main input[type=password]:focus, main input[type=t
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.modal-dialog.modal-notify.modal-dark .modal-header {
+  background-color: white;
 }
 .modal-header{
   z-index: 99;
@@ -39,7 +41,9 @@ main input[type=email]:focus, main input[type=password]:focus, main input[type=t
   background-color: #f3f0f0!important 
 }
 .modal-body{
-  background-color: #f3f0f0!important
+  background-color: #f3f0f0!important;
+  max-height:calc(100vh - 200px);
+  overflow-y: auto;
 }
 /* End some fix and amend in elements*/
 
@@ -197,4 +201,21 @@ input.timepicker::placeholder {
 /* Colors*/
 .text-light-1{
   color: #e8e8ec;
+}
+.table-ticket tr td{
+  padding: 0;
+}
+.table-ticket tr td a{
+  color: #495057;
+  display: block;
+  padding: 0.75rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1rem;
+
+}
+.table-ticket tbody tr:hover{
+  background-color:#00000026!important;
+}
+.ticket-No{
+  color:#6767b5!important;
 }

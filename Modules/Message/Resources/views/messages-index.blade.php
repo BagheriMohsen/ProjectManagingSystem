@@ -19,7 +19,7 @@
             'name'          =>  'Messages',
             'btn_content'   =>  'New Message',
             'is_modal'      =>  True,
-            'modal_name'    =>  'new_messages'
+            'modal_name'    =>  'new_tickets'
     ];
 
     // page_title option
@@ -45,7 +45,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-messages')
+    @include('Master.Modal.create-tickets')
 @endsection
 
 
@@ -155,20 +155,102 @@
                     Tickets
                 </div>
                 <div class="card-body">
-                    <div class="br-mailbox-list-body">
-                        <div class="br-mailbox-list-item unread">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="tx-12 tx-info">
-                                        To: Sajjad Rafiei
-                                    </p>
-                                </div>
-                                <span class="tx-12 tx-gray-600">No:121231</span>
-                            </div>
-                            <h6 class="tx-14 mg-b-10 tx-gray-800"><small>Subject:</small> Lorem ispum lorme</h6>
-                            <p class="tx-12 tx-gray-700 mg-b-5">Hi, Please provide a whiteboard for... </p>
-                        </div>
-                    </div>
+                    <table class="table table-striped table-ticket table-responsive-md btn-table tx-gray-600 text-center">
+                        <thead>
+                          <tr>
+                            <th>Ticket No</th>
+                            <th>Departement</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Last Update</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                          <tr>
+                            <td scope="row">
+                                <a href="#" class="ticket-No">
+                                    #2131321
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    Managment
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    About work
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <button class="btn btn-sm btn-outline-success">closed</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    2020/3/12 (4:20 pm)
+                                </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td scope="row">
+                                <a href="#" class="ticket-No">
+                                    #2131321
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    Managment
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    About work
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <button class="btn btn-sm btn-outline-success">closed</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    2020/3/12 (4:20 pm)
+                                </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td scope="row">
+                                <a href="#" class="ticket-No">
+                                    #2131321
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    Managment
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    About work
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    <button class="btn btn-sm btn-outline-success">closed</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#">
+                                    2020/3/12 (4:20 pm)
+                                </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                        
+                        </table>
                 </div>
             </div>
         </div>
