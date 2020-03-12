@@ -45,6 +45,14 @@
             <span class="menu-item-label">Messages</span>
           </a>
         </li>
+
+        <li class="br-menu-item">
+          <a href="{{ route("tickets.index") }}" class="br-menu-link">
+            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
+            <span class="menu-item-label">Ticket</span>
+          </a>
+        </li>
+
         <li class="br-menu-item">
           <a href="notice" class="br-menu-link">
             <i class="menu-item-icon icon ion-radio-waves tx-24"></i>

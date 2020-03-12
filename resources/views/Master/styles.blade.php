@@ -7,7 +7,6 @@
 <link href="{{asset('panel/css/persiandatepicker.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('panel/css/jquery-ui.min.css')}}">
 <link rel="stylesheet" href="{{asset('panel/css/select2.min.css')}}">   
-<link rel="stylesheet" href="{{asset('panel/css/select2.min.css')}}">  
 <link rel="stylesheet" href="{{asset('panel/css/mdb.min.css')}}">  
 <link rel="stylesheet" href="{{asset('panel/css/hover-min.css')}}">  
 

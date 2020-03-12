@@ -4,18 +4,6 @@
     {{"Dashboard"}}
 @endsection
 
-@php
-
-    // path option
-    $path = [
-            'is_modal'      =>  False,
-            'btn_href'      =>  ''
-    ];
-
-@endphp
-
-
-
 <!-- 
     path 
 -->

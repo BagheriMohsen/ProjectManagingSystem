@@ -15,7 +15,7 @@
 {{-- <script src="{{asset('panel/lib/flot-spline/js/jquery.flot.spline.min.js')}}"></script> --}}
 {{-- <script src="{{asset('panel/lib/chart.js/Chart.min.js')}}"></script> --}}
 <script src="{{asset('panel/js/jquery.multifield.js')}}"></script>
-<script src="{{asset('panel/js/mdb.min.js')}}"></script>
+{{-- <script src="{{asset('panel/js/mdb.min.js')}}"></script> --}}
 <script src="{{asset('panel/js/main.js')}}"></script>
 {{-- <script src="{{asset('panel/js/map.shiftworker.js')}}"></script> --}}
 {{-- <script src="{{asset('panel/js/ResizeSensor.js')}}"></script> --}}
@@ -24,7 +24,7 @@
 <script src="{{asset('panel/js/fontawsome-all.js')}}"></script>
 <script src="{{asset('panel/js/parsley-2.9.2.min.js')}}"></script>
 <script src="{{asset('panel/lib/i18n/ar.js')}}"></script>
-<script src="{{asset('panel/lib/i18n/fa.js')}}"></script>
+{{-- <script src="{{asset('panel/lib/i18n/fa.js')}}"></script> --}}
 <script src="{{asset('panel/lib/timepicker/jquery.timepicker.min.js')}}"></script>
 <script src="{{asset('panel/js/easytimer.min.js')}}"></script>
 <script src="{{asset('panel/js/custom.js')}}"></script>

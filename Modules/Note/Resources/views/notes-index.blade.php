@@ -37,7 +37,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-notes')
+    @include('note::Modals.create-notes')
 @endsection
 
 

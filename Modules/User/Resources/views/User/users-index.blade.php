@@ -43,7 +43,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-users')
+    @include('user::Modals.create-users')
 @endsection
 
 

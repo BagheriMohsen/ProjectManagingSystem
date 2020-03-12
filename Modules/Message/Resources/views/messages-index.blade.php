@@ -1,22 +1,14 @@
 @extends('Master.layout')
 
 @section('title')
-    {{"Messages"}}
+    {{"Message"}}
 @endsection
 
 @php
 
-    // text_editor option
-    $text_editor = [
-        'route_name'    =>  'notes.store',
-        'desc'          =>  True,
-        'title'         =>  True,
-        "contact"       =>  True
-    ];
-
     // path option
     $path = [
-            'name'          =>  'Messages',
+            'name'          =>  'Message',
             'btn_content'   =>  'New Message',
             'is_modal'      =>  True,
             'modal_name'    =>  'new_messages'
@@ -24,7 +16,7 @@
 
     // page_title option
     $page_title = [
-        "title"     =>  "Messages",
+        "title"     =>  "Ticket",
         "sub_title" =>  "Techno Fast",
         "icon"      =>  '<i class="menu-item-icon icon ion-ios-email-outline"></i>'
     ]
@@ -45,7 +37,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-messages')
+    @include('message::Modals.create-messages')
 @endsection
 
 

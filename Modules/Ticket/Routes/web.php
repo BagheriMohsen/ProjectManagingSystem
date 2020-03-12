@@ -11,6 +11,8 @@
 |
 */
 
-Route::prefix('ticket')->group(function() {
-    Route::get('/', 'TicketController@index');
+Route::prefix('tickets/')->group(function() {
+   //
 });
+
+Route::middleware("auth")->resource("tickets","TicketController");
