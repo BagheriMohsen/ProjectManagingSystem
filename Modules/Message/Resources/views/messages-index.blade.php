@@ -19,7 +19,7 @@
             'name'          =>  'Messages',
             'btn_content'   =>  'New Message',
             'is_modal'      =>  True,
-            'modal_name'    =>  'new_tickets'
+            'modal_name'    =>  'new_messages'
     ];
 
     // page_title option
@@ -45,7 +45,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-tickets')
+    @include('Master.Modal.create-messages')
 @endsection
 
 
