@@ -39,7 +39,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-timelines')
+    @include('timeline::Modals.create-timelines')
 @endsection
 
 

@@ -26,7 +26,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-units')
+    @include('user::Modals.create-units')
 @endsection
 
 

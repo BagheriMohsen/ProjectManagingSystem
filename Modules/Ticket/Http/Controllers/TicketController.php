@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Modules\Ticket\Entities\Ticket;
+
 class TicketController extends Controller
 {
     /**
@@ -14,7 +16,19 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('ticket::index');
+
+        $user = auth()->user();
+
+        $users = "App\User"::latest()->get();
+        $tickets = Ticket::where([
+            ["user_id","=",$user->id],
+            ["unit_id","=",$user->unit_id]
+        ])->paginate(10);
+
+        return view('ticket::tickets-index',compact(
+            "tickets",
+            "users"
+        ));
     }
 
     /**
@@ -31,9 +45,26 @@ class TicketController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+       
+        $req->validate([
+            "receiver_id"   =>  "required",
+            "title"         =>  "required",
+            "desc"          =>  "required"
+        ]);
+
+        $data = $req->all();
+
+        $user = auth()->user();
+
+        $data["user_id"]        =  $user->id;
+        $data["unit_id"]        =  $user->unit_id;
+        $data["tracking_code"]  =  uniqid();
+        Ticket::create($data);
+
+        return redirect()->route("tickets.index")
+        ->with("message","ticket is sended!");
     }
 
     /**

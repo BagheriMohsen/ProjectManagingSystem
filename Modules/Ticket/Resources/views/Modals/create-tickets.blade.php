@@ -1,14 +1,32 @@
 
-    <div id="new_messages" class="modal fade">
+    <div id="new_tickets" class="modal fade">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-notify modal-dark" role="document">
             <div class="modal-content tx-size-sm">
                 <div class="modal-header pd-x-20">
-                    <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">Add message</h6>
+                    <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">Add Ticket</h6>
                 </div>
                 <div class="modal-body pd-20">
-                    <form class="form" action="{{route("timeline.store")}}" method="POST" 
+                    <form class="form" action="{{route("tickets.store")}}" method="POST" 
                     enctype="multipart/form-data">
                         @csrf
+
+
+                        <div class="row mp0">
+                            <div class="col-xl-12">
+                                <div class="form-group">
+                                    <label class="form-control-label">Contact</label>
+                                    <br/>
+                                    <select id="receiver_id" class="form-control text-dark"  name="receiver_id" style="width: 100%">
+                                        @foreach( $users as $user )
+                                            <option value="{{ $user->id }}">
+                                                {{ $user->first_name." ".$user->last_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
@@ -31,18 +49,17 @@
                     
 
                  
+                            
+
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
-                                        <label class="form-control-label">Contact</label>
-                                        <br/>
-                                        <select id="contact" class="form-control text-dark"  name="contact" style="width: 100%">
-                                            @foreach( $users as $user )
-                                                <option value="{{ $user->id }}">
-                                                    {{ $user->first_name." ".$user->last_name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        <input type="file" name="attach" id="file" class="inputfile"
+                                        data-multiple-caption="{count} files selected" multiple>
+                                        <label for="file" class="tx-white bg-warning">
+                                            <i class="icon ion-ios-upload-outline tx-24"></i>
+                                            <span>Attach</span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +70,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-green btn-sm mg-l-10">Add Message</button>
+                    <button type="submit" class="btn btn-green btn-sm mg-l-10">Add Ticket</button>
                 </div>
 
             </form>

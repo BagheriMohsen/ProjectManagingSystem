@@ -25,7 +25,7 @@
     Modal for store data
 -->
 @section('create_modal')
-    @include('Master.Modal.create-groups')
+    @include('user::Modals.create-teams')
 @endsection
 
 

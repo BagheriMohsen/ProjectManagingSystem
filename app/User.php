@@ -128,5 +128,14 @@ class User extends Authenticatable
         return $this->hasMany("Modules\Project\Entities\ProjectTaskAction");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Ticket\Entities\Ticket
+    |--------------------------------------------------------------------------
+    */
+    public function ticket_receivers () {
+        return $this->hasMany("Modules\Ticket\Entities\Ticket","receiver_id");
+    }
+
 
 }
