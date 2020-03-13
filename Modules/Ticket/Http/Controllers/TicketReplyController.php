@@ -9,9 +9,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 
 use Modules\Ticket\Entities\Ticket;
-use Modules\Project\Entities\Project;
+use Modules\Ticket\Entities\TicketReplies;
 
-class TicketController extends Controller
+class TicketReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,23 +19,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-
-        $user = auth()->user();
-
-        $users = "App\User"::latest()->get();
-        $tickets = Ticket::where([
-            ["user_id","=",$user->id],
-            ["unit_id","=",$user->unit_id]
-        ])->paginate(10);
-        
-        $projects = Project::where("operating_unit_id",$user->unit_id)
-        ->latest()->get();
-
-        return view('ticket::tickets-index',compact(
-            "tickets",
-            "users",
-            "projects"
-        ));
+        return view('ticket::index');
     }
 
     /**
@@ -54,31 +38,24 @@ class TicketController extends Controller
      */
     public function store(Request $req)
     {
-       
         $req->validate([
-            "receiver_id"   =>  "required",
-            "title"         =>  "required",
-            "desc"          =>  "required"
+            "desc"  =>  "required"
         ]);
 
         $data = $req->all();
-
-        $user = auth()->user();
-
-        $data["user_id"]        =  $user->id;
-        $data["unit_id"]        =  $user->unit_id;
-        $data["tracking_code"]  =  uniqid();
-
+      
+        $data["user_id"]    =  auth()->user()->id;
+        
         // if attach file is exists 
         if( $req->hasFile("attach") ) {
             $data["attach"] = Storage::disk("public")
-            ->put("TicketFiles",$req->File("attach"));
+            ->put("TicketRepliesFiles",$req->File("attach"));
         }
 
-        Ticket::create($data);
+        TicketReplies::create($data);
 
-        return redirect()->route("tickets.index")
-        ->with("message","ticket is sended!");
+        return redirect()->back()
+        ->with("message","its sended!");
     }
 
     /**
@@ -121,20 +98,4 @@ class TicketController extends Controller
     {
         //
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Ticket Single
-    |--------------------------------------------------------------------------
-    */
-    public function ticket_single($ticket_slug) {
-
-        $ticket = Ticket::where("slug",$ticket_slug)->firstOrFail();
-
-        return view("ticket::tickets-single",compact(
-            "ticket"
-        ));
-
-    }
-
 }

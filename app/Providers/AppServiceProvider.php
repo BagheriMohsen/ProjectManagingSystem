@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('Master.header',function($view){
             if(auth()->check()){
                 // find user detail
-                $units       = Unit::latest()->get();
+                $units       = Unit::all();
                
                 $view ->with(compact('units'));
             }

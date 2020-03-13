@@ -103,6 +103,15 @@ class Project extends Model
         ->latest();
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Ticket\Entities\Ticket
+    |--------------------------------------------------------------------------
+    */
+    public function tickets () {
+        return $this->hasMany("Modules\Ticket\Entities\Ticket");
+    }
+
     
 
 

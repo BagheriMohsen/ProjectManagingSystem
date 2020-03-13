@@ -63,30 +63,48 @@
                     Tickets
                 </div>
                 <div class="card-body">
-                    <div class="br-mailbox-list-body">
-                        @foreach( $tickets as $ticket )
-                        <div class="br-mailbox-list-item unread">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="tx-12 tx-info">
-                                        To: 
-                                        {{ $ticket->receiver->first_name." ".$ticket->receiver->last_name }}
-                                    </p>
-                                </div>
-                                <span class="tx-12 tx-gray-600">No:
-                                    {{ $ticket->tracking_code }}
-                                </span>
-                            </div>
-                            <h6 class="tx-14 mg-b-10 tx-gray-800"><small>Title:</small> 
-                                {{ $ticket->title }}
-                            </h6>
-                            <div class="tx-12 tx-gray-700 mg-b-5">
-                                {!! $ticket->desc !!}
-                            </div>
-                        </div>
-                        @endforeach
-
-                    </div>
+                    <table class="table table-striped table-ticket table-responsive-md btn-table tx-gray-600 text-center">
+                        <thead>
+                          <tr>
+                            <th>Ticket No</th>
+                            <th>Project</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Last Update</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody>
+                            @foreach( $tickets as $ticket )
+                                <tr>
+                                    <td scope="row">
+                                        <a href="{{ route("tickets.single",$ticket->slug) }}" class="ticket-No">
+                                            #{{ $ticket->tracking_code }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route("tickets.single",$ticket->slug) }}" class="ticket-No">
+                                            {{ $ticket->project->title }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ $ticket->title }}
+                                    </td>
+                                    <td>
+                                        @if( $ticket->is_close )
+                                            {{"closed"}}
+                                        @else 
+                                            {{"In Progress..."}}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{ $ticket->updated_at }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        
+                        </table>
                 </div>
             </div>
         </div>

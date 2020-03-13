@@ -102,6 +102,7 @@ class ProjectController extends Controller
      */
     public function show($project_slug)
     {
+        
         $project = Project::where("slug", $project_slug)->firstOrFail();
         $percent = $project->tasks->where("is_done",True)->sum("percent"); 
         

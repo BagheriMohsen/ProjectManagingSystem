@@ -23,6 +23,7 @@ class CreateTableTickets extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('unit_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
             $table->bigInteger('receiver_id')->unsigned();
             $table->string('attach')->nullable();
             $table->string('title');
@@ -43,6 +44,9 @@ class CreateTableTickets extends Migration
             $table->foreign('unit_id')->references('id')->on('units')
             ->onDelete('CASCADE')->onUpdate('CASCADE');
 
+            $table->foreign('project_id')->references('id')->on('projects')
+            ->onDelete('CASCADE')->onUpdate('CASCADE');
+
 
             
         });
@@ -58,7 +62,6 @@ class CreateTableTickets extends Migration
             $table->bigInteger('receiver_id')->unsigned();
             $table->bigInteger('ticket_id')->unsigned();
             $table->string('attach')->nullable();
-            $table->string('title');
             $table->text('desc');
             $table->timestamps();
 

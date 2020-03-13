@@ -137,5 +137,61 @@ class User extends Authenticatable
         return $this->hasMany("Modules\Ticket\Entities\Ticket","receiver_id");
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Ticket\Entities\Ticket
+    |--------------------------------------------------------------------------
+    */
+    public function ticket_users () {
+        return $this->hasMany("Modules\Ticket\Entities\Ticket","user_id");
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Ticket\Entities\TicketReplies
+    |--------------------------------------------------------------------------
+    */
+    public function ticket_replies_receivers () {
+        $this->belongsTo("Modules\Ticket\Entities\TicketReplies","receiver_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Message\Entities\Message      =>  Senders info
+    |--------------------------------------------------------------------------
+    */
+    public function message_senders () {
+        $this->belongsTo("Modules\Message\Entities\Message","sender_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Message\Entities\Message      =>  Receiver info 
+    |--------------------------------------------------------------------------
+    */
+    public function message_receivers () {
+        $this->belongsTo("Modules\Message\Entities\Message","receiver_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Message\Entities\MessageReply      =>  Senders info
+    |--------------------------------------------------------------------------
+    */
+    public function message_reply_senders () {
+        $this->belongsTo("Modules\Message\Entities\MessageReply","sender_id");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Message\Entities\MessageReply      =>  Receiver info 
+    |--------------------------------------------------------------------------
+    */
+    public function message_reply_receivers () {
+        $this->belongsTo("Modules\Message\Entities\MessageReply","receiver_id");
+    }
+
+
 
 }

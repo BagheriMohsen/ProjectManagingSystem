@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
+use Illuminate\Support\Facades\Storage;
+
+use Modules\Message\Entities\Message;
+
 class MessageController extends Controller
 {
     /**
@@ -17,7 +21,17 @@ class MessageController extends Controller
         $user = auth()->user();
         $users = "App\User"::where("unit_id",$user->unit_id)->get();
 
-        return view('message::messages-index',compact("users"));
+        $inbox_items = Message::where("receiver_id",$user->id)
+        ->latest("updated_at")->paginate(15);
+
+        $sentbox_items = Message::where("sender_id",$user->id)
+        ->latest("updated_at")->paginate(15);
+
+        return view('message::messages-index',compact(
+            "users",
+            "inbox_items",
+            "sentbox_items"
+        ));
     }
 
     /**
@@ -34,9 +48,29 @@ class MessageController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $req->validate([
+            "title"         =>  "required",
+            "desc"          =>  "required",
+            "receiver_id"   =>  "required",
+        ],[
+            "receiver_id.required"  =>  "please select someone to send message"
+        ]);
+
+        $data = $req->all();
+        $data["sender_id"]    =   auth()->user()->id;
+
+        if( $req->hasFile("attach") ) {
+            $data["attach"] =   Storage::disk("public")
+                ->put("MessagesFiles",$req->File("attach"));
+        }
+
+        Message::create($data);
+
+        return redirect()->back()
+        ->with("message","your message is sent!");
+
     }
 
     /**
@@ -79,4 +113,36 @@ class MessageController extends Controller
     {
         //
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Inbox single page
+    |--------------------------------------------------------------------------
+    */
+    public function inbox_single($message_slug) {
+
+        $message = Message::where("slug",$message_slug)->firstOrFail();
+
+        return view("message::inbox-single",compact(
+            "message"
+        ));
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sentbox single page
+    |--------------------------------------------------------------------------
+    */
+    public function sent_single($message_slug) {
+
+        $message = Message::where("slug",$message_slug)->firstOrFail();
+
+        return view("message::sentbox-single",compact(
+            "message"
+        ));
+
+    }
+
 }

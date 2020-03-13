@@ -35,7 +35,7 @@ class StartingSeeder extends Seeder
         $second_user = User::create([
             "first_name"    =>  "Sadegh",
             "last_name"     =>  "Bagheri",
-            "phone_number"  =>  "09196769465",
+            "phone_number"  =>  "09196769466",
             "job_title"     =>  "programmer",
             "password"      =>  Hash::make("admin"),
             'is_active'     =>  True

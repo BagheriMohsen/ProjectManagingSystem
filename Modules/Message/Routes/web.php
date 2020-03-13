@@ -4,13 +4,22 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
-
 Route::group(["middleware"=>"auth","prefix"=>"messages/","as"=>"messages."], function() {
-    Route::get("","MessageController@index")->name("index");
+    Route::get("inbox/{message_slug}","MessageController@inbox_single")->name("inbox_single");
+    Route::get("sentbox/{message_slug}","MessageController@sent_single")->name("sent_single");
+
+});
+Route::middleware("auth")->resource("messages","MessageController");
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(["middleware"=>"auth","prefix"=>"message-reply/","as"=>"message_reply."], function() {
+    Route::post("inbox-store","MessageReplyController@inbox_store")->name("inbox_store");
+    Route::post("sent-store","MessageReplyController@sentbox_store")->name("sentbox_store");
+    
 });

@@ -2,17 +2,24 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| TicketController Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
-Route::prefix('tickets/')->group(function() {
-   //
+Route::group(["middleware"=>"auth","prefix"=>"tickets/","as"=>"tickets."],function() {
+   Route::get("{ticket_slug}/","TicketController@ticket_single")->name("single");
 });
 
 Route::middleware("auth")->resource("tickets","TicketController");
+
+/*
+|--------------------------------------------------------------------------
+| ReplyController Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::group(["middleware"=>"auth","prefix"=>"ticket-replies/","as"=>"ticket_replies."],function() {
+   //
+});
+
+Route::middleware("auth")->resource("ticket_replies","TicketReplyController");

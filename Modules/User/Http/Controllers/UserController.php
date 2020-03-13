@@ -127,7 +127,7 @@ class UserController extends Controller
             "last_name"         =>  "required",
             "phone_number"      =>  "required",
             "password"          =>  "required",
-            "unit"              =>  "required",
+            "unit_id"           =>  "required",
             "job_title"         =>  "required"
         ]);
         

@@ -15,6 +15,7 @@ class Ticket extends Model
         "user_id",
         "unit_id",
         "receiver_id",
+        "project_id",
         "attach",
         "title",
         "slug",
@@ -38,6 +39,16 @@ class Ticket extends Model
         ];
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function user () {
+        return $this->belongsTo("App\User","user_id");
+    }
+
     /*
     |--------------------------------------------------------------------------
     | relate with App\User
@@ -54,6 +65,15 @@ class Ticket extends Model
     */
     public function replies () {
         return $this->hasMany("Modules\Ticket\Entities\TicketReplies");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with Modules\Project\Entities\Project
+    |--------------------------------------------------------------------------
+    */
+    public function project () {
+        return $this->belongsTo("Modules\Project\Entities\Project");
     }
 
 }

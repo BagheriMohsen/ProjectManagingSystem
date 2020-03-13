@@ -12,9 +12,23 @@
 
 
                         <div class="row mp0">
-                            <div class="col-xl-12">
+                            <div class="col-xl-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Contact</label>
+                                    <label class="form-control-label">Which Project?</label>
+                                    <br/>
+                                    <select id="receiver_id" class="form-control text-dark"  name="project_id" style="width: 100%">
+                                        @foreach( $projects as $project )
+                                            <option value="{{ $project->id }}">
+                                                {{ $project->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Managers</label>
                                     <br/>
                                     <select id="receiver_id" class="form-control text-dark"  name="receiver_id" style="width: 100%">
                                         @foreach( $users as $user )
@@ -25,15 +39,33 @@
                                     </select>
                                 </div>
                             </div>
+
                         </div>
 
+                       
+
+
                             <div class="row mp0">
-                                <div class="col-xl-12">
+                                <div class="col-xl-9">
                                     <div class="form-group">
-                                        <label class="form-control-label">title<span class="tx-danger">*</span></label>
+                                        <label class="form-control-label">Title</label>
                                         <input class="form-control" name="title" value="{{old('title')}}" id="timelinetitle" placeholder="title">
                                     </div>
                                 </div>
+
+                                <div class="col-xl-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Priority</label>
+                                        <br/>
+                                        <select id="priority" class="form-control text-dark"  name="priority" style="width: 100%">
+                                            <option value="low">{{ "Low" }}</option>
+                                            <option value="normal">{{ "Normal" }}</option>
+                                            <option value="high">{{ "High" }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
                             </div>
                    
 

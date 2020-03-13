@@ -6,7 +6,7 @@
                     <h6 class="tx-16 mg-b-0 tx-uppercase tx-inverse text-white">Add message</h6>
                 </div>
                 <div class="modal-body pd-20">
-                    <form class="form" action="{{route("timeline.store")}}" method="POST" 
+                    <form class="form" action="{{route("messages.store")}}" method="POST" 
                     enctype="multipart/form-data">
                         @csrf
 
@@ -16,11 +16,13 @@
                                     <div class="form-group">
                                         <label class="form-control-label">Contact</label>
                                         <br/>
-                                        <select id="contact" class="form-control text-dark"  name="contact" style="width: 100%">
+                                        <select id="contact" class="form-control text-dark"  name="receiver_id" style="width: 100%">
                                             @foreach( $users as $user )
-                                                <option value="{{ $user->id }}">
-                                                    {{ $user->first_name." ".$user->last_name }}
-                                                </option>
+                                                @if($user->id != auth()->user()->id)
+                                                    <option value="{{ $user->id }}">
+                                                        {{ $user->first_name." ".$user->last_name }}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -31,7 +33,7 @@
                             <div class="row mp0">
                                 <div class="col-xl-12">
                                     <div class="form-group">
-                                        <label class="form-control-label">title<span class="tx-danger">*</span></label>
+                                        <label class="form-control-label">Title<span class="tx-danger">*</span></label>
                                         <input class="form-control" name="title" value="{{old('title')}}" id="timelinetitle" placeholder="title">
                                     </div>
                                 </div>

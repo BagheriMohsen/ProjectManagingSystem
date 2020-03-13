@@ -24,4 +24,13 @@ class TicketReplies extends Model
     public function ticket () {
         $this->belongsTo("Modules\Ticket\Entities\Ticket");
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | relate with App\User
+    |--------------------------------------------------------------------------
+    */
+    public function receiver () {
+        $this->belongsTo("App\User","receiver_id");
+    }
 }

@@ -65,7 +65,7 @@
                                     <div class="col-sm-12 col-xl-6">
                                         <div class="form-group">
                                             <label>Unit</label>
-                                            <select name="unit" class="form-control">
+                                            <select name="unit_id" class="form-control">
                                                 @foreach($units as $unit)
                                                     <option value="{{ $unit->id }}"
                                                         @if($unit->id == $user->unit_id)
